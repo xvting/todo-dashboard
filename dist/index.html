@@ -1,0 +1,2178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO 管理中心</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+            font-size: 1.1em;
+        }
+
+        .filters {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .filter-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .workspace-section {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .workspace-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .workspace-content {
+            padding: 20px;
+        }
+
+        .task-group {
+            margin-bottom: 30px;
+        }
+
+        .task-group-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .task-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .task-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .task-card:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .task-card.priority-P0 {
+            border-left-color: #dc3545;
+        }
+
+        .task-card.priority-P1 {
+            border-left-color: #fd7e14;
+        }
+
+        .task-card.priority-P2 {
+            border-left-color: #ffc107;
+        }
+
+        .task-card.priority-P3 {
+            border-left-color: #28a745;
+        }
+
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .task-text {
+            font-size: 1.1em;
+            color: #333;
+            flex: 1;
+        }
+
+        .task-meta {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .priority-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: bold;
+            color: white;
+        }
+
+        .priority-badge.P0 { background: #dc3545; }
+        .priority-badge.P1 { background: #fd7e14; }
+        .priority-badge.P2 { background: #ffc107; color: #333; }
+        .priority-badge.P3 { background: #28a745; }
+
+        .date-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            background: #6c757d;
+            color: white;
+        }
+
+        .date-badge.overdue {
+            background: #dc3545;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .tag-list {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .tag {
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.8em;
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .no-tasks {
+            text-align: center;
+            color: #999;
+            padding: 40px;
+            font-size: 1.2em;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .stat-number {
+                font-size: 2em;
+            }
+
+            .task-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 TODO 管理中心</h1>
+            <p>跨工作区任务管理平台</p>
+        </header>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="total-tasks">0</div>
+                <div class="stat-label">总任务数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="in-progress">0</div>
+                <div class="stat-label">进行中</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="pending">0</div>
+                <div class="stat-label">待办</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="completed">0</div>
+                <div class="stat-label">已完成</div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label>优先级：</label>
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="P0">P0 紧急</button>
+                <button class="filter-btn" data-filter="P1">P1 重要</button>
+                <button class="filter-btn" data-filter="P2">P2 一般</button>
+                <button class="filter-btn" data-filter="P3">P3 可选</button>
+            </div>
+        </div>
+
+        <div id="workspaces-container">
+            <!-- 工作区内容将通过 JavaScript 动态生成 -->
+        </div>
+
+        <footer>
+            <p>最后更新: <span id="last-update"></span></p>
+            <p>Powered by TODO Management System</p>
+        </footer>
+    </div>
+
+    <script>
+        // 这里的数据将由构建脚本注入
+        const TODO_DATA = {
+  "workspaces": [
+    {
+      "name": "AIStore ASR",
+      "last_update": "2026-07-20",
+      "sections": [
+        {
+          "status": "进行中",
+          "title": "",
+          "tasks": [
+            {
+              "text": "aistore-task 前端 Vue 改造",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "feature",
+                "refactor"
+              ],
+              "completed": false
+            }
+          ]
+        },
+        {
+          "status": "待办",
+          "title": "",
+          "tasks": [
+            {
+              "text": "修复 LASRGPURealtimeProvider 路由不到（AsrRealtimeProviderRouter 硬编码只返回 CPU 版本）",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "修复 LASRGPURealtimeProvider.send() 缺少 synchronized 线程安全隐患",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "bug",
+                "security"
+              ],
+              "completed": false
+            },
+            {
+              "text": "清理 LASRCPURealtimeProvider 无效的 @Component 注解（实际是 new 出来的）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "修复连接计数使用 lasrcpuConfig，切换 GPU 引擎时限制值不对",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "实现 AliyunFileProvider / AliyunRealtimeProvider（当前为空壳）",
+              "priority": "P3",
+              "dueDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "清理 iflytek / tencent 空骨架目录",
+              "priority": "P3",
+              "dueDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "添加 WebSocket handler 和 Provider 路由单元测试",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "修复 WebSocket CORS 通配符 setAllowedOrigins(\"*\") 无认证问题",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "security"
+              ],
+              "completed": false
+            },
+            {
+              "text": "添加 RealtimeWebSocketHandler 单元测试（最核心组件，零覆盖）",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "实现 PCM 临时文件分段方案（每 5 分钟分段，已上传分段及时删除，磁盘上限约 20MB）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "performance"
+              ],
+              "completed": false
+            },
+            {
+              "text": "aistore-asr 多副本并行分析与适配（WebSocket 会话状态/连接计数/临时文件隔离/负载均衡）",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "移除 dev profile 中数据库密码默认值，强制使用环境变量",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "security"
+              ],
+              "completed": false
+            },
+            {
+              "text": "外部化 ASR 引擎 API key（当前明文硬编码：apikey=99999, productId=123456）",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "security"
+              ],
+              "completed": false
+            },
+            {
+              "text": "添加 Service 层 @Transactional 注解（状态变更操作无事务边界）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "修复任务启动 TOCTOU 竞态条件（检查与创建非原子）",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "修复线程池无界且无关闭钩子问题",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "实现优雅关闭（应用停止时 FFmpeg 进程会成为孤儿）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "修复流处理器资源泄漏（RtspPullProcessor/PcmPushProcessor 异常时未确保关闭）",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "添加 REST 端点 @Valid 输入验证",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "修复 Service 层空指针风险（多处未检查 null）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "添加 /actuator/health 健康检查端点",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": false
+            },
+            {
+              "text": "添加 /actuator/metrics 指标监控",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": false
+            },
+            {
+              "text": "设备管理增加测试功能 + URI 加密展示（敏感信息保护）",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "feature",
+                "security"
+              ],
+              "completed": false
+            },
+            {
+              "text": "实现 V1.1 外部状态集映射层（starting/running/stopping/stopped/disconnected/error → 内部三态）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "对齐 stream 模式 WS 握手协议到 V1.1 规范",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "实现 WebSocket server 端点 WS /asr/stream（规范要求接收 PCM 流的服务端点，完全缺失）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "修复状态枚举序列化大小写不匹配（代码输出 CREATED，规范要求 created）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "实现统计字段实际计算（sentenceCount/durationMs/segmentCount 当前为硬编码桩数据）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "实现 interim 标志控制中间结果推送",
+              "priority": "P3",
+              "dueDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "实现 hotwords 转发给 ASR 引擎",
+              "priority": "P3",
+              "dueDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "实现 6 个未触发的错误码（1001, 1003, 1006, 1007, 1009, 1010）",
+              "priority": "P3",
+              "dueDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "激活 Bean Validation（@Valid 注解）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "清理 StartRequest/TaskStatusResponse 中规范不存在的多余字段",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "强制执行 sentences 接口 limit 参数 max=500 限制",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "添加 source.type 值验证（规范要求只能是 live 或 stream）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "添加 taskId 长度 8-64 字符验证",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "添加 Spring Boot Actuator（/actuator/health, /actuator/info）",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": false
+            },
+            {
+              "text": "迁移 Swagger 到 springdoc-openapi（springfox 2.x 与 Spring Boot 3 不兼容）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": false
+            },
+            {
+              "text": "实现结构化日志（JSON 格式，便于 ELK/Loki/Splunk 聚合）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": false
+            },
+            {
+              "text": "添加 Prometheus/Micrometer 指标端点",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": false
+            },
+            {
+              "text": "添加分布式追踪（Micrometer Tracing）",
+              "priority": "P3",
+              "dueDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": false
+            },
+            {
+              "text": "实现优雅关闭（server.shutdown: graceful，WebSocket 会话处理）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "实现数据库备份自动化（mysqldump 脚本、定时任务）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": false
+            },
+            {
+              "text": "制定音频文件备份策略",
+              "priority": "P3",
+              "dueDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": false
+            },
+            {
+              "text": "制定灾难恢复计划（RTO/RPO 目标、故障转移流程）",
+              "priority": "P3",
+              "dueDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": false
+            },
+            {
+              "text": "制定数据保留策略（旧音频、日志、任务记录的自动清理）",
+              "priority": "P3",
+              "dueDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": false
+            },
+            {
+              "text": "搭建 CI/CD 管道（GitLab CI / Jenkins / GitHub Actions）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": false
+            },
+            {
+              "text": "添加 API 端点速率限制",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "security"
+              ],
+              "completed": false
+            },
+            {
+              "text": "配置生产环境 CORS 策略",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "security"
+              ],
+              "completed": false
+            },
+            {
+              "text": "编写运维手册/操作指南（重启、日志轮转、磁盘监控、数据库维护）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "docs"
+              ],
+              "completed": false
+            },
+            {
+              "text": "编写容量规划文档（并发任务数限制、内存需求、网络带宽）",
+              "priority": "P3",
+              "dueDate": null,
+              "tags": [
+                "docs"
+              ],
+              "completed": false
+            },
+            {
+              "text": "编写生产环境故障排查指南（OOM、网络分区、引擎故障、连接耗尽）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "docs"
+              ],
+              "completed": false
+            },
+            {
+              "text": "编写 E2E 测试脚本（端到端流程验证）",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "编写压力测试（多任务并发 + 连接上限边界）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "编写集成测试（Controller 层 + Service 层）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "编写 WebSocket 协议测试（握手、PCM 推送、结果接收、断线重连）",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "编写任务生命周期测试（创建→启动→停止→重启→删除）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "编写推流重试边界测试（引擎拒绝、网络断开、连接上限）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "编写缓冲区溢出测试（FIFO 策略验证、数据丢失边界）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "编写音频处理测试（多声道、不同采样率、格式转换）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "aistore-task 多任务同时运行测试（并发任务稳定性/资源隔离/状态管理）",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "集成 FilePullProcessor 到任务主流程（含 AliyunFileProvider 实现）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "分发节点独立拆分（DistributeMessageManager/WebhookDistributor/ArtemisDistributor 等从 aistore-task 分离为独立服务）",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "aistore-task 多实例运行模式探索（水平扩展/负载均衡/分布式任务调度）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "feature",
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "aistore-mock 添加模拟海康接口的分发接收端点（兼容 Artemis 推送格式）",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "任务列表过滤检索功能（支持历史数据查询：按状态/时间/设备/关键词等筛选）",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "aistore-task 日志详细内容展示问题（日志详情查看/格式化/搜索）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "更新 API 文档（V1.1 规范与实际实现对齐）",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "docs"
+              ],
+              "completed": false
+            },
+            {
+              "text": "编写运维手册（日常操作、监控、故障处理）",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [
+                "docs"
+              ],
+              "completed": false
+            },
+            {
+              "text": "编写开发指南（本地开发环境搭建、调试技巧）",
+              "priority": "P3",
+              "dueDate": null,
+              "tags": [
+                "docs"
+              ],
+              "completed": false
+            }
+          ]
+        },
+        {
+          "status": "已完成",
+          "title": "",
+          "tasks": [
+            {
+              "text": "将 aistore-asr、aistore-task、aistore-mock 推送到思云 Git 服务器",
+              "priority": null,
+              "dueDate": "2026-07-20",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "aistore-asr 前端开发（使用 Vue 框架）",
+              "priority": null,
+              "dueDate": "2026-07-20",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "aistore-mock 海康模拟服务端添加（模拟海康设备/平台接口，用于集成测试）",
+              "priority": null,
+              "dueDate": "2026-07-20",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "aistore-asr 日志记录系统（后端日志采集 + 前端查看分析界面）",
+              "priority": null,
+              "dueDate": "2026-07-20",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "RTSP 拉流 FFmpeg 连接超时 30s（-timeout 30000000）+ \"连接中\"黄灯状态",
+              "priority": null,
+              "dueDate": "2026-07-19",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "aistore-asr 空闲连接清理（Jetty 替代 Tomcat，connection-idle-timeout 60s）",
+              "priority": null,
+              "dueDate": "2026-07-19",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "aistore-asr 状态页面（system/connections/tempFiles/config 展示）",
+              "priority": null,
+              "dueDate": "2026-07-19",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "日志查询页面（独立 HTML + 任务/设备筛选 + 时间范围 + 统计卡片 + Canvas 甘特图）",
+              "priority": null,
+              "dueDate": "2026-07-19",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "前端页面拆分（index.html 1791 行 → 8 个独立 HTML + common.css/common.js）",
+              "priority": null,
+              "dueDate": "2026-07-19",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "任务节点架构重构（ITaskNode 统一接口 + 交通灯状态）",
+              "priority": null,
+              "dueDate": "2026-07-18",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "任务列表红绿灯展示（🟢🟡🔴 圆点 + hover 描述）",
+              "priority": null,
+              "dueDate": "2026-07-18",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "转写节点断连不重连修复（sendFailCount 检测，连续 10 次失败强制重连）",
+              "priority": null,
+              "dueDate": "2026-07-18",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "日志治理（AccessLogFilter + 成功日志降级 debug）",
+              "priority": null,
+              "dueDate": "2026-07-18",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "SQL N+1 优化（批量预加载，51 条 SQL → 4 条）",
+              "priority": null,
+              "dueDate": "2026-07-18",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "Redis 缓存（taskCode→taskId 缓存，消除轮询 SQL）",
+              "priority": null,
+              "dueDate": "2026-07-18",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "WAV 文件存储迁移到 MinIO（aistore-asr 上传 + aistore-task 代理读取）",
+              "priority": null,
+              "dueDate": "2026-07-13",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "aistore-mock RTSP 测试数据源服务（Web 管理 + 音频管理 + RTSP/HLS 流）",
+              "priority": null,
+              "dueDate": "2026-07-12",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "设备多任务并发（移除 DEVICE_ALREADY_RUNNING 限制）",
+              "priority": null,
+              "dueDate": "2026-07-10",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "转写结果角色存储（ES/分发消息新增 role + device.strategy）",
+              "priority": null,
+              "dueDate": "2026-07-09",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "海康 Artemis SDK 集成（分发 + 测试连接）",
+              "priority": null,
+              "dueDate": "2026-07-09",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "多声道取流策略（channelStrategy: mix/left/right + FFmpeg channelsplit）",
+              "priority": null,
+              "dueDate": "2026-07-09",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "声道角色存储（设备 6 字段 + UI 动态渲染 + ES/分发消息携带 role）",
+              "priority": null,
+              "dueDate": "2026-07-09",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "版本管理与发布策略制定",
+              "priority": null,
+              "dueDate": "2026-07-09",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "Docker 镜像构建与导出（基础镜像 + 应用镜像 + K8s 部署文件）",
+              "priority": null,
+              "dueDate": "2026-07-09",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "多环境配置（application-dev.yml / application-test.yml）",
+              "priority": null,
+              "dueDate": "2026-07-09",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "任务管理优化（taskCode 为标识 + 设备继承配置 + 编辑功能）",
+              "priority": null,
+              "dueDate": "2026-07-08",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "Start 接口 upsert 模式（自动创建 + 已删除任务恢复）",
+              "priority": null,
+              "dueDate": "2026-07-08",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "分发管理调整（子表重构 + HTTP 方法 + 认证 + customHeaders）",
+              "priority": null,
+              "dueDate": "2026-07-08",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "转写结果分发系统（Webhook + Artemis，HTTP POST/PUT/PATCH + 认证 + customHeaders）",
+              "priority": null,
+              "dueDate": "2026-07-07",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "用户认证（JWT + RBAC + Redis Token 黑名单 + 登录防爆破）",
+              "priority": null,
+              "dueDate": "2026-07-07",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "API Keys（SHA-256 hash 存储 + X-API-Key 认证）",
+              "priority": null,
+              "dueDate": "2026-07-07",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "设备表精简（删除冗余字段 + sourceType 继承）",
+              "priority": null,
+              "dueDate": "2026-07-07",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "转写结果 ES 存储（事件驱动 + 异步写入 aistore-transcripts）",
+              "priority": null,
+              "dueDate": "2026-07-06",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "命名统一（beginMs/endMs + taskRunId）",
+              "priority": null,
+              "dueDate": "2026-07-06",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "握手协议简化 + 定稿结果绝对时间计算",
+              "priority": null,
+              "dueDate": "2026-07-06",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "任务运行日志系统（TaskLogger + ES 存储 + Web UI 日志面板）",
+              "priority": null,
+              "dueDate": "2026-07-05",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "数据库设计规范重构（V3/V4 Flyway + Entity/Repository/Service/Controller 全链路）",
+              "priority": null,
+              "dueDate": "2026-07-05",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "架构重构（TaskContext→RunningTask + 工厂模式 + Active Object）",
+              "priority": null,
+              "dueDate": "2026-07-05",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "状态机简化为三态（CREATED/RUNNING/STOPPED）",
+              "priority": null,
+              "dueDate": "2026-07-05",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "Web 界面（左右分栏 + 实时速率折线图 + 缓冲区 FIFO）",
+              "priority": null,
+              "dueDate": "2026-07-05",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "推流重试（无限重试 + 指数退避 2s→30s）",
+              "priority": null,
+              "dueDate": "2026-07-05",
+              "tags": [],
+              "completed": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "园区人口库",
+      "last_update": "2026-07-23",
+      "sections": [
+        {
+          "status": "进行中",
+          "title": "",
+          "tasks": [
+            {
+              "text": "现有的平板后台要做maven现代框架化改造",
+              "priority": "P1",
+              "dueDate": "2026-07-23",
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            }
+          ]
+        },
+        {
+          "status": "待办",
+          "title": "",
+          "tasks": [
+            {
+              "text": "分析园区人口库项目的现状，明确项目目标和范围",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [],
+              "completed": false
+            },
+            {
+              "text": "确定技术栈和架构方案",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [],
+              "completed": false
+            },
+            {
+              "text": "设计数据模型（人口信息、园区结构等）",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [],
+              "completed": false
+            },
+            {
+              "text": "搭建项目基础框架",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [],
+              "completed": false
+            },
+            {
+              "text": "分析国产化改造开发计划",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [],
+              "completed": false
+            },
+            {
+              "text": "分析所有改造的功能",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [],
+              "completed": false
+            },
+            {
+              "text": "人口库数据库表设计分析",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [],
+              "completed": false
+            },
+            {
+              "text": "人口库业务流程分析",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [],
+              "completed": false
+            },
+            {
+              "text": "人口库改造代码git 代码库构建",
+              "priority": "P2",
+              "dueDate": null,
+              "tags": [],
+              "completed": false
+            }
+          ]
+        },
+        {
+          "status": "已完成",
+          "title": "",
+          "tasks": [
+            {
+              "text": "完成政务网部署环境梳理（91% - 31/34 已分析）",
+              "priority": null,
+              "dueDate": "2026-07-23",
+              "tags": [
+                "docs"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生成总结报告（安全风险清单、架构优化建议）",
+              "priority": null,
+              "dueDate": "2026-07-23",
+              "tags": [
+                "docs"
+              ],
+              "completed": true
+            },
+            {
+              "text": "更新 architecture.md 完整架构图",
+              "priority": null,
+              "dueDate": "2026-07-23",
+              "tags": [
+                "docs"
+              ],
+              "completed": true
+            },
+            {
+              "text": "分析 172.24.242.12 测试/辅助服务器（2个系统）",
+              "priority": null,
+              "dueDate": "2026-07-23",
+              "tags": [
+                "docs"
+              ],
+              "completed": true
+            },
+            {
+              "text": "分析 172.24.242.23 业务服务器（9个系统）",
+              "priority": null,
+              "dueDate": "2026-07-23",
+              "tags": [
+                "docs"
+              ],
+              "completed": true
+            },
+            {
+              "text": "分析 172.24.242.50 新架构服务器（6个系统）",
+              "priority": null,
+              "dueDate": "2026-07-23",
+              "tags": [
+                "docs"
+              ],
+              "completed": true
+            },
+            {
+              "text": "分析 172.24.242.21 主应用服务器（11个系统）",
+              "priority": null,
+              "dueDate": "2026-07-23",
+              "tags": [
+                "docs"
+              ],
+              "completed": true
+            },
+            {
+              "text": "分析 172.24.242.11 Nginx 网关服务器",
+              "priority": null,
+              "dueDate": "2026-07-23",
+              "tags": [
+                "docs"
+              ],
+              "completed": true
+            },
+            {
+              "text": "导出外国人三表（园区公安）",
+              "priority": null,
+              "dueDate": "2026-07-20",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "海康照片验证服务恢复",
+              "priority": null,
+              "dueDate": "2026-07-20",
+              "tags": [],
+              "completed": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "产品质检",
+      "last_update": "2026-07-22",
+      "sections": [
+        {
+          "status": "待办",
+          "title": "",
+          "tasks": [
+            {
+              "text": "确定 MVP 范围和功能优先级",
+              "priority": null,
+              "dueDate": null,
+              "tags": [],
+              "completed": false
+            },
+            {
+              "text": "设计产品原型和交互流程",
+              "priority": null,
+              "dueDate": null,
+              "tags": [],
+              "completed": false
+            },
+            {
+              "text": "选择技术栈和架构方案",
+              "priority": null,
+              "dueDate": null,
+              "tags": [],
+              "completed": false
+            }
+          ]
+        },
+        {
+          "status": "已完成",
+          "title": "",
+          "tasks": [
+            {
+              "text": "分析产品质检项目的现状，明确项目目标和范围",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "梳理业务场景分类矩阵（技术形态 × 行业应用 × 部署模式）",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "梳理核心业务流程（实时质检、离线质检）",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "梳理规则资产工作流（配置、测试、发布、回流）",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "梳理运营协同工作流（智能体辅助、反向优化）",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "梳理应用展示与外部集成工作流",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "生成场景-工作流全景矩阵文档",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "梳理公安讯问场景的业务应用描述",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "梳理纪委谈话场景的业务应用描述",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "梳理客服回访场景的业务应用描述",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "梳理窗口服务场景的业务应用描述",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "做场景对比分析（共性/差异/规则复用）",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "保存为行业应用场景分析文档",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "完成 MVP 技术方案设计（Java 8 + MySQL 5 + Spring Boot）",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "搭建项目基础框架",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "实现 MVP 后端核心功能（F001 转写输入、F005 规则管理、F003/F004 质检执行、F008 统计）",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "实现 MVP 前端界面（Vue 3 + Element Plus）",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "集成 DeepSeek LLM API",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "优化前端交互（左右分栏、复制结果、查看提示词、原文定位）",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "完成实时程序合规监控业务分析文档",
+              "priority": null,
+              "dueDate": "2026-07-22",
+              "tags": [],
+              "completed": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "昆山公安人管系统",
+      "last_update": "2026-07-22",
+      "sections": [
+        {
+          "status": "待办",
+          "title": "",
+          "tasks": [
+            {
+              "text": "后端：331 反馈接口支持按地址维度反馈",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "backend"
+              ],
+              "completed": false
+            },
+            {
+              "text": "后端：隐患结束状态字典新增若干类型",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "backend"
+              ],
+              "completed": false
+            },
+            {
+              "text": "前端：隐患详情/列表适配新的结束状态展示",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "frontend"
+              ],
+              "completed": false
+            }
+          ]
+        },
+        {
+          "status": "已完成",
+          "title": "",
+          "tasks": [
+            {
+              "text": "后端：隐患表/DTO/VO 新增派出所相关字段",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "后端：隐患创建/查询时填充派出所信息",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "前端：隐患列表/详情展示派出所信息",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "后端：指定地址重新下发 331 隐患接口",
+              "priority": "P0",
+              "dueDate": null,
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "后端：核查任务查询接口适配隐患展示",
+              "priority": "P0",
+              "dueDate": null,
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "前端：核查任务页面展示隐患信息",
+              "priority": "P0",
+              "dueDate": null,
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "联调测试",
+              "priority": "P0",
+              "dueDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "T_HOUSE_DETAIL 新增 FWLX_ZL 字段",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "一级标签新增\"出租房\"(code=5)",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "二级标签(整租/合租/联租)仅出租房时显示且必填",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "字典接口改造为 children 层级结构",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "前端处理 children 渲染联动",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "T_HOUSE_RENT_PIC 新增 PIC_TYPE 字段",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "DTO/VO 将单一 picUrls 拆分为 safetyPicUrls + contractPicUrls",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "Service 按类型分别处理上传/保留/删除",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "前端拆分为两个独立上传区域",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "历史数据迁移(PIC_TYPE IS NULL → '1')",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "新建 T_PERSON_TAG 表+字典",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "6个DTO/1个BO新增personTags字段",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "3个Service保存注入",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "3个Controller新增字典接口",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "前端\"防骗宣传\"按钮替换为\"人员标签\"多选组件",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "确保不影响境外人员流程",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "新建Controller/DTO/BO/VO/Service/Mapper",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "T_BASIC_INFO/T_LIVING_INFO/T_ADDRESS/VIEW_COMMUNITY四表关联查询",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "三层权限判断（昆山/派出所/网格）",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "security"
+              ],
+              "completed": true
+            },
+            {
+              "text": "返回导航字段支持前端跳转",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "前端人员查询页面",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "3张新表+3PO+3Mapper+3Service",
+              "priority": "P0",
+              "dueDate": null,
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "复用房屋详情接口",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "仅出租房时显示/提交隐患",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "331回调(Token验证)",
+              "priority": "P0",
+              "dueDate": null,
+              "tags": [
+                "security"
+              ],
+              "completed": true
+            },
+            {
+              "text": "MinIO照片集成",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "推送TODO",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "出租房类型切换拦截",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "前端隐患UI组件",
+              "priority": "P1",
+              "dueDate": null,
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "与331系统联调对接（推送接口+回调接口）",
+              "priority": "P0",
+              "dueDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-07-23T22:52:36.938717"
+};
+
+        let currentFilter = 'all';
+
+        function init() {
+            updateStats();
+            renderWorkspaces();
+            setupFilters();
+            document.getElementById('last-update').textContent = new Date().toLocaleString('zh-CN');
+        }
+
+        function updateStats() {
+            let total = 0, inProgress = 0, pending = 0, completed = 0;
+            
+            TODO_DATA.workspaces.forEach(workspace => {
+                workspace.sections.forEach(section => {
+                    section.tasks.forEach(task => {
+                        total++;
+                        if (section.status === '进行中') inProgress++;
+                        else if (section.status === '待办') pending++;
+                        else if (section.status === '已完成') completed++;
+                    });
+                });
+            });
+
+            document.getElementById('total-tasks').textContent = total;
+            document.getElementById('in-progress').textContent = inProgress;
+            document.getElementById('pending').textContent = pending;
+            document.getElementById('completed').textContent = completed;
+        }
+
+        function renderWorkspaces() {
+            const container = document.getElementById('workspaces-container');
+            container.innerHTML = '';
+
+            TODO_DATA.workspaces.forEach(workspace => {
+                const section = document.createElement('div');
+                section.className = 'workspace-section';
+                
+                const header = document.createElement('div');
+                header.className = 'workspace-header';
+                header.textContent = workspace.name;
+                section.appendChild(header);
+
+                const content = document.createElement('div');
+                content.className = 'workspace-content';
+
+                workspace.sections.forEach(taskSection => {
+                    const filteredTasks = taskSection.tasks.filter(task => {
+                        if (currentFilter === 'all') return true;
+                        return task.priority === currentFilter;
+                    });
+
+                    if (filteredTasks.length === 0) return;
+
+                    const group = document.createElement('div');
+                    group.className = 'task-group';
+
+                    const title = document.createElement('div');
+                    title.className = 'task-group-title';
+                    const statusEmoji = taskSection.status === '进行中' ? '🔴' : 
+                                       taskSection.status === '待办' ? '🟡' : '🟢';
+                    title.textContent = `${statusEmoji} ${taskSection.status} ${taskSection.title ? '(' + taskSection.title + ')' : ''}`;
+                    group.appendChild(title);
+
+                    const taskList = document.createElement('div');
+                    taskList.className = 'task-list';
+
+                    filteredTasks.forEach(task => {
+                        const taskCard = createTaskCard(task);
+                        taskList.appendChild(taskCard);
+                    });
+
+                    group.appendChild(taskList);
+                    content.appendChild(group);
+                });
+
+                if (content.children.length === 0) {
+                    const noTasks = document.createElement('div');
+                    noTasks.className = 'no-tasks';
+                    noTasks.textContent = '暂无任务';
+                    content.appendChild(noTasks);
+                }
+
+                section.appendChild(content);
+                container.appendChild(section);
+            });
+        }
+
+        function createTaskCard(task) {
+            const card = document.createElement('div');
+            card.className = `task-card priority-${task.priority || 'P2'}`;
+
+            const header = document.createElement('div');
+            header.className = 'task-header';
+
+            const text = document.createElement('div');
+            text.className = 'task-text';
+            text.textContent = task.text;
+            header.appendChild(text);
+
+            const meta = document.createElement('div');
+            meta.className = 'task-meta';
+
+            if (task.priority) {
+                const priorityBadge = document.createElement('span');
+                priorityBadge.className = `priority-badge ${task.priority}`;
+                priorityBadge.textContent = task.priority;
+                meta.appendChild(priorityBadge);
+            }
+
+            if (task.dueDate) {
+                const dateBadge = document.createElement('span');
+                dateBadge.className = 'date-badge';
+                const dueDate = new Date(task.dueDate);
+                const today = new Date();
+                if (dueDate < today) {
+                    dateBadge.classList.add('overdue');
+                }
+                dateBadge.textContent = task.dueDate;
+                meta.appendChild(dateBadge);
+            }
+
+            header.appendChild(meta);
+            card.appendChild(header);
+
+            if (task.tags && task.tags.length > 0) {
+                const tagList = document.createElement('div');
+                tagList.className = 'tag-list';
+                task.tags.forEach(tag => {
+                    const tagElement = document.createElement('span');
+                    tagElement.className = 'tag';
+                    tagElement.textContent = tag;
+                    tagList.appendChild(tagElement);
+                });
+                card.appendChild(tagList);
+            }
+
+            return card;
+        }
+
+        function setupFilters() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentFilter = btn.dataset.filter;
+                    renderWorkspaces();
+                });
+            });
+        }
+
+        // 初始化
+        init();
+    </script>
+</body>
+</html>

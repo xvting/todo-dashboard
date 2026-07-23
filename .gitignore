@@ -9,7 +9,6 @@ venv/
 ENV/
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
@@ -38,3 +37,5 @@ Thumbs.db
 *.tmp
 *.bak
 *.log
+
+# NOTE: dist/ folder is committed for Gitee Pages deployment
