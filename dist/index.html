@@ -124,10 +124,37 @@
             padding: 20px;
             font-size: 1.5em;
             font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: all 0.3s ease;
+        }
+
+        .workspace-header:hover {
+            opacity: 0.9;
+        }
+
+        .workspace-header .toggle-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        .workspace-section.collapsed .workspace-header .toggle-icon {
+            transform: rotate(-90deg);
         }
 
         .workspace-content {
             padding: 20px;
+            max-height: 2000px;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+        }
+
+        .workspace-section.collapsed .workspace-content {
+            max-height: 0;
+            padding: 0 20px;
         }
 
         .task-group {
@@ -306,6 +333,11 @@
                 <button class="filter-btn" data-filter="P1">P1 重要</button>
                 <button class="filter-btn" data-filter="P2">P2 一般</button>
                 <button class="filter-btn" data-filter="P3">P3 可选</button>
+            </div>
+            <div class="filter-group" style="margin-top: 15px;">
+                <label>视图：</label>
+                <button class="filter-btn" id="collapse-all">全部折叠</button>
+                <button class="filter-btn" id="expand-all">全部展开</button>
             </div>
         </div>
 
@@ -2017,7 +2049,7 @@
       ]
     }
   ],
-  "generated_at": "2026-07-23T23:14:19.031939"
+  "generated_at": "2026-07-23T23:19:46.043721"
 };
 
         let currentFilter = 'all';
@@ -2026,6 +2058,7 @@
             updateStats();
             renderWorkspaces();
             setupFilters();
+            setupCollapseButtons();
             document.getElementById('last-update').textContent = new Date().toLocaleString('zh-CN');
         }
 
@@ -2059,7 +2092,21 @@
                 
                 const header = document.createElement('div');
                 header.className = 'workspace-header';
-                header.textContent = workspace.name;
+                
+                const titleSpan = document.createElement('span');
+                titleSpan.textContent = workspace.name;
+                header.appendChild(titleSpan);
+                
+                const toggleIcon = document.createElement('span');
+                toggleIcon.className = 'toggle-icon';
+                toggleIcon.textContent = '▼';
+                header.appendChild(toggleIcon);
+                
+                // 添加点击事件
+                header.addEventListener('click', () => {
+                    section.classList.toggle('collapsed');
+                });
+                
                 section.appendChild(header);
 
                 const content = document.createElement('div');
@@ -2160,13 +2207,30 @@
         }
 
         function setupFilters() {
-            const filterBtns = document.querySelectorAll('.filter-btn');
+            const filterBtns = document.querySelectorAll('.filter-btn[data-filter]');
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
                     filterBtns.forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                     currentFilter = btn.dataset.filter;
                     renderWorkspaces();
+                });
+            });
+        }
+
+        function setupCollapseButtons() {
+            const collapseAllBtn = document.getElementById('collapse-all');
+            const expandAllBtn = document.getElementById('expand-all');
+            
+            collapseAllBtn.addEventListener('click', () => {
+                document.querySelectorAll('.workspace-section').forEach(section => {
+                    section.classList.add('collapsed');
+                });
+            });
+            
+            expandAllBtn.addEventListener('click', () => {
+                document.querySelectorAll('.workspace-section').forEach(section => {
+                    section.classList.remove('collapsed');
                 });
             });
         }
