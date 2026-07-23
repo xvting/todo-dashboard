@@ -167,6 +167,35 @@
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 2px solid #667eea;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: all 0.3s ease;
+        }
+
+        .task-group-title:hover {
+            opacity: 0.8;
+        }
+
+        .task-group-title .toggle-icon {
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+        }
+
+        .task-group.collapsed .task-group-title .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .task-group .task-list {
+            max-height: 2000px;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .task-group.collapsed .task-list {
+            max-height: 0;
         }
 
         .task-list {
@@ -428,9 +457,23 @@
 
                     const title = document.createElement('div');
                     title.className = 'task-group-title';
+                    
+                    const titleText = document.createElement('span');
                     const statusEmoji = taskSection.status === '进行中' ? '🔴' : 
                                        taskSection.status === '待办' ? '🟡' : '🟢';
-                    title.textContent = `${statusEmoji} ${taskSection.status} ${taskSection.title ? '(' + taskSection.title + ')' : ''}`;
+                    titleText.textContent = `${statusEmoji} ${taskSection.status} ${taskSection.title ? '(' + taskSection.title + ')' : ''}`;
+                    title.appendChild(titleText);
+                    
+                    const groupToggleIcon = document.createElement('span');
+                    groupToggleIcon.className = 'toggle-icon';
+                    groupToggleIcon.textContent = '▼';
+                    title.appendChild(groupToggleIcon);
+                    
+                    // 添加点击事件
+                    title.addEventListener('click', () => {
+                        group.classList.toggle('collapsed');
+                    });
+                    
                     group.appendChild(title);
 
                     const taskList = document.createElement('div');
