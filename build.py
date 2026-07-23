@@ -11,8 +11,8 @@ import json
 from pathlib import Path
 from datetime import datetime
 
-# 中心工作区路径
-CENTRAL_WORKSPACE = Path(r"E:\TODO")
+# 使用相对路径，支持任何平台
+CENTRAL_WORKSPACE = Path(__file__).parent
 WORKSPACES_FILE = CENTRAL_WORKSPACE / "WORKSPACES.md"
 
 
