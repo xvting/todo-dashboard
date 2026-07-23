@@ -356,12 +356,17 @@
 
         <div class="filters">
             <div class="filter-group">
+                <label>工作区：</label>
+                <button class="filter-btn workspace-filter active" data-workspace="all">全部</button>
+                <!-- 工作区按钮将通过 JavaScript 动态生成 -->
+            </div>
+            <div class="filter-group">
                 <label>优先级：</label>
-                <button class="filter-btn active" data-filter="all">全部</button>
-                <button class="filter-btn" data-filter="P0">P0 紧急</button>
-                <button class="filter-btn" data-filter="P1">P1 重要</button>
-                <button class="filter-btn" data-filter="P2">P2 一般</button>
-                <button class="filter-btn" data-filter="P3">P3 可选</button>
+                <button class="filter-btn priority-filter active" data-filter="all">全部</button>
+                <button class="filter-btn priority-filter" data-filter="P0">P0 紧急</button>
+                <button class="filter-btn priority-filter" data-filter="P1">P1 重要</button>
+                <button class="filter-btn priority-filter" data-filter="P2">P2 一般</button>
+                <button class="filter-btn priority-filter" data-filter="P3">P3 可选</button>
             </div>
             <div class="filter-group" style="margin-top: 15px;">
                 <label>视图：</label>
@@ -2078,12 +2083,14 @@
       ]
     }
   ],
-  "generated_at": "2026-07-23T23:22:50.367348"
+  "generated_at": "2026-07-23T23:24:08.241197"
 };
 
         let currentFilter = 'all';
+        let currentWorkspaceFilter = 'all';
 
         function init() {
+            generateWorkspaceFilters();
             updateStats();
             renderWorkspaces();
             setupFilters();
@@ -2091,10 +2098,26 @@
             document.getElementById('last-update').textContent = new Date().toLocaleString('zh-CN');
         }
 
+        function generateWorkspaceFilters() {
+            const filterContainer = document.querySelector('.filter-group:first-child');
+            TODO_DATA.workspaces.forEach(workspace => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn workspace-filter';
+                btn.dataset.workspace = workspace.name;
+                btn.textContent = workspace.name;
+                filterContainer.appendChild(btn);
+            });
+        }
+
         function updateStats() {
             let total = 0, inProgress = 0, pending = 0, completed = 0;
             
             TODO_DATA.workspaces.forEach(workspace => {
+                // 应用工作区筛选
+                if (currentWorkspaceFilter !== 'all' && workspace.name !== currentWorkspaceFilter) {
+                    return;
+                }
+                
                 workspace.sections.forEach(section => {
                     section.tasks.forEach(task => {
                         total++;
@@ -2116,6 +2139,11 @@
             container.innerHTML = '';
 
             TODO_DATA.workspaces.forEach(workspace => {
+                // 应用工作区筛选
+                if (currentWorkspaceFilter !== 'all' && workspace.name !== currentWorkspaceFilter) {
+                    return;
+                }
+                
                 const section = document.createElement('div');
                 section.className = 'workspace-section';
                 
@@ -2250,12 +2278,26 @@
         }
 
         function setupFilters() {
-            const filterBtns = document.querySelectorAll('.filter-btn[data-filter]');
-            filterBtns.forEach(btn => {
+            // 工作区筛选
+            const workspaceBtns = document.querySelectorAll('.workspace-filter');
+            workspaceBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    filterBtns.forEach(b => b.classList.remove('active'));
+                    workspaceBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentWorkspaceFilter = btn.dataset.workspace;
+                    updateStats();
+                    renderWorkspaces();
+                });
+            });
+            
+            // 优先级筛选
+            const priorityBtns = document.querySelectorAll('.priority-filter');
+            priorityBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    priorityBtns.forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                     currentFilter = btn.dataset.filter;
+                    updateStats();
                     renderWorkspaces();
                 });
             });
