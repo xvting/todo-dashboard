@@ -441,7 +441,7 @@
   "workspaces": [
     {
       "name": "AIStore ASR",
-      "last_update": "2026-07-20",
+      "last_update": "2026-07-24",
       "sections": [
         {
           "status": "进行中",
@@ -450,8 +450,8 @@
             {
               "text": "aistore-task 前端 Vue 改造",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-30",
               "completedDate": null,
               "tags": [
                 "feature",
@@ -468,8 +468,8 @@
             {
               "text": "修复 LASRGPURealtimeProvider 路由不到（AsrRealtimeProviderRouter 硬编码只返回 CPU 版本）",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "bug"
@@ -479,8 +479,8 @@
             {
               "text": "修复 LASRGPURealtimeProvider.send() 缺少 synchronized 线程安全隐患",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "bug",
@@ -491,8 +491,8 @@
             {
               "text": "清理 LASRCPURealtimeProvider 无效的 @Component 注解（实际是 new 出来的）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "refactor"
@@ -502,8 +502,8 @@
             {
               "text": "修复连接计数使用 lasrcpuConfig，切换 GPU 引擎时限制值不对",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "bug"
@@ -513,8 +513,8 @@
             {
               "text": "实现 AliyunFileProvider / AliyunRealtimeProvider（当前为空壳）",
               "priority": "P3",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-09-24",
               "completedDate": null,
               "tags": [
                 "feature"
@@ -524,8 +524,8 @@
             {
               "text": "清理 iflytek / tencent 空骨架目录",
               "priority": "P3",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-09-24",
               "completedDate": null,
               "tags": [
                 "refactor"
@@ -535,8 +535,8 @@
             {
               "text": "添加 WebSocket handler 和 Provider 路由单元测试",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "test"
@@ -546,8 +546,8 @@
             {
               "text": "修复 WebSocket CORS 通配符 setAllowedOrigins(\"*\") 无认证问题",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "security"
@@ -557,8 +557,8 @@
             {
               "text": "添加 RealtimeWebSocketHandler 单元测试（最核心组件，零覆盖）",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "test"
@@ -568,8 +568,8 @@
             {
               "text": "实现 PCM 临时文件分段方案（每 5 分钟分段，已上传分段及时删除，磁盘上限约 20MB）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "performance"
@@ -579,8 +579,8 @@
             {
               "text": "aistore-asr 多副本并行分析与适配（WebSocket 会话状态/连接计数/临时文件隔离/负载均衡）",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "refactor"
@@ -590,8 +590,8 @@
             {
               "text": "移除 dev profile 中数据库密码默认值，强制使用环境变量",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "security"
@@ -601,8 +601,8 @@
             {
               "text": "外部化 ASR 引擎 API key（当前明文硬编码：apikey=99999, productId=123456）",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "security"
@@ -612,8 +612,8 @@
             {
               "text": "添加 Service 层 @Transactional 注解（状态变更操作无事务边界）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "refactor"
@@ -623,8 +623,8 @@
             {
               "text": "修复任务启动 TOCTOU 竞态条件（检查与创建非原子）",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "bug"
@@ -634,8 +634,8 @@
             {
               "text": "修复线程池无界且无关闭钩子问题",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "refactor"
@@ -645,8 +645,8 @@
             {
               "text": "实现优雅关闭（应用停止时 FFmpeg 进程会成为孤儿）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "refactor"
@@ -656,8 +656,8 @@
             {
               "text": "修复流处理器资源泄漏（RtspPullProcessor/PcmPushProcessor 异常时未确保关闭）",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "bug"
@@ -667,8 +667,8 @@
             {
               "text": "添加 REST 端点 @Valid 输入验证",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "refactor"
@@ -678,8 +678,8 @@
             {
               "text": "修复 Service 层空指针风险（多处未检查 null）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "bug"
@@ -689,8 +689,8 @@
             {
               "text": "添加 /actuator/health 健康检查端点",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "devops"
@@ -700,8 +700,8 @@
             {
               "text": "添加 /actuator/metrics 指标监控",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "devops"
@@ -711,8 +711,8 @@
             {
               "text": "设备管理增加测试功能 + URI 加密展示（敏感信息保护）",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "feature",
@@ -723,8 +723,8 @@
             {
               "text": "实现 V1.1 外部状态集映射层（starting/running/stopping/stopped/disconnected/error → 内部三态）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "feature"
@@ -734,8 +734,8 @@
             {
               "text": "对齐 stream 模式 WS 握手协议到 V1.1 规范",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "feature"
@@ -745,8 +745,8 @@
             {
               "text": "实现 WebSocket server 端点 WS /asr/stream（规范要求接收 PCM 流的服务端点，完全缺失）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "feature"
@@ -756,8 +756,8 @@
             {
               "text": "修复状态枚举序列化大小写不匹配（代码输出 CREATED，规范要求 created）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "bug"
@@ -767,8 +767,8 @@
             {
               "text": "实现统计字段实际计算（sentenceCount/durationMs/segmentCount 当前为硬编码桩数据）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "feature"
@@ -778,8 +778,8 @@
             {
               "text": "实现 interim 标志控制中间结果推送",
               "priority": "P3",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-09-24",
               "completedDate": null,
               "tags": [
                 "feature"
@@ -789,8 +789,8 @@
             {
               "text": "实现 hotwords 转发给 ASR 引擎",
               "priority": "P3",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-09-24",
               "completedDate": null,
               "tags": [
                 "feature"
@@ -800,8 +800,8 @@
             {
               "text": "实现 6 个未触发的错误码（1001, 1003, 1006, 1007, 1009, 1010）",
               "priority": "P3",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-09-24",
               "completedDate": null,
               "tags": [
                 "refactor"
@@ -811,8 +811,8 @@
             {
               "text": "激活 Bean Validation（@Valid 注解）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "refactor"
@@ -822,8 +822,8 @@
             {
               "text": "清理 StartRequest/TaskStatusResponse 中规范不存在的多余字段",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "refactor"
@@ -833,8 +833,8 @@
             {
               "text": "强制执行 sentences 接口 limit 参数 max=500 限制",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "bug"
@@ -844,8 +844,8 @@
             {
               "text": "添加 source.type 值验证（规范要求只能是 live 或 stream）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "bug"
@@ -855,8 +855,8 @@
             {
               "text": "添加 taskId 长度 8-64 字符验证",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "bug"
@@ -866,8 +866,8 @@
             {
               "text": "添加 Spring Boot Actuator（/actuator/health, /actuator/info）",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "devops"
@@ -877,8 +877,8 @@
             {
               "text": "迁移 Swagger 到 springdoc-openapi（springfox 2.x 与 Spring Boot 3 不兼容）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "devops"
@@ -888,8 +888,8 @@
             {
               "text": "实现结构化日志（JSON 格式，便于 ELK/Loki/Splunk 聚合）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "devops"
@@ -899,8 +899,8 @@
             {
               "text": "添加 Prometheus/Micrometer 指标端点",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "devops"
@@ -910,8 +910,8 @@
             {
               "text": "添加分布式追踪（Micrometer Tracing）",
               "priority": "P3",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-09-24",
               "completedDate": null,
               "tags": [
                 "devops"
@@ -921,8 +921,8 @@
             {
               "text": "实现优雅关闭（server.shutdown: graceful，WebSocket 会话处理）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "refactor"
@@ -932,8 +932,8 @@
             {
               "text": "实现数据库备份自动化（mysqldump 脚本、定时任务）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "devops"
@@ -943,8 +943,8 @@
             {
               "text": "制定音频文件备份策略",
               "priority": "P3",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-09-24",
               "completedDate": null,
               "tags": [
                 "devops"
@@ -954,8 +954,8 @@
             {
               "text": "制定灾难恢复计划（RTO/RPO 目标、故障转移流程）",
               "priority": "P3",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-09-24",
               "completedDate": null,
               "tags": [
                 "devops"
@@ -965,8 +965,8 @@
             {
               "text": "制定数据保留策略（旧音频、日志、任务记录的自动清理）",
               "priority": "P3",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-09-24",
               "completedDate": null,
               "tags": [
                 "devops"
@@ -976,8 +976,8 @@
             {
               "text": "搭建 CI/CD 管道（GitLab CI / Jenkins / GitHub Actions）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "devops"
@@ -987,8 +987,8 @@
             {
               "text": "添加 API 端点速率限制",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "security"
@@ -998,8 +998,8 @@
             {
               "text": "配置生产环境 CORS 策略",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "security"
@@ -1009,8 +1009,8 @@
             {
               "text": "编写运维手册/操作指南（重启、日志轮转、磁盘监控、数据库维护）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "docs"
@@ -1020,8 +1020,8 @@
             {
               "text": "编写容量规划文档（并发任务数限制、内存需求、网络带宽）",
               "priority": "P3",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-09-24",
               "completedDate": null,
               "tags": [
                 "docs"
@@ -1031,8 +1031,8 @@
             {
               "text": "编写生产环境故障排查指南（OOM、网络分区、引擎故障、连接耗尽）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "docs"
@@ -1042,8 +1042,8 @@
             {
               "text": "编写 E2E 测试脚本（端到端流程验证）",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "test"
@@ -1053,8 +1053,8 @@
             {
               "text": "编写压力测试（多任务并发 + 连接上限边界）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "test"
@@ -1064,8 +1064,8 @@
             {
               "text": "编写集成测试（Controller 层 + Service 层）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "test"
@@ -1075,8 +1075,8 @@
             {
               "text": "编写 WebSocket 协议测试（握手、PCM 推送、结果接收、断线重连）",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "test"
@@ -1086,8 +1086,8 @@
             {
               "text": "编写任务生命周期测试（创建→启动→停止→重启→删除）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "test"
@@ -1097,8 +1097,8 @@
             {
               "text": "编写推流重试边界测试（引擎拒绝、网络断开、连接上限）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "test"
@@ -1108,8 +1108,8 @@
             {
               "text": "编写缓冲区溢出测试（FIFO 策略验证、数据丢失边界）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "test"
@@ -1119,8 +1119,8 @@
             {
               "text": "编写音频处理测试（多声道、不同采样率、格式转换）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "test"
@@ -1130,8 +1130,8 @@
             {
               "text": "aistore-task 多任务同时运行测试（并发任务稳定性/资源隔离/状态管理）",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "test"
@@ -1141,8 +1141,8 @@
             {
               "text": "集成 FilePullProcessor 到任务主流程（含 AliyunFileProvider 实现）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "feature"
@@ -1152,8 +1152,8 @@
             {
               "text": "分发节点独立拆分（DistributeMessageManager/WebhookDistributor/ArtemisDistributor 等从 aistore-task 分离为独立服务）",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "refactor"
@@ -1163,8 +1163,8 @@
             {
               "text": "aistore-task 多实例运行模式探索（水平扩展/负载均衡/分布式任务调度）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "feature",
@@ -1175,8 +1175,8 @@
             {
               "text": "aistore-mock 添加模拟海康接口的分发接收端点（兼容 Artemis 推送格式）",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "feature"
@@ -1186,8 +1186,8 @@
             {
               "text": "任务列表过滤检索功能（支持历史数据查询：按状态/时间/设备/关键词等筛选）",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "feature"
@@ -1197,8 +1197,8 @@
             {
               "text": "aistore-task 日志详细内容展示问题（日志详情查看/格式化/搜索）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "bug"
@@ -1208,8 +1208,8 @@
             {
               "text": "更新 API 文档（V1.1 规范与实际实现对齐）",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "docs"
@@ -1219,8 +1219,8 @@
             {
               "text": "编写运维手册（日常操作、监控、故障处理）",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [
                 "docs"
@@ -1230,8 +1230,8 @@
             {
               "text": "编写开发指南（本地开发环境搭建、调试技巧）",
               "priority": "P3",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-09-24",
               "completedDate": null,
               "tags": [
                 "docs"
@@ -1619,7 +1619,7 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-07-23",
+      "last_update": "2026-07-24",
       "sections": [
         {
           "status": "进行中",
@@ -1629,7 +1629,7 @@
               "text": "现有的平板后台要做maven现代框架化改造",
               "priority": "P1",
               "createdDate": "2026-07-23",
-              "dueDate": null,
+              "dueDate": "2026-07-20",
               "completedDate": null,
               "tags": [
                 "refactor"
@@ -1645,8 +1645,8 @@
             {
               "text": "分析园区人口库项目的现状，明确项目目标和范围",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [],
               "completed": false
@@ -1654,8 +1654,8 @@
             {
               "text": "确定技术栈和架构方案",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [],
               "completed": false
@@ -1663,8 +1663,8 @@
             {
               "text": "设计数据模型（人口信息、园区结构等）",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [],
               "completed": false
@@ -1672,8 +1672,8 @@
             {
               "text": "搭建项目基础框架",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [],
               "completed": false
@@ -1681,8 +1681,8 @@
             {
               "text": "分析国产化改造开发计划",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [],
               "completed": false
@@ -1690,8 +1690,8 @@
             {
               "text": "分析所有改造的功能",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [],
               "completed": false
@@ -1699,8 +1699,8 @@
             {
               "text": "人口库数据库表设计分析",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [],
               "completed": false
@@ -1708,8 +1708,8 @@
             {
               "text": "人口库业务流程分析",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [],
               "completed": false
@@ -1717,8 +1717,8 @@
             {
               "text": "人口库改造代码git 代码库构建",
               "priority": "P2",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [],
               "completed": false
@@ -1853,7 +1853,7 @@
     },
     {
       "name": "产品质检",
-      "last_update": "2026-07-22",
+      "last_update": "2026-07-24",
       "sections": [
         {
           "status": "待办",
@@ -1861,27 +1861,27 @@
           "tasks": [
             {
               "text": "确定 MVP 范围和功能优先级",
-              "priority": null,
-              "createdDate": null,
-              "dueDate": null,
+              "priority": "P2",
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [],
               "completed": false
             },
             {
               "text": "设计产品原型和交互流程",
-              "priority": null,
-              "createdDate": null,
-              "dueDate": null,
+              "priority": "P2",
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [],
               "completed": false
             },
             {
               "text": "选择技术栈和架构方案",
-              "priority": null,
-              "createdDate": null,
-              "dueDate": null,
+              "priority": "P2",
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-08-24",
               "completedDate": null,
               "tags": [],
               "completed": false
@@ -2078,7 +2078,7 @@
     },
     {
       "name": "昆山公安人管系统",
-      "last_update": "2026-07-22",
+      "last_update": "2026-07-24",
       "sections": [
         {
           "status": "待办",
@@ -2087,8 +2087,8 @@
             {
               "text": "后端：331 反馈接口支持按地址维度反馈",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "backend"
@@ -2098,8 +2098,8 @@
             {
               "text": "后端：隐患结束状态字典新增若干类型",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "backend"
@@ -2109,8 +2109,8 @@
             {
               "text": "前端：隐患详情/列表适配新的结束状态展示",
               "priority": "P1",
-              "createdDate": null,
-              "dueDate": null,
+              "createdDate": "2026-07-20",
+              "dueDate": "2026-07-31",
               "completedDate": null,
               "tags": [
                 "frontend"
@@ -2535,7 +2535,7 @@
       ]
     }
   ],
-  "generated_at": "2026-07-24T09:49:00.834823"
+  "generated_at": "2026-07-24T09:55:17.046279"
 };
 
         let currentFilter = 'all';
