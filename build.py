@@ -134,13 +134,30 @@ def parse_task_content(task_text, is_completed):
     else:
         description = task_text
     
+    # 提取所有日期
+    dates = re.findall(r'`(\d{4}-\d{2}-\d{2})`', task_text)
+    
+    # 根据任务状态解析日期
+    created_date = None
+    due_date = None
+    completed_date = None
+    
+    if is_completed:
+        # 已完成任务：第一个日期是创建日期，第二个是完成日期
+        if len(dates) >= 1:
+            created_date = dates[0]
+        if len(dates) >= 2:
+            completed_date = dates[1]
+    else:
+        # 未完成任务：第一个日期是创建日期，第二个是截止日期
+        if len(dates) >= 1:
+            created_date = dates[0]
+        if len(dates) >= 2:
+            due_date = dates[1]
+    
     # 提取优先级
     priority_match = re.search(r'`(P[0-3])`', task_text)
     priority = priority_match.group(1) if priority_match else None
-    
-    # 提取日期
-    date_match = re.search(r'`(\d{4}-\d{2}-\d{2})`', task_text)
-    due_date = date_match.group(1) if date_match else None
     
     # 提取标签
     tags = re.findall(r'`#(\w+)`', task_text)
@@ -155,7 +172,9 @@ def parse_task_content(task_text, is_completed):
     return {
         'text': description,
         'priority': priority,
+        'createdDate': created_date,
         'dueDate': due_date,
+        'completedDate': completed_date,
         'tags': tags,
         'completed': is_completed
     }

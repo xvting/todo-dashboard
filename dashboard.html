@@ -251,6 +251,56 @@
             align-items: center;
         }
 
+        .time-info {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .time-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: #e9ecef;
+        }
+
+        .time-badge.created {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .time-badge.due {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .time-badge.completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .time-badge.overdue {
+            background: #f8d7da;
+            color: #721c24;
+            animation: pulse 2s infinite;
+        }
+
+        .duration-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: #e2e3e5;
+            color: #383d41;
+            font-size: 0.85em;
+        }
+
         .priority-badge {
             padding: 4px 12px;
             border-radius: 12px;
@@ -550,20 +600,72 @@
                 meta.appendChild(priorityBadge);
             }
 
-            if (task.dueDate) {
-                const dateBadge = document.createElement('span');
-                dateBadge.className = 'date-badge';
-                const dueDate = new Date(task.dueDate);
-                const today = new Date();
-                if (dueDate < today) {
-                    dateBadge.classList.add('overdue');
-                }
-                dateBadge.textContent = task.dueDate;
-                meta.appendChild(dateBadge);
-            }
-
             header.appendChild(meta);
             card.appendChild(header);
+
+            // 添加时间信息
+            const timeInfo = document.createElement('div');
+            timeInfo.className = 'time-info';
+
+            // 创建日期
+            if (task.createdDate) {
+                const createdBadge = document.createElement('span');
+                createdBadge.className = 'time-badge created';
+                createdBadge.textContent = `📅 创建: ${task.createdDate}`;
+                timeInfo.appendChild(createdBadge);
+            }
+
+            // 截止日期（未完成任务）
+            if (!task.completed && task.dueDate) {
+                const dueBadge = document.createElement('span');
+                const dueDate = new Date(task.dueDate);
+                const today = new Date();
+                const isOverdue = dueDate < today;
+                
+                dueBadge.className = `time-badge due${isOverdue ? ' overdue' : ''}`;
+                dueBadge.textContent = isOverdue ? `⚠️ 逾期: ${task.dueDate}` : `⏰ 截止: ${task.dueDate}`;
+                timeInfo.appendChild(dueBadge);
+            }
+
+            // 完成日期（已完成任务）
+            if (task.completed && task.completedDate) {
+                const completedBadge = document.createElement('span');
+                completedBadge.className = 'time-badge completed';
+                completedBadge.textContent = `✅ 完成: ${task.completedDate}`;
+                timeInfo.appendChild(completedBadge);
+            }
+
+            // 计算任务耗时（已完成任务且有创建日期和完成日期）
+            if (task.completed && task.createdDate && task.completedDate) {
+                const created = new Date(task.createdDate);
+                const completed = new Date(task.completedDate);
+                const durationMs = completed - created;
+                const durationDays = Math.ceil(durationMs / (1000 * 60 * 60 * 24));
+                
+                const durationBadge = document.createElement('span');
+                durationBadge.className = 'duration-badge';
+                durationBadge.textContent = `⏱️ 耗时: ${durationDays}天`;
+                timeInfo.appendChild(durationBadge);
+            }
+
+            // 计算任务年龄（未完成任务且有创建日期）
+            if (!task.completed && task.createdDate) {
+                const created = new Date(task.createdDate);
+                const today = new Date();
+                const ageMs = today - created;
+                const ageDays = Math.floor(ageMs / (1000 * 60 * 60 * 24));
+                
+                if (ageDays > 0) {
+                    const ageBadge = document.createElement('span');
+                    ageBadge.className = 'duration-badge';
+                    ageBadge.textContent = `📆 已${ageDays}天`;
+                    timeInfo.appendChild(ageBadge);
+                }
+            }
+
+            if (timeInfo.children.length > 0) {
+                card.appendChild(timeInfo);
+            }
 
             if (task.tags && task.tags.length > 0) {
                 const tagList = document.createElement('div');
