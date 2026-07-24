@@ -448,7 +448,10 @@
             renderWorkspaces();
             setupFilters();
             setupCollapseButtons();
-            document.getElementById('last-update').textContent = new Date().toLocaleString('zh-CN');
+            
+            // 使用构建时间而不是页面加载时间
+            const buildTime = new Date(TODO_DATA.generated_at);
+            document.getElementById('last-update').textContent = buildTime.toLocaleString('zh-CN');
         }
 
         function generateWorkspaceFilters() {
