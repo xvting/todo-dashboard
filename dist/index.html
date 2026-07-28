@@ -594,6 +594,15 @@
           "title": "",
           "tasks": [
             {
+              "text": "**修复 `PcmTranscribeNode.sendPcm()` WritePendingException 导致音频流中断** — `ReentrantLock` 双重检查 + `closeSession` 同步保护 + 3 个并发/异常测试",
+              "priority": null,
+              "createdDate": "2026-07-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
               "text": "GPU LASR `rec` 缓冲合并 — 一句话分多次 `rec` 定稿（VAD 停顿切分），当前每次 `rec` 都触发 `isEnd=true` 回调，导致业务系统收到碎片化定稿。方案：缓冲 `rec`，`var` 为空时 flush 合并输出。`errno=9` 也走缓冲逻辑。`disconnect()` 时检查残留。`postType=1` 标记不可靠（有时不标记），用 `var` 是否为空判断句终",
               "priority": "P1",
               "createdDate": "2026-07-31",
@@ -2470,7 +2479,7 @@
       ]
     }
   ],
-  "generated_at": "2026-07-28T18:00:14.201554"
+  "generated_at": "2026-07-28T19:00:13.848235"
 };
 
         let currentFilter = 'all';
