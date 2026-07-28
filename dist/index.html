@@ -70,6 +70,116 @@
             font-size: 1.1em;
         }
 
+        /* 详细统计区域 */
+        .detailed-stats {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .detailed-stats h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .stats-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .stats-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 8px 0;
+        }
+
+        .stat-item-label {
+            font-weight: 500;
+            color: #555;
+        }
+
+        .stat-item-value {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .priority-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .priority-P0 { background: #dc3545; }
+        .priority-P1 { background: #fd7e14; }
+        .priority-P2 { background: #ffc107; }
+        .priority-P3 { background: #28a745; }
+
+        .completion-rate {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .completion-rate .rate-number {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .overdue-alert {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .overdue-alert.critical {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+
         .filters {
             background: white;
             padding: 20px;
@@ -404,6 +514,42 @@
             </div>
         </div>
 
+        <!-- 详细统计展示区域 -->
+        <div class="detailed-stats">
+            <h2>📊 详细统计</h2>
+            <div class="stats-grid">
+                <!-- 按优先级统计 -->
+                <div class="stats-section">
+                    <h3>按优先级分布</h3>
+                    <div id="priority-stats"></div>
+                </div>
+
+                <!-- 按工作区统计 -->
+                <div class="stats-section">
+                    <h3>按工作区分布</h3>
+                    <div id="workspace-stats"></div>
+                </div>
+
+                <!-- 完成率统计 -->
+                <div class="stats-section">
+                    <h3>完成率</h3>
+                    <div class="completion-rate">
+                        <div>当前完成率</div>
+                        <div class="rate-number" id="completion-rate">0%</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="completion-progress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 逾期任务 -->
+                <div class="stats-section">
+                    <h3>逾期任务</h3>
+                    <div id="overdue-stats"></div>
+                </div>
+            </div>
+        </div>
+
         <div class="filters">
             <div class="filter-group">
                 <label>工作区：</label>
@@ -441,14 +587,14 @@
   "workspaces": [
     {
       "name": "AIStore ASR",
-      "last_update": "2026-07-24",
+      "last_update": "2026-07-28",
       "sections": [
         {
           "status": "待办",
           "title": "",
           "tasks": [
             {
-              "text": "修复 LASRGPURealtimeProvider 路由不到（AsrRealtimeProviderRouter 硬编码只返回 CPU 版本）",
+              "text": "GPU LASR `rec` 缓冲合并 — 一句话分多次 `rec` 定稿（VAD 停顿切分），当前每次 `rec` 都触发 `isEnd=true` 回调，导致业务系统收到碎片化定稿。方案：缓冲 `rec`，`var` 为空时 flush 合并输出。`errno=9` 也走缓冲逻辑。`disconnect()` 时检查残留。`postType=1` 标记不可靠（有时不标记），用 `var` 是否为空判断句终",
               "priority": "P1",
               "createdDate": "2026-07-31",
               "dueDate": null,
@@ -459,25 +605,13 @@
               "completed": false
             },
             {
-              "text": "修复 LASRGPURealtimeProvider.send() 缺少 synchronized 线程安全隐患",
-              "priority": "P1",
-              "createdDate": "2026-07-31",
-              "dueDate": null,
-              "completedDate": null,
-              "tags": [
-                "bug",
-                "security"
-              ],
-              "completed": false
-            },
-            {
-              "text": "清理 LASRCPURealtimeProvider 无效的 @Component 注解（实际是 new 出来的）",
+              "text": "GPU LASR 中间结果用 `llmVar` 替代 `var` — `var` 过度预测（包含未说内容），`llmVar` 是引擎 LLM 后处理修正版，和后续 `rec` 定稿一致",
               "priority": "P2",
               "createdDate": "2026-08-24",
               "dueDate": null,
               "completedDate": null,
               "tags": [
-                "refactor"
+                "feature"
               ],
               "completed": false
             },
@@ -511,17 +645,6 @@
               "completedDate": null,
               "tags": [
                 "refactor"
-              ],
-              "completed": false
-            },
-            {
-              "text": "添加 WebSocket handler 和 Provider 路由单元测试",
-              "priority": "P2",
-              "createdDate": "2026-08-24",
-              "dueDate": null,
-              "completedDate": null,
-              "tags": [
-                "test"
               ],
               "completed": false
             },
@@ -566,17 +689,6 @@
               "completedDate": null,
               "tags": [
                 "refactor"
-              ],
-              "completed": false
-            },
-            {
-              "text": "aistore-asr 支持 CPU 版本 LASR 引擎（LASRCPURealtimeProvider 完善 + 路由配置）",
-              "priority": "P1",
-              "createdDate": "2026-07-31",
-              "dueDate": null,
-              "completedDate": null,
-              "tags": [
-                "feature"
               ],
               "completed": false
             },
@@ -1237,6 +1349,60 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "GPU LASR 引擎对接（AbstractLASRRealtimeProvider 基类 + CPU/GPU 子类精简 + 路由器 GPU 分支 + 独立连接计数）",
+              "priority": null,
+              "createdDate": "2026-07-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "修复 GPU LASR errno=6 未处理（当作错误打 WARN）",
+              "priority": null,
+              "createdDate": "2026-07-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "GPU LASR 定稿提取（errno=6 rec 字段解析 + WAV 提取 + MinIO 上传）",
+              "priority": null,
+              "createdDate": "2026-07-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "修复握手处理硬编码 aispeech-lasrcpu 导致 default-provider 配置不生效",
+              "priority": null,
+              "createdDate": "2026-07-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "代码审查修复（URI 日志脱敏、删除 getConfig 死代码、onDisconnected 防重、线程名含引擎类型）",
+              "priority": null,
+              "createdDate": "2026-07-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "K8s ConfigMap/Deployment 新增 GPU LASR 环境变量",
+              "priority": null,
+              "createdDate": "2026-07-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
             {
               "text": "aistore-task 前端 Vue 改造",
               "priority": null,
@@ -2290,7 +2456,7 @@
       ]
     }
   ],
-  "generated_at": "2026-07-28T17:00:11.301877"
+  "generated_at": "2026-07-28T17:38:16.864073"
 };
 
         let currentFilter = 'all';
@@ -2299,6 +2465,7 @@
         function init() {
             generateWorkspaceFilters();
             updateStats();
+            renderDetailedStats();
             renderWorkspaces();
             setupFilters();
             setupCollapseButtons();
@@ -2342,6 +2509,124 @@
             document.getElementById('in-progress').textContent = inProgress;
             document.getElementById('pending').textContent = pending;
             document.getElementById('completed').textContent = completed;
+        }
+
+        function renderDetailedStats() {
+            // 统计优先级分布
+            const priorityCounts = { P0: 0, P1: 0, P2: 0, P3: 0 };
+            const workspaceCounts = {};
+            let overdueCount = 0;
+            let totalTasks = 0;
+            let completedTasks = 0;
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            TODO_DATA.workspaces.forEach(workspace => {
+                // 应用工作区筛选
+                if (currentWorkspaceFilter !== 'all' && workspace.name !== currentWorkspaceFilter) {
+                    return;
+                }
+
+                // 统计工作区任务数
+                let workspaceTaskCount = 0;
+                
+                workspace.sections.forEach(section => {
+                    section.tasks.forEach(task => {
+                        totalTasks++;
+                        workspaceTaskCount++;
+                        
+                        if (section.status === '已完成') {
+                            completedTasks++;
+                        }
+
+                        // 统计优先级
+                        if (task.priority && priorityCounts.hasOwnProperty(task.priority)) {
+                            priorityCounts[task.priority]++;
+                        }
+
+                        // 检查逾期（未完成任务且有截止日期）
+                        if (section.status !== '已完成' && task.dueDate) {
+                            const dueDate = new Date(task.dueDate);
+                            dueDate.setHours(0, 0, 0, 0);
+                            if (dueDate < today) {
+                                overdueCount++;
+                            }
+                        }
+                    });
+                });
+
+                workspaceCounts[workspace.name] = workspaceTaskCount;
+            });
+
+            // 渲染优先级统计
+            const priorityContainer = document.getElementById('priority-stats');
+            priorityContainer.innerHTML = '';
+            const totalWithPriority = Object.values(priorityCounts).reduce((a, b) => a + b, 0);
+            
+            ['P0', 'P1', 'P2', 'P3'].forEach(priority => {
+                const count = priorityCounts[priority];
+                const percentage = totalWithPriority > 0 ? (count / totalWithPriority * 100).toFixed(1) : 0;
+                
+                const item = document.createElement('div');
+                item.className = 'stat-item';
+                item.innerHTML = `
+                    <span class="stat-item-label">
+                        <span class="priority-indicator priority-${priority}"></span>
+                        ${priority} 优先级
+                    </span>
+                    <span class="stat-item-value">${count} (${percentage}%)</span>
+                `;
+                priorityContainer.appendChild(item);
+
+                // 添加进度条
+                const progressBar = document.createElement('div');
+                progressBar.className = 'progress-bar';
+                progressBar.innerHTML = `<div class="progress-fill" style="width: ${percentage}%"></div>`;
+                priorityContainer.appendChild(progressBar);
+            });
+
+            // 渲染工作区统计
+            const workspaceContainer = document.getElementById('workspace-stats');
+            workspaceContainer.innerHTML = '';
+            
+            Object.entries(workspaceCounts).forEach(([name, count]) => {
+                const percentage = totalTasks > 0 ? (count / totalTasks * 100).toFixed(1) : 0;
+                
+                const item = document.createElement('div');
+                item.className = 'stat-item';
+                item.innerHTML = `
+                    <span class="stat-item-label">${name}</span>
+                    <span class="stat-item-value">${count} (${percentage}%)</span>
+                `;
+                workspaceContainer.appendChild(item);
+
+                // 添加进度条
+                const progressBar = document.createElement('div');
+                progressBar.className = 'progress-bar';
+                progressBar.innerHTML = `<div class="progress-fill" style="width: ${percentage}%"></div>`;
+                workspaceContainer.appendChild(progressBar);
+            });
+
+            // 渲染完成率
+            const completionRate = totalTasks > 0 ? (completedTasks / totalTasks * 100).toFixed(1) : 0;
+            document.getElementById('completion-rate').textContent = `${completionRate}%`;
+            document.getElementById('completion-progress').style.width = `${completionRate}%`;
+
+            // 渲染逾期任务
+            const overdueContainer = document.getElementById('overdue-stats');
+            overdueContainer.innerHTML = '';
+            
+            const overdueItem = document.createElement('div');
+            overdueItem.className = `overdue-alert ${overdueCount > 0 ? 'critical' : ''}`;
+            overdueItem.innerHTML = `
+                <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 10px;">
+                    ${overdueCount > 0 ? '⚠️' : '✅'} ${overdueCount} 个逾期任务
+                </div>
+                <div style="color: #666;">
+                    ${overdueCount > 0 ? '需要立即关注和处理' : '所有任务都在计划时间内'}
+                </div>
+            `;
+            overdueContainer.appendChild(overdueItem);
         }
 
         function renderWorkspaces() {
@@ -2548,6 +2833,7 @@
                     btn.classList.add('active');
                     currentWorkspaceFilter = btn.dataset.workspace;
                     updateStats();
+                    renderDetailedStats();
                     renderWorkspaces();
                 });
             });
@@ -2560,6 +2846,7 @@
                     btn.classList.add('active');
                     currentFilter = btn.dataset.filter;
                     updateStats();
+                    renderDetailedStats();
                     renderWorkspaces();
                 });
             });
