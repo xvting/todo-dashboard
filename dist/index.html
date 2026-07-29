@@ -603,17 +603,6 @@
                 "bug"
               ],
               "completed": false
-            },
-            {
-              "text": "测试环境 WS 频繁断开问题排查（可能是 aistore-asr 响应处理问题）",
-              "priority": "P1",
-              "createdDate": "2026-07-28",
-              "dueDate": null,
-              "completedDate": null,
-              "tags": [
-                "bug"
-              ],
-              "completed": false
             }
           ]
         },
@@ -1362,6 +1351,15 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "**测试环境 WS 频繁断开问题修复** — 根因：`setMaxIdleTimeout()` 因 `instanceof StandardWebSocketSession` 检查失败而静默跳过（Jetty 12 EE10 实际类型为 `JakartaWebSocketSession`），idle timeout 保持默认 30 秒。修复：改用 `AbstractWebSocketSession.getNativeSession()` + 反射调用 `setMaxIdleTimeout()`，兼容所有 Spring WebSocket 实现，5 个单元测试全部通过",
+              "priority": null,
+              "createdDate": "2026-07-29",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
             {
               "text": "aistore-mock 增加转写模拟服务（Mock ASR WebSocket 转写模拟，兼容 aistore-asr 协议，含文本脚本/异常注入/前端UI）",
               "priority": null,
@@ -2532,7 +2530,7 @@
       ]
     }
   ],
-  "generated_at": "2026-07-29T14:00:11.425239"
+  "generated_at": "2026-07-29T15:00:19.167832"
 };
 
         let currentFilter = 'all';
