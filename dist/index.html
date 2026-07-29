@@ -587,23 +587,12 @@
   "workspaces": [
     {
       "name": "AIStore ASR",
-      "last_update": "2026-07-28",
+      "last_update": "2026-07-29",
       "sections": [
         {
           "status": "进行中",
           "title": "",
           "tasks": [
-            {
-              "text": "aistore-mock 增加转写模拟服务（模拟 ASR 转写结果返回）",
-              "priority": "P1",
-              "createdDate": "2026-07-28",
-              "dueDate": null,
-              "completedDate": null,
-              "tags": [
-                "feature"
-              ],
-              "completed": false
-            },
             {
               "text": "aistore-asr 文件处理出错不能影响转写流程（异常隔离/容错处理）",
               "priority": "P1",
@@ -1313,15 +1302,6 @@
               "completed": false
             },
             {
-              "text": "aistore-mock 添加模拟海康接口的分发接收端点（兼容 Artemis 推送格式）",
-              "priority": null,
-              "createdDate": "2026-07-29",
-              "dueDate": null,
-              "completedDate": null,
-              "tags": [],
-              "completed": true
-            },
-            {
               "text": "任务列表过滤检索功能（支持历史数据查询：按状态/时间/设备/关键词等筛选）",
               "priority": "P1",
               "createdDate": "2026-07-31",
@@ -1382,6 +1362,24 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "aistore-mock 增加转写模拟服务（Mock ASR WebSocket 转写模拟，兼容 aistore-asr 协议，含文本脚本/异常注入/前端UI）",
+              "priority": null,
+              "createdDate": "2026-07-29",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "aistore-mock 添加模拟海康接口的分发接收端点（兼容 Artemis 推送格式）",
+              "priority": null,
+              "createdDate": "2026-07-29",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
             {
               "text": "GPU LASR 引擎对接（AbstractLASRRealtimeProvider 基类 + CPU/GPU 子类精简 + 路由器 GPU 分支 + 独立连接计数）",
               "priority": null,
@@ -2534,7 +2532,7 @@
       ]
     }
   ],
-  "generated_at": "2026-07-29T11:00:15.112267"
+  "generated_at": "2026-07-29T12:00:16.169771"
 };
 
         let currentFilter = 'all';
