@@ -590,18 +590,48 @@
       "last_update": "2026-07-28",
       "sections": [
         {
-          "status": "待办",
+          "status": "进行中",
           "title": "",
           "tasks": [
             {
-              "text": "**修复 `PcmTranscribeNode.sendPcm()` WritePendingException 导致音频流中断** — `ReentrantLock` 双重检查 + `closeSession` 同步保护 + 3 个并发/异常测试",
-              "priority": null,
+              "text": "aistore-mock 增加转写模拟服务（模拟 ASR 转写结果返回）",
+              "priority": "P1",
               "createdDate": "2026-07-28",
               "dueDate": null,
               "completedDate": null,
-              "tags": [],
-              "completed": true
+              "tags": [
+                "feature"
+              ],
+              "completed": false
             },
+            {
+              "text": "aistore-asr 文件处理出错不能影响转写流程（异常隔离/容错处理）",
+              "priority": "P1",
+              "createdDate": "2026-07-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "测试环境 WS 频繁断开问题排查（可能是 aistore-asr 响应处理问题）",
+              "priority": "P1",
+              "createdDate": "2026-07-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            }
+          ]
+        },
+        {
+          "status": "待办",
+          "title": "",
+          "tasks": [
             {
               "text": "GPU LASR `rec` 缓冲合并 — 一句话分多次 `rec` 定稿（VAD 停顿切分），当前每次 `rec` 都触发 `isEnd=true` 回调，导致业务系统收到碎片化定稿。方案：缓冲 `rec`，`var` 为空时 flush 合并输出。`errno=9` 也走缓冲逻辑。`disconnect()` 时检查残留。`postType=1` 标记不可靠（有时不标记），用 `var` 是否为空判断句终",
               "priority": "P1",
@@ -1284,14 +1314,12 @@
             },
             {
               "text": "aistore-mock 添加模拟海康接口的分发接收端点（兼容 Artemis 推送格式）",
-              "priority": "P1",
-              "createdDate": "2026-07-31",
+              "priority": null,
+              "createdDate": "2026-07-29",
               "dueDate": null,
               "completedDate": null,
-              "tags": [
-                "feature"
-              ],
-              "completed": false
+              "tags": [],
+              "completed": true
             },
             {
               "text": "任务列表过滤检索功能（支持历史数据查询：按状态/时间/设备/关键词等筛选）",
@@ -1419,6 +1447,33 @@
             },
             {
               "text": "Docker 镜像构建与导出（aistore-asr-1.0.0-alpha.3.tar）",
+              "priority": null,
+              "createdDate": "2026-07-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "修复 `PcmTranscribeNode.sendPcm()` WritePendingException 导致音频流中断 — `ReentrantLock` 双重检查 + `closeSession` 同步保护 + 3 个并发/异常测试",
+              "priority": null,
+              "createdDate": "2026-07-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "**LASR WebSocket 空闲超时修复** — Client 端 `afterConnectionEstablished` 设置空闲超时 5 分钟（Jetty 默认 30s 导致说话人停顿断连）+ Server 端 `ServletServerContainerFactoryBean` 同步设置",
+              "priority": null,
+              "createdDate": "2026-07-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "**LASR_IDLE_TIMEOUT 事件 + 前端优化** — 新增事件类型 + `afterConnectionClosed`/`handleTransportError` 检测超时 + 前端橙色展示 + 友好提示 \"LASR空闲超时（说话人长时间停顿触发）\"",
               "priority": null,
               "createdDate": "2026-07-28",
               "dueDate": null,
@@ -2479,7 +2534,7 @@
       ]
     }
   ],
-  "generated_at": "2026-07-28T20:00:19.718790"
+  "generated_at": "2026-07-29T10:00:14.444986"
 };
 
         let currentFilter = 'all';
