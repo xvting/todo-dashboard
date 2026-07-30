@@ -25,6 +25,7 @@
 | 产品质检 | `E:\siyun\chanpin-zhijian\TODO.md` | 产品质量检测与管理 | ✅ 已对齐 |
 | 昆山公安人管系统 | `E:\siyun\kunshagongan\renguan\TODO.md` | 公安人口管理（房屋/人员标签、出租屋、隐患） | ✅ 已对齐 |
 | 昆山救护车 | `E:\siyun\kunshan-jiuhuche\TODO.md` | 昆山救护车管理系统 | ✅ 已对齐 |
+| MS-Agent 研究 | `E:\RESEARCH\ms-agent\TODO.md` | MS-Agent 框架研究与 Agent 平台 PoC | ✅ 已对齐 |
 
 ---
 

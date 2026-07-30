@@ -722,15 +722,13 @@
               "completed": false
             },
             {
-              "text": "修复任务启动 TOCTOU 竞态条件（检查与创建非原子）",
-              "priority": "P1",
-              "createdDate": "2026-07-31",
+              "text": "修复任务启动 TOCTOU 竞态条件（流处理器层已用 AtomicReference + compareAndSet 防御）",
+              "priority": null,
+              "createdDate": "2026-07-29",
               "dueDate": null,
               "completedDate": null,
-              "tags": [
-                "bug"
-              ],
-              "completed": false
+              "tags": [],
+              "completed": true
             },
             {
               "text": "修复线程池无界且无关闭钩子问题",
@@ -755,15 +753,13 @@
               "completed": false
             },
             {
-              "text": "修复流处理器资源泄漏（RtspPullProcessor/PcmPushProcessor 异常时未确保关闭）",
-              "priority": "P1",
-              "createdDate": "2026-07-31",
+              "text": "修复流处理器资源泄漏（AtomicReference + ReentrantLock + try-with-resources 全面覆盖）",
+              "priority": null,
+              "createdDate": "2026-07-29",
               "dueDate": null,
               "completedDate": null,
-              "tags": [
-                "bug"
-              ],
-              "completed": false
+              "tags": [],
+              "completed": true
             },
             {
               "text": "添加 REST 端点 @Valid 输入验证",
@@ -2558,9 +2554,190 @@
           ]
         }
       ]
+    },
+    {
+      "name": "MS-Agent 研究",
+      "last_update": "2026-07-29",
+      "sections": [
+        {
+          "status": "待办",
+          "title": "",
+          "tasks": [
+            {
+              "text": "完成 ms-agent-1.6.0 框架的环境配置和依赖安装",
+              "priority": "P1",
+              "createdDate": "2026-07-29",
+              "dueDate": "2026-07-30",
+              "completedDate": null,
+              "tags": [
+                "docs"
+              ],
+              "completed": false
+            },
+            {
+              "text": "配置 platform-poc 的开发环境（后端 + 前端）",
+              "priority": "P1",
+              "createdDate": "2026-07-29",
+              "dueDate": "2026-07-30",
+              "completedDate": null,
+              "tags": [
+                "docs"
+              ],
+              "completed": false
+            },
+            {
+              "text": "配置 LLM API Key 和环境变量",
+              "priority": "P0",
+              "createdDate": "2026-07-29",
+              "dueDate": "2026-07-30",
+              "completedDate": null,
+              "tags": [
+                "docs"
+              ],
+              "completed": false
+            },
+            {
+              "text": "验证 platform-poc 用户注册/登录功能",
+              "priority": "P1",
+              "createdDate": "2026-07-29",
+              "dueDate": "2026-07-31",
+              "completedDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "验证技能管理功能（创建/编辑/删除 SKILL.md）",
+              "priority": "P1",
+              "createdDate": "2026-07-29",
+              "dueDate": "2026-07-31",
+              "completedDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "验证 Agent 管理功能（配置提示词、LLM、绑定技能）",
+              "priority": "P1",
+              "createdDate": "2026-07-29",
+              "dueDate": "2026-07-31",
+              "completedDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "验证会话管理和实时对话功能（WebSocket 流式输出）",
+              "priority": "P1",
+              "createdDate": "2026-07-29",
+              "dueDate": "2026-07-31",
+              "completedDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "研究 MS-Agent 的核心架构和设计模式",
+              "priority": "P2",
+              "createdDate": "2026-07-29",
+              "dueDate": "2026-08-05",
+              "completedDate": null,
+              "tags": [
+                "research"
+              ],
+              "completed": false
+            },
+            {
+              "text": "研究 Deep Research (Agentic Insight v2) 的实现原理",
+              "priority": "P2",
+              "createdDate": "2026-07-29",
+              "dueDate": "2026-08-05",
+              "completedDate": null,
+              "tags": [
+                "research"
+              ],
+              "completed": false
+            },
+            {
+              "text": "研究 MCP (Model Calling Protocol) 的使用方式",
+              "priority": "P2",
+              "createdDate": "2026-07-29",
+              "dueDate": "2026-08-05",
+              "completedDate": null,
+              "tags": [
+                "research"
+              ],
+              "completed": false
+            },
+            {
+              "text": "研究 Agent Skills 系统的实现机制",
+              "priority": "P2",
+              "createdDate": "2026-07-29",
+              "dueDate": "2026-08-05",
+              "completedDate": null,
+              "tags": [
+                "research"
+              ],
+              "completed": false
+            },
+            {
+              "text": "分析 platform-poc 的架构设计，识别可优化点",
+              "priority": "P2",
+              "createdDate": "2026-07-29",
+              "dueDate": "2026-08-07",
+              "completedDate": null,
+              "tags": [
+                "platform",
+                "research"
+              ],
+              "completed": false
+            },
+            {
+              "text": "优化数据库模型和查询性能",
+              "priority": "P3",
+              "createdDate": "2026-07-29",
+              "dueDate": "2026-08-07",
+              "completedDate": null,
+              "tags": [
+                "platform",
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "改进 WebSocket 连接的稳定性和错误处理",
+              "priority": "P3",
+              "createdDate": "2026-07-29",
+              "dueDate": "2026-08-07",
+              "completedDate": null,
+              "tags": [
+                "platform",
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "完善前端 UI/UX 设计",
+              "priority": "P3",
+              "createdDate": "2026-07-29",
+              "dueDate": "2026-08-07",
+              "completedDate": null,
+              "tags": [
+                "platform",
+                "frontend"
+              ],
+              "completed": false
+            }
+          ]
+        }
+      ]
     }
   ],
-  "generated_at": "2026-07-30T14:00:45.508561"
+  "generated_at": "2026-07-30T14:15:41.782931"
 };
 
         let currentFilter = 'all';
