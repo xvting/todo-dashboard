@@ -590,23 +590,6 @@
       "last_update": "2026-07-29",
       "sections": [
         {
-          "status": "进行中",
-          "title": "",
-          "tasks": [
-            {
-              "text": "aistore-asr 文件处理出错不能影响转写流程（异常隔离/容错处理）",
-              "priority": "P1",
-              "createdDate": "2026-07-28",
-              "dueDate": null,
-              "completedDate": null,
-              "tags": [
-                "bug"
-              ],
-              "completed": false
-            }
-          ]
-        },
-        {
           "status": "待办",
           "title": "",
           "tasks": [
@@ -1362,6 +1345,15 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "**MinIO 上传韧性功能** — 解耦 MinIO WAV 上传与转写结果回传，防止 MinIO 故障阻塞转写。核心改动：MinioConfig 加 10s 超时、TranscriptionAudioHandler 原子写入（.tmp→.wav）、LocalAudioDirManager 后台任务（最新优先上传/120s轮次超时/30天过期清理/10分钟孤儿清理/空间阈值）、LocalAudioController REST API + Vue 前端 `/local-audio` 页面、83 个测试全部通过、代码审查修复路径不匹配 Critical 问题",
+              "priority": null,
+              "createdDate": "2026-07-29",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
             {
               "text": "**测试环境 WS 频繁断开问题修复** — 根因：`setMaxIdleTimeout()` 因 `instanceof StandardWebSocketSession` 检查失败而静默跳过（Jetty 12 EE10 实际类型为 `JakartaWebSocketSession`），idle timeout 保持默认 30 秒。修复：改用 `AbstractWebSocketSession.getNativeSession()` + 反射调用 `setMaxIdleTimeout()`，兼容所有 Spring WebSocket 实现，5 个单元测试全部通过",
               "priority": null,
@@ -2541,7 +2533,7 @@
       ]
     }
   ],
-  "generated_at": "2026-07-29T19:00:29.137430"
+  "generated_at": "2026-07-30T10:00:24.372595"
 };
 
         let currentFilter = 'all';
