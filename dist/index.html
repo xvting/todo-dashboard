@@ -616,15 +616,6 @@
               "completed": false
             },
             {
-              "text": "修复连接计数使用 lasrcpuConfig，切换 GPU 引擎时限制值不对",
-              "priority": null,
-              "createdDate": "2026-07-28",
-              "dueDate": null,
-              "completedDate": null,
-              "tags": [],
-              "completed": true
-            },
-            {
               "text": "实现 AliyunFileProvider / AliyunRealtimeProvider（当前为空壳）",
               "priority": "P3",
               "createdDate": "2026-09-24",
@@ -658,15 +649,6 @@
               "completed": false
             },
             {
-              "text": "添加 RealtimeWebSocketHandler 单元测试（最核心组件，零覆盖）",
-              "priority": null,
-              "createdDate": "2026-07-28",
-              "dueDate": null,
-              "completedDate": null,
-              "tags": [],
-              "completed": true
-            },
-            {
               "text": "实现 PCM 临时文件分段方案（每 5 分钟分段，已上传分段及时删除，磁盘上限约 20MB）",
               "priority": "P2",
               "createdDate": "2026-08-24",
@@ -689,18 +671,7 @@
               "completed": false
             },
             {
-              "text": "移除 dev profile 中数据库密码默认值，强制使用环境变量",
-              "priority": "P1",
-              "createdDate": "2026-07-31",
-              "dueDate": null,
-              "completedDate": null,
-              "tags": [
-                "security"
-              ],
-              "completed": false
-            },
-            {
-              "text": "外部化 ASR 引擎 API key（当前明文硬编码：apikey=99999, productId=123456）",
+              "text": "移除 dev profile 中数据库密码默认值（部分完成：已支持环境变量，但仍有默认值 `aispeech2019`，flyway plugin 密码硬编码）",
               "priority": "P1",
               "createdDate": "2026-07-31",
               "dueDate": null,
@@ -720,15 +691,6 @@
                 "refactor"
               ],
               "completed": false
-            },
-            {
-              "text": "修复任务启动 TOCTOU 竞态条件（流处理器层已用 AtomicReference + compareAndSet 防御）",
-              "priority": null,
-              "createdDate": "2026-07-29",
-              "dueDate": null,
-              "completedDate": null,
-              "tags": [],
-              "completed": true
             },
             {
               "text": "修复线程池无界且无关闭钩子问题",
@@ -751,15 +713,6 @@
                 "refactor"
               ],
               "completed": false
-            },
-            {
-              "text": "修复流处理器资源泄漏（AtomicReference + ReentrantLock + try-with-resources 全面覆盖）",
-              "priority": null,
-              "createdDate": "2026-07-29",
-              "dueDate": null,
-              "completedDate": null,
-              "tags": [],
-              "completed": true
             },
             {
               "text": "添加 REST 端点 @Valid 输入验证",
@@ -1281,17 +1234,6 @@
               "completed": false
             },
             {
-              "text": "任务列表过滤检索功能（支持历史数据查询：按状态/时间/设备/关键词等筛选）",
-              "priority": "P1",
-              "createdDate": "2026-07-31",
-              "dueDate": null,
-              "completedDate": null,
-              "tags": [
-                "feature"
-              ],
-              "completed": false
-            },
-            {
               "text": "aistore-task 日志详细内容展示问题（日志详情查看/格式化/搜索）",
               "priority": "P2",
               "createdDate": "2026-08-24",
@@ -1303,7 +1245,7 @@
               "completed": false
             },
             {
-              "text": "更新 API 文档（V1.1 规范与实际实现对齐）",
+              "text": "更新 API 文档（部分完成：文档已存在 static/docs/index.html，但版本标注仍为 v1.0.0-alpha.3，未对齐 V1.1）",
               "priority": "P1",
               "createdDate": "2026-07-31",
               "dueDate": null,
@@ -1343,6 +1285,42 @@
           "tasks": [
             {
               "text": "aistore-asr 文件处理异常隔离（审查确认：所有文件 IO 异常已在各层级妥善捕获，不影响转写流程）",
+              "priority": null,
+              "createdDate": "2026-07-29",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "外部化 ASR 引擎 API key（代码审查确认：无硬编码，仅通过 ${ASR_URL} 配置）",
+              "priority": null,
+              "createdDate": "2026-07-29",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "任务列表过滤检索功能（已实现：GET /api/tasks/history 支持 keyword/status/deviceCode/startTime/endTime 筛选 + 分页）",
+              "priority": null,
+              "createdDate": "2026-07-29",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "修复任务启动 TOCTOU 竞态条件（流处理器层已用 AtomicReference + compareAndSet 防御）",
+              "priority": null,
+              "createdDate": "2026-07-29",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "修复流处理器资源泄漏（AtomicReference + ReentrantLock + try-with-resources 全面覆盖）",
               "priority": null,
               "createdDate": "2026-07-29",
               "dueDate": null,
@@ -2737,7 +2715,7 @@
       ]
     }
   ],
-  "generated_at": "2026-07-30T14:15:41.782931"
+  "generated_at": "2026-07-30T15:00:30.795925"
 };
 
         let currentFilter = 'all';
