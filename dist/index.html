@@ -587,7 +587,7 @@
   "workspaces": [
     {
       "name": "AIStore ASR",
-      "last_update": "2026-07-29",
+      "last_update": "2026-08-02",
       "sections": [
         {
           "status": "待办",
@@ -1283,6 +1283,15 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "分发节点化 + Per-Sink 隔离重试重构（1 任务 1 节点 DistributeNode + 内部 N 个 SinkChannel，定稿自动重试补发指数退避 1s→60s，interim 失败丢弃，队列满三层淘汰策略，交通灯全绿/任一黄/停止红，SinkChangedEvent 即时刷新配置，381 tests passed）",
+              "priority": null,
+              "createdDate": "2026-08-02",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
             {
               "text": "aistore-asr 文件处理异常隔离（审查确认：所有文件 IO 异常已在各层级妥善捕获，不影响转写流程）",
               "priority": null,
@@ -2715,7 +2724,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-02T20:01:50.452793"
+  "generated_at": "2026-08-02T21:00:18.074618"
 };
 
         let currentFilter = 'all';
