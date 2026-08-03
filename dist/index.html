@@ -587,7 +587,7 @@
   "workspaces": [
     {
       "name": "AIStore ASR",
-      "last_update": "2026-08-02",
+      "last_update": "2026-08-03",
       "sections": [
         {
           "status": "待办",
@@ -1223,7 +1223,7 @@
               "completed": false
             },
             {
-              "text": "海康录音设备对接（RTSP 拉流/设备注册/状态监控）",
+              "text": "海康录音设备对接（ISAPI 声源方位定位 + RTSP 多路拉流，需实测验证设备是否按角色分离输出音频流）",
               "priority": "P1",
               "createdDate": "2026-08-07",
               "dueDate": null,
@@ -1283,6 +1283,15 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "设备多音源改造（aistore_device_audio_source 子表 + Task 直接关联 AudioSource + 前端音源子表/下拉 + 运行中任务引用保护 + 批量查询优化 + RTSP 地址安全隐藏 + CSS Grid 分发目标布局，Flyway V14 迁移，399 tests passed，合并 master，打 tag deploy-aistore-task-v1.0.0-alpha.8）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
             {
               "text": "分发节点化 + Per-Sink 隔离重试重构（1 任务 1 节点 DistributeNode + 内部 N 个 SinkChannel，定稿自动重试补发指数退避 1s→60s，interim 失败丢弃，队列满三层淘汰策略，交通灯全绿/任一黄/停止红，SinkChangedEvent 即时刷新配置，381 tests passed）",
               "priority": null,
@@ -1901,112 +1910,186 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-07-24",
+      "last_update": "2026-08-03",
       "sections": [
+        {
+          "status": "进行中",
+          "title": "",
+          "tasks": [
+            {
+              "text": "部署 dm8-migrate 新 K8s StatefulSet + Service（正确参数：COMPATIBLE_MODE=2/CASE_SENSITIVE=1/EXTENT_SIZE=32/BLANK_PAD_MODE=1，NodePort 30237，his 命名空间）",
+              "priority": "P0",
+              "createdDate": "2026-08-03",
+              "dueDate": "2026-08-05",
+              "completedDate": null,
+              "tags": [
+                "devops",
+                "database"
+              ],
+              "completed": false
+            },
+            {
+              "text": "完善各模块标记 TODO 的业务逻辑（海康数据库链/中间表/水电气复合查询）",
+              "priority": "P1",
+              "createdDate": "2026-08-03",
+              "dueDate": "2026-08-10",
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "平板 APP 端联调测试（登录/采集/两实跟踪接口）",
+              "priority": "P1",
+              "createdDate": "2026-08-03",
+              "dueDate": "2026-08-10",
+              "completedDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            }
+          ]
+        },
         {
           "status": "待办",
           "title": "",
           "tasks": [
             {
-              "text": "分析园区人口库项目的现状，明确项目目标和范围",
+              "text": "验证 dm8-migrate 新实例参数（SQLark 自动检查全通过）",
               "priority": "P1",
-              "createdDate": "2026-07-20",
-              "dueDate": "2026-07-31",
+              "createdDate": "2026-08-03",
+              "dueDate": "2026-08-07",
               "completedDate": null,
-              "tags": [],
+              "tags": [
+                "database"
+              ],
               "completed": false
             },
             {
-              "text": "确定技术栈和架构方案",
+              "text": "在达梦迁移库创建 CENSUS / CENSUS_DC 表空间 + CENSUS 用户",
               "priority": "P1",
-              "createdDate": "2026-07-20",
-              "dueDate": "2026-07-31",
+              "createdDate": "2026-08-03",
+              "dueDate": "2026-08-07",
               "completedDate": null,
-              "tags": [],
+              "tags": [
+                "database"
+              ],
               "completed": false
             },
             {
-              "text": "设计数据模型（人口信息、园区结构等）",
+              "text": "用 SQLark 迁移 Oracle 表结构到达梦（544 表 + 139 索引 + 17 序列 + 130 触发器，99.7% 直接迁）",
               "priority": "P1",
-              "createdDate": "2026-07-20",
-              "dueDate": "2026-07-31",
+              "createdDate": "2026-08-03",
+              "dueDate": "2026-08-10",
               "completedDate": null,
-              "tags": [],
+              "tags": [
+                "database"
+              ],
               "completed": false
             },
             {
-              "text": "搭建项目基础框架",
+              "text": "手工修复 3 个迁移问题对象（V_DQ_HCTJ 视图 / PROC_AUTO_EXE_C_JOB 存储过程 / 1 个函数）",
               "priority": "P2",
-              "createdDate": "2026-07-20",
-              "dueDate": "2026-08-24",
+              "createdDate": "2026-08-03",
+              "dueDate": "2026-08-10",
               "completedDate": null,
-              "tags": [],
+              "tags": [
+                "database",
+                "refactor"
+              ],
               "completed": false
             },
             {
-              "text": "分析国产化改造开发计划",
-              "priority": "P1",
-              "createdDate": "2026-07-20",
-              "dueDate": "2026-07-31",
-              "completedDate": null,
-              "tags": [],
-              "completed": false
-            },
-            {
-              "text": "分析所有改造的功能",
-              "priority": "P1",
-              "createdDate": "2026-07-20",
-              "dueDate": "2026-07-31",
-              "completedDate": null,
-              "tags": [],
-              "completed": false
-            },
-            {
-              "text": "人口库数据库表设计分析",
-              "priority": "P1",
-              "createdDate": "2026-07-20",
-              "dueDate": "2026-07-31",
-              "completedDate": null,
-              "tags": [],
-              "completed": false
-            },
-            {
-              "text": "人口库业务流程分析",
-              "priority": "P1",
-              "createdDate": "2026-07-20",
-              "dueDate": "2026-07-31",
-              "completedDate": null,
-              "tags": [],
-              "completed": false
-            },
-            {
-              "text": "人口库改造代码git 代码库构建",
+              "text": "分析 Oracle USERS 表空间的表（决定是否迁移，先查内容）",
               "priority": "P2",
-              "createdDate": "2026-07-20",
-              "dueDate": "2026-08-24",
+              "createdDate": "2026-08-03",
+              "dueDate": "2026-08-07",
               "completedDate": null,
-              "tags": [],
+              "tags": [
+                "database"
+              ],
+              "completed": false
+            },
+            {
+              "text": "迁移少量测试数据到 dm8-migrate（每表前 1000 行，够联调用）",
+              "priority": "P2",
+              "createdDate": "2026-08-05",
+              "dueDate": "2026-08-15",
+              "completedDate": null,
+              "tags": [
+                "database"
+              ],
+              "completed": false
+            },
+            {
+              "text": "改造 oracle.sql.* 类型（10 个 Java 文件：BLOB/CLOB/DATE 替换为 java.sql 标准类型）",
+              "priority": "P1",
+              "createdDate": "2026-08-03",
+              "dueDate": "2026-08-15",
+              "completedDate": null,
+              "tags": [
+                "refactor",
+                "database"
+              ],
+              "completed": false
+            },
+            {
+              "text": "批量替换 JDBC URL/Driver/Hibernate Dialect（30+ 配置 + 10 pom.xml + OracleLobHandler）",
+              "priority": "P1",
+              "createdDate": "2026-08-05",
+              "dueDate": "2026-08-15",
+              "completedDate": null,
+              "tags": [
+                "refactor",
+                "database"
+              ],
+              "completed": false
+            },
+            {
+              "text": "ROWNUM 分页改造验证（90+ 处，评估批量改 LIMIT/OFFSET）",
+              "priority": "P2",
+              "createdDate": "2026-08-07",
+              "dueDate": "2026-08-20",
+              "completedDate": null,
+              "tags": [
+                "refactor",
+                "database"
+              ],
+              "completed": false
+            },
+            {
+              "text": "DB Link 跨库引用改造（139 处 `@census`/`@CENSUS_BI` 改为 Schema 跨表访问）",
+              "priority": "P1",
+              "createdDate": "2026-08-07",
+              "dueDate": "2026-08-15",
+              "completedDate": null,
+              "tags": [
+                "refactor",
+                "database"
+              ],
+              "completed": false
+            },
+            {
+              "text": "数据迁移（园区旧库 → 达梦测试库，登录相关7表已就绪，待全量）",
+              "priority": "P2",
+              "createdDate": "2026-08-03",
+              "dueDate": "2026-08-31",
+              "completedDate": null,
+              "tags": [
+                "devops"
+              ],
               "completed": false
             },
             {
               "text": "分析 cas 验证的升级",
               "priority": "P1",
               "createdDate": "2026-07-24",
-              "dueDate": "2026-07-31",
+              "dueDate": "2026-08-31",
               "completedDate": null,
               "tags": [
                 "security"
-              ],
-              "completed": false
-            },
-            {
-              "text": "分析国产数据库达梦在 Spring Boot 框架下的开发",
-              "priority": "P1",
-              "createdDate": "2026-07-24",
-              "dueDate": "2026-07-31",
-              "completedDate": null,
-              "tags": [
-                "refactor"
               ],
               "completed": false
             }
@@ -2017,9 +2100,219 @@
           "title": "",
           "tasks": [
             {
+              "text": "Oracle → 达梦代码兼容性扫描（10 大类：oracle.sql.*/JDBC URL/Hibernate Dialect/ROWNUM 等）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "database"
+              ],
+              "completed": true
+            },
+            {
+              "text": "用 SQLark 评估迁移可行性（99.7% 兼容，544 表 + 139 索引 + 17 序列 + 130 触发器直接迁，仅 3 对象需小改）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "database"
+              ],
+              "completed": true
+            },
+            {
+              "text": "定位达梦初始化参数问题（现有 K8s 实例 dm8-cs 缺 COMPATIBLE_MODE=2/CASE_SENSITIVE=1/EXTENT_SIZE=32/BLANK_PAD_MODE=1）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "database"
+              ],
+              "completed": true
+            },
+            {
+              "text": "确认 K8s Pod env 不可变，制定新建 dm8-migrate StatefulSet 方案（保留现有 dm8-cs）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": true
+            },
+            {
+              "text": "Web 管理端前端（登录页 + 首页数据大盘，web/ Vite+Vue3+Element Plus 工程，构建进 static/）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "删除指挥中心登录接口（loginWithZHZX + tempUserLogin，feature/remove-zhzx-login 分支，编译通过）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "登录接口业务逻辑改为园区方式（按usercode查警员/T_SYS_USER密码/4表联查权限）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "登录接口真实账号验证通过（admin 获取 Token + 权限）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "配置文件合并为单一 application.yml（达梦/Redis/MinIO）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "参照 aistore-task 配置日志（logback-spring.xml）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "创建 Docker/K8s 部署配置（Dockerfile/docker-compose/k8s.yaml/configmap）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "添加 Knife4j 依赖（doc.html 界面，Spring Boot 3 兼容）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "触发自动构建发布（tag: deploy-main-0.0.1 / deploy-main-0.0.2）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "创建 develop 分支并确定分支策略（feature→develop→main）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "升级 Spring Boot 3.3.5 + Java 17（javax→jakarta、springfox→springdoc、MyBatis-Plus 3.5.5）",
+              "priority": null,
+              "createdDate": "2026-07-29",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "配置达梦数据库连接（119.45.40.133:35237 census用户）",
+              "priority": null,
+              "createdDate": "2026-07-29",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "创建 sip-rk-app-server 项目骨架（基于昆山架构，1074源文件编译通过）",
+              "priority": null,
+              "createdDate": "2026-07-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "恢复广达对接模块（gdserver 5个WebService桩类）",
+              "priority": null,
+              "createdDate": "2026-07-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "居住信息采集核心（Controller sure/del 恢复）",
+              "priority": null,
+              "createdDate": "2026-07-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "两实跟踪模块框架（6个Controller + 26个SQL）",
+              "priority": null,
+              "createdDate": "2026-07-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "待办任务模块（5种任务类型处理器 + TaskHandlerFactory）",
+              "priority": null,
+              "createdDate": "2026-07-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "完善待办任务处理器业务逻辑（5实体 + 5Mapper）",
+              "priority": null,
+              "createdDate": "2026-07-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
               "text": "给园区公安增加新的揭露想地址",
               "priority": null,
-              "createdDate": "2026-07-24",
+              "createdDate": "2026-07-20",
               "dueDate": null,
               "completedDate": "2026-07-24",
               "tags": [],
@@ -2044,11 +2337,22 @@
               "completed": true
             },
             {
+              "text": "从信创改造设计方案 HTML 文档中提取完整 12 章节内容",
+              "priority": null,
+              "createdDate": "2026-07-20",
+              "dueDate": null,
+              "completedDate": "2026-07-24",
+              "tags": [
+                "docs"
+              ],
+              "completed": true
+            },
+            {
               "text": "完成政务网部署环境梳理（91% - 31/34 已分析）",
               "priority": null,
               "createdDate": "2026-07-23",
               "dueDate": null,
-              "completedDate": "2026-07-23",
+              "completedDate": null,
               "tags": [],
               "completed": true
             },
@@ -2057,7 +2361,7 @@
               "priority": null,
               "createdDate": "2026-07-23",
               "dueDate": null,
-              "completedDate": "2026-07-23",
+              "completedDate": null,
               "tags": [],
               "completed": true
             },
@@ -2066,52 +2370,16 @@
               "priority": null,
               "createdDate": "2026-07-23",
               "dueDate": null,
-              "completedDate": "2026-07-23",
+              "completedDate": null,
               "tags": [],
               "completed": true
             },
             {
-              "text": "分析 172.24.242.12 测试/辅助服务器（2个系统）",
+              "text": "分析 172.24.242.12/23/50/21/11 共 5 台服务器",
               "priority": null,
               "createdDate": "2026-07-23",
               "dueDate": null,
-              "completedDate": "2026-07-23",
-              "tags": [],
-              "completed": true
-            },
-            {
-              "text": "分析 172.24.242.23 业务服务器（9个系统）",
-              "priority": null,
-              "createdDate": "2026-07-23",
-              "dueDate": null,
-              "completedDate": "2026-07-23",
-              "tags": [],
-              "completed": true
-            },
-            {
-              "text": "分析 172.24.242.50 新架构服务器（6个系统）",
-              "priority": null,
-              "createdDate": "2026-07-23",
-              "dueDate": null,
-              "completedDate": "2026-07-23",
-              "tags": [],
-              "completed": true
-            },
-            {
-              "text": "分析 172.24.242.21 主应用服务器（11个系统）",
-              "priority": null,
-              "createdDate": "2026-07-23",
-              "dueDate": null,
-              "completedDate": "2026-07-23",
-              "tags": [],
-              "completed": true
-            },
-            {
-              "text": "分析 172.24.242.11 Nginx 网关服务器",
-              "priority": null,
-              "createdDate": "2026-07-23",
-              "dueDate": null,
-              "completedDate": "2026-07-23",
+              "completedDate": null,
               "tags": [],
               "completed": true
             },
@@ -2120,7 +2388,7 @@
               "priority": null,
               "createdDate": "2026-07-23",
               "dueDate": null,
-              "completedDate": "2026-07-23",
+              "completedDate": null,
               "tags": [],
               "completed": true
             },
@@ -2129,7 +2397,7 @@
               "priority": null,
               "createdDate": "2026-07-20",
               "dueDate": null,
-              "completedDate": "2026-07-20",
+              "completedDate": null,
               "tags": [],
               "completed": true
             },
@@ -2138,7 +2406,7 @@
               "priority": null,
               "createdDate": "2026-07-20",
               "dueDate": null,
-              "completedDate": "2026-07-20",
+              "completedDate": null,
               "tags": [],
               "completed": true
             }
@@ -2760,7 +3028,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-03T18:00:25.675873"
+  "generated_at": "2026-08-03T19:00:31.326861"
 };
 
         let currentFilter = 'all';
