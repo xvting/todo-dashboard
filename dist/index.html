@@ -587,7 +587,7 @@
   "workspaces": [
     {
       "name": "AIStore ASR",
-      "last_update": "2026-08-03",
+      "last_update": "2026-08-03 (开发者指南 + Dockerfile 解耦)",
       "sections": [
         {
           "status": "待办",
@@ -1024,15 +1024,15 @@
               "completed": false
             },
             {
-              "text": "搭建 CI/CD 管道（GitLab CI / Jenkins / GitHub Actions）",
-              "priority": "P2",
-              "createdDate": "2026-08-24",
+              "text": "搭建 CI/CD 管道（Jenkins tag-based 自动构建：deploy-{module}-v{version} 触发 Docker build + Harbor push + K8s 部署）",
+              "priority": null,
+              "createdDate": "2026-08-03",
               "dueDate": null,
               "completedDate": null,
               "tags": [
                 "devops"
               ],
-              "completed": false
+              "completed": true
             },
             {
               "text": "添加 API 端点速率限制",
@@ -1245,9 +1245,9 @@
               "completed": false
             },
             {
-              "text": "更新 API 文档（部分完成：文档已存在 static/docs/index.html，但版本标注仍为 v1.0.0-alpha.3，未对齐 V1.1）",
-              "priority": "P1",
-              "createdDate": "2026-07-31",
+              "text": "更新 API 文档（开发者指南已对齐多音源改造 v1.0.0-alpha.8，待对齐 V1.1 规范：外部状态集/WS 握手协议/统计字段计算）",
+              "priority": "P2",
+              "createdDate": "2026-08-24",
               "dueDate": null,
               "completedDate": null,
               "tags": [
@@ -1283,6 +1283,33 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "开发者指南更新（设备/任务 API 对齐多音源改造：audioSources 子表、audioSourceId 关联、音源级声道策略，修复残留 JSON 片段，版本号 v1.0.0-alpha.8，206 行增/126 行删）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "Dockerfile jar 文件名解耦（pom.xml finalName=aistore-task，打包输出固定名称不含版本号，Dockerfile 不再随版本变更）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "版本 bump 到 1.0.0-alpha.8（pom.xml + 开发者指南 + Dockerfile 统一）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
             {
               "text": "设备多音源改造（aistore_device_audio_source 子表 + Task 直接关联 AudioSource + 前端音源子表/下拉 + 运行中任务引用保护 + 批量查询优化 + RTSP 地址安全隐藏 + CSS Grid 分发目标布局，Flyway V14 迁移，399 tests passed，合并 master，打 tag deploy-aistore-task-v1.0.0-alpha.8）",
               "priority": null,
@@ -1940,7 +1967,7 @@
               "completed": false
             },
             {
-              "text": "平板 APP 端联调测试（登录/采集/两实跟踪接口）",
+              "text": "平板 APP 端联调测试（登录已通过 admin 验证，采集/两实跟踪接口待联调）",
               "priority": "P1",
               "createdDate": "2026-08-03",
               "dueDate": "2026-08-10",
@@ -2092,6 +2119,39 @@
                 "security"
               ],
               "completed": false
+            },
+            {
+              "text": "Web 管理端扩展页面（基础数据查询/工作量统计——后端 API 已就绪；用户/角色/权限需先补后端 API）",
+              "priority": "P2",
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "登录登出缺口确认（checkPoliceStatus 接口 / policeStationName_yy 字段，随 APP 联调确认是否补）",
+              "priority": "P2",
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "清理残留分支 feature/remove-zhzx-login（内容已并入 main）",
+              "priority": "P3",
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": false
             }
           ]
         },
@@ -2140,6 +2200,28 @@
               "completedDate": null,
               "tags": [
                 "devops"
+              ],
+              "completed": true
+            },
+            {
+              "text": "发布 v0.0.3（develop → main 合并 + tag deploy-main-0.0.3 触发自动构建）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": true
+            },
+            {
+              "text": "登录登出单元测试（38 个用例：AuthController/TokenService/LoginInterceptor/Certification/UserLoginVo）",
+              "priority": null,
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "test"
               ],
               "completed": true
             },
@@ -3028,7 +3110,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-03T19:00:31.326861"
+  "generated_at": "2026-08-04T10:00:26.198660"
 };
 
         let currentFilter = 'all';
