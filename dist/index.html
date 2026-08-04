@@ -1937,7 +1937,7 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-08-03",
+      "last_update": "2026-08-04",
       "sections": [
         {
           "status": "进行中",
@@ -1974,6 +1974,61 @@
               "completedDate": null,
               "tags": [
                 "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "用户/角色/权限 API（用户管理/角色管理/权限管理，P0 剩余 3 功能）",
+              "priority": "P1",
+              "createdDate": "2026-08-04",
+              "dueDate": "2026-08-15",
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "前端工程 sip-rk-admin-web（Vue3 独立项目：基础数据管理 6 页面 + 用户权限 3 页面 + 工作量统计）",
+              "priority": "P1",
+              "createdDate": "2026-08-04",
+              "dueDate": "2026-08-31",
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "民警\"两实\"工作量统计 API 盘点补齐（StatsController 现有 vs P0 需求）",
+              "priority": "P2",
+              "createdDate": "2026-08-04",
+              "dueDate": "2026-08-20",
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "DB 唯一索引登记：T_COMMUNICTY.COMMUNITY_ID 部分唯一索引（达梦 WHERE STATUS='1'，随数据迁移执行）",
+              "priority": "P2",
+              "createdDate": "2026-08-04",
+              "dueDate": "2026-08-31",
+              "completedDate": null,
+              "tags": [
+                "database"
+              ],
+              "completed": false
+            },
+            {
+              "text": "底层死代码清理（已删 Controller 的下层 Service/Mapper/DTO/BO 仍存在：Jxcs*/TDeclareLivingTask*/RoadPass*/CompanyDetail*/Business* 等，无 API 暴露但占体积，需逐个验证无保留代码引用后删除）",
+              "priority": "P3",
+              "createdDate": "2026-08-04",
+              "dueDate": "2026-08-31",
+              "completedDate": null,
+              "tags": [
+                "refactor"
               ],
               "completed": false
             }
@@ -2159,6 +2214,39 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "新建 sip-rk-admin-server 项目（从 sip-rk-app-server 裁剪，9091 端口，GitLab 仓库 + main/develop 推送）",
+              "priority": null,
+              "createdDate": "2026-08-04",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "写后台管理系统架构设计（改造/design/05-后台管理系统.md）+ 基础数据管理方案（06）+ 实施计划（.zcode/plans/）",
+              "priority": null,
+              "createdDate": "2026-08-04",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "docs"
+              ],
+              "completed": true
+            },
+            {
+              "text": "基础数据管理 6 功能 API（派出所/行政区/小区/楼栋/房屋/警员，按园区逻辑，178 单测全过 + 冒烟通过，feature/basicdata-crud 已推送）",
+              "priority": null,
+              "createdDate": "2026-08-04",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
             {
               "text": "Oracle → 达梦代码兼容性扫描（10 大类：oracle.sql.*/JDBC URL/Hibernate Dialect/ROWNUM 等）",
               "priority": null,
@@ -3110,7 +3198,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-04T15:00:14.241653"
+  "generated_at": "2026-08-04T16:00:28.641285"
 };
 
         let currentFilter = 'all';
