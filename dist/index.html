@@ -1954,28 +1954,6 @@
                 "database"
               ],
               "completed": false
-            },
-            {
-              "text": "完善各模块标记 TODO 的业务逻辑（海康数据库链/中间表/水电气复合查询）",
-              "priority": "P1",
-              "createdDate": "2026-08-03",
-              "dueDate": "2026-08-10",
-              "completedDate": null,
-              "tags": [
-                "feature"
-              ],
-              "completed": false
-            },
-            {
-              "text": "平板 APP 端联调测试（登录已通过 admin 验证，采集/两实跟踪接口待联调）",
-              "priority": "P1",
-              "createdDate": "2026-08-03",
-              "dueDate": "2026-08-10",
-              "completedDate": null,
-              "tags": [
-                "test"
-              ],
-              "completed": false
             }
           ]
         },
@@ -1984,10 +1962,21 @@
           "title": "",
           "tasks": [
             {
-              "text": "民警\"两实\"工作量统计 API 盘点补齐（StatsController 现有 vs P0 需求）",
-              "priority": "P2",
+              "text": "管理端 P1 功能点（24 个：数据展现/综合查询/重点要素/时空地图/智能感知，逐个开发走 feature 分支+测试确认流程）",
+              "priority": "P1",
               "createdDate": "2026-08-04",
-              "dueDate": "2026-08-20",
+              "dueDate": "2026-12-31",
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "地址中心化基础（t_address 标准地址表 + 地址服务，8月计划欠账）",
+              "priority": "P1",
+              "createdDate": "2026-08-04",
+              "dueDate": "2026-08-31",
               "completedDate": null,
               "tags": [
                 "feature"
@@ -2017,6 +2006,17 @@
               "completed": false
             },
             {
+              "text": "民警\"两实\"工作量统计（T_LIVING_LOG 口径 5 接口+ECharts 页面+测试数据，deploy-main-1.2.0；P0 管理端 10 功能点全部交付）",
+              "priority": null,
+              "createdDate": "2026-08-04",
+              "dueDate": null,
+              "completedDate": "2026-08-04",
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
               "text": "用户/角色/权限管理 3 功能点（角色 CRUD+菜单分配+用户启用禁用+菜单树+登录权限双套注入修复，deploy-main-1.1.0）",
               "priority": null,
               "createdDate": "2026-08-04",
@@ -2026,6 +2026,83 @@
                 "feature"
               ],
               "completed": true
+            },
+            {
+              "text": "移动端 P0 14 功能点（信息采集3/人员查询/两实跟踪6/办事指南/系统设置/隐患采集/防诈宣传，见功能点-工作量与阶段.md）",
+              "priority": "P1",
+              "createdDate": "2026-08-04",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "平板 APP 端联调测试（登录已通过 admin 验证，采集/两实跟踪接口待联调）",
+              "priority": "P1",
+              "createdDate": "2026-08-03",
+              "dueDate": "2026-08-10",
+              "completedDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "完善各模块标记 TODO 的业务逻辑（海康数据库链/中间表/水电气复合查询）",
+              "priority": "P1",
+              "createdDate": "2026-08-03",
+              "dueDate": "2026-08-10",
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "数据迁移（园区旧库 → 达梦测试库，登录相关7表已就绪，待全量）",
+              "priority": "P2",
+              "createdDate": "2026-08-03",
+              "dueDate": "2026-08-31",
+              "completedDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": false
+            },
+            {
+              "text": "分析 cas 验证的升级",
+              "priority": "P1",
+              "createdDate": "2026-07-24",
+              "dueDate": "2026-08-31",
+              "completedDate": null,
+              "tags": [
+                "security"
+              ],
+              "completed": false
+            },
+            {
+              "text": "登录登出缺口确认（checkPoliceStatus 接口 / policeStationName_yy 字段，随 APP 联调确认是否补）",
+              "priority": "P2",
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "清理残留分支 feature/remove-zhzx-login（内容已并入 main）",
+              "priority": "P3",
+              "createdDate": "2026-08-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": false
             },
             {
               "text": "验证 dm8-migrate 新实例参数（SQLark 自动检查全通过）",
@@ -2143,10 +2220,10 @@
               "completed": false
             },
             {
-              "text": "数据迁移（园区旧库 → 达梦测试库，登录相关7表已就绪，待全量）",
-              "priority": "P2",
-              "createdDate": "2026-08-03",
-              "dueDate": "2026-08-31",
+              "text": "xxl-job 调度中心对接联调（XXL_JOB_ADMIN_ADDRESSES 配置实际平台地址，executor 注册 + 任务调度验证）",
+              "priority": "P1",
+              "createdDate": "2026-08-05",
+              "dueDate": "2026-08-15",
               "completedDate": null,
               "tags": [
                 "devops"
@@ -2154,35 +2231,13 @@
               "completed": false
             },
             {
-              "text": "分析 cas 验证的升级",
-              "priority": "P1",
-              "createdDate": "2026-07-24",
-              "dueDate": "2026-08-31",
-              "completedDate": null,
-              "tags": [
-                "security"
-              ],
-              "completed": false
-            },
-            {
-              "text": "登录登出缺口确认（checkPoliceStatus 接口 / policeStationName_yy 字段，随 APP 联调确认是否补）",
+              "text": "老 executor 业务 handler 分批迁移（task 漏登记 → artemis 海康 → dataUpload → jwrylzdj，~84 handler）",
               "priority": "P2",
-              "createdDate": "2026-08-03",
-              "dueDate": null,
+              "createdDate": "2026-08-05",
+              "dueDate": "2026-09-30",
               "completedDate": null,
               "tags": [
                 "feature"
-              ],
-              "completed": false
-            },
-            {
-              "text": "清理残留分支 feature/remove-zhzx-login（内容已并入 main）",
-              "priority": "P3",
-              "createdDate": "2026-08-03",
-              "dueDate": null,
-              "completedDate": null,
-              "tags": [
-                "devops"
               ],
               "completed": false
             }
@@ -2192,6 +2247,51 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "新建 sip-rk-schedule-server（XXL-JOB Executor 独立项目：Spring Boot 3.3.5 + xxl-job-core 3.1.0 + 达梦骨架，9092/9999 端口）",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-05",
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "首批 handler：tokenCleanHandler（调 app-server token-clean）+ demoHandler（链路自检），单测 6 个全过",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-05",
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "app-server 新增 ScheduleTaskController（POST /api/schedule/v1/token-clean，X-Internal-Token 内部凭证校验，清理过期会话+在线统计）",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-05",
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "架构文档 design/07 + 部署配置（Dockerfile/k8s.yaml/configmap，his 命名空间）+ GitLab 仓库 main/develop/feature 推送",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-05",
+              "tags": [
+                "docs",
+                "devops"
+              ],
+              "completed": true
+            },
             {
               "text": "新建 sip-rk-admin-server 项目（从 sip-rk-app-server v0.0.3 裁剪，9091 端口，GitLab 仓库 + main/develop 推送）",
               "priority": null,
@@ -3209,7 +3309,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-05T14:00:36.390894"
+  "generated_at": "2026-08-05T15:00:29.299970"
 };
 
         let currentFilter = 'all';
