@@ -1937,7 +1937,7 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-08-04",
+      "last_update": "2026-08-05",
       "sections": [
         {
           "status": "进行中",
@@ -2094,17 +2094,6 @@
               "completed": false
             },
             {
-              "text": "清理残留分支 feature/remove-zhzx-login（内容已并入 main）",
-              "priority": "P3",
-              "createdDate": "2026-08-03",
-              "dueDate": null,
-              "completedDate": null,
-              "tags": [
-                "devops"
-              ],
-              "completed": false
-            },
-            {
               "text": "验证 dm8-migrate 新实例参数（SQLark 自动检查全通过）",
               "priority": "P1",
               "createdDate": "2026-08-03",
@@ -2220,7 +2209,7 @@
               "completed": false
             },
             {
-              "text": "xxl-job 调度中心对接联调（XXL_JOB_ADMIN_ADDRESSES 配置实际平台地址，executor 注册 + 任务调度验证）",
+              "text": "xxl-job 调度中心对接联调（XXL_JOB_ADMIN_ADDRESSES 配置实际平台地址，executor 注册 + 任务调度验证；本地验证已完成，只差真实调度中心）",
               "priority": "P1",
               "createdDate": "2026-08-05",
               "dueDate": "2026-08-15",
@@ -2248,6 +2237,117 @@
           "title": "",
           "tasks": [
             {
+              "text": "合并 develop → main（e2b05a7，含骨架 + 自执行试点 handler + 联调准备）",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-05",
+              "tags": [
+                "devops"
+              ],
+              "completed": true
+            },
+            {
+              "text": "打 tag deploy-main-0.0.1 触发自动构建（K3s Deployment sip-rk-schedule-server，his 命名空间）",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-05",
+              "tags": [
+                "devops"
+              ],
+              "completed": true
+            },
+            {
+              "text": "git 分支清理同步：三仓库（admin/app/schedule）feature 分支全清（本地+远端），develop/main 内容同步，远端一致",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-05",
+              "tags": [
+                "devops"
+              ],
+              "completed": true
+            },
+            {
+              "text": "管理端 P0 10 功能点全部交付（1.0.0 基础数据×6 / 1.1.0 用户权限×3 / 1.2.0 工作量统计×1，209+ 单测+冒烟实测）",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-05",
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "进度对照文档（改造/进度对照.md，管理端 34 功能点）+ P1 功能点明细（改造/P1功能点明细.md，24 个含开发内容/依赖/批次）",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-05",
+              "tags": [
+                "docs"
+              ],
+              "completed": true
+            },
+            {
+              "text": "合并分支：schedule-server feature/schedule-executor → develop；app-server feature/schedule-task-api → develop",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-05",
+              "tags": [
+                "devops"
+              ],
+              "completed": true
+            },
+            {
+              "text": "jar 打包 + 本地启动验证（handler 注册成功/Netty 9999 启动/注册调度中心失败自动重试不崩）",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-05",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "本地全链路验证：app-server 起服务 + token-clean 接口直调（真实 Redis 统计到 3 个在线会话，错误凭证被拒）",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-05",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "联调准备：k8s.yaml 注入 XXL_JOB_EXECUTOR_IP（Pod IP）+ README 调度中心联调手册 7 步",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-05",
+              "tags": [
+                "docs",
+                "devops"
+              ],
+              "completed": true
+            },
+            {
+              "text": "试点调整：tokenCleanHandler 改为 executor 自执行（直接连 Redis，key 序列化与 app-server 一致）；app-server 定时任务接口已回退（无侵入）；自执行 + HTTP 转发两种执行方式并存",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-05",
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
               "text": "新建 sip-rk-schedule-server（XXL-JOB Executor 独立项目：Spring Boot 3.3.5 + xxl-job-core 3.1.0 + 达梦骨架，9092/9999 端口）",
               "priority": null,
               "createdDate": "2026-08-05",
@@ -2270,7 +2370,7 @@
               "completed": true
             },
             {
-              "text": "app-server 新增 ScheduleTaskController（POST /api/schedule/v1/token-clean，X-Internal-Token 内部凭证校验，清理过期会话+在线统计）",
+              "text": "app-server 曾新增 ScheduleTaskController（token-clean 接口）——已回退（试点改为 executor 自执行，见\"联调准备\"组）",
               "priority": null,
               "createdDate": "2026-08-05",
               "dueDate": null,
@@ -3309,7 +3409,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-05T15:00:29.299970"
+  "generated_at": "2026-08-05T16:00:35.323134"
 };
 
         let currentFilter = 'all';
