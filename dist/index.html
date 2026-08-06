@@ -1937,7 +1937,7 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-08-05",
+      "last_update": "2026-08-06",
       "sections": [
         {
           "status": "进行中",
@@ -2028,6 +2028,50 @@
               "completed": true
             },
             {
+              "text": "新建 sip-rk-auth-server 独立认证服务（Sa-Token 1.45.0 签发 + LoginProvider SPI + LocalLoginProvider 迁入 + sso-callback 骨架，9093）",
+              "priority": "P1",
+              "createdDate": "2026-08-06",
+              "dueDate": "2026-08-15",
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "app/admin 引入 Sa-Token 替换自研验证（LoginInterceptor/PermissionAspect/UserContext/TokenService 验证侧，对外契约不变）",
+              "priority": "P1",
+              "createdDate": "2026-08-06",
+              "dueDate": "2026-08-20",
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "schedule-server token-clean 适配 Sa-Token Redis key（login:token:* → sa-token 会话 key）",
+              "priority": "P2",
+              "createdDate": "2026-08-06",
+              "dueDate": "2026-08-20",
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "客户认证服务协议确定后实现 CustomerLoginProvider Adapter（OIDC/CAS/自定义）+ 前端跳转（待客户信息，单独排期）",
+              "priority": "P3",
+              "createdDate": "2026-08-06",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
               "text": "移动端 P0 14 功能点（信息采集3/人员查询/两实跟踪6/办事指南/系统设置/隐患采集/防诈宣传，见功能点-工作量与阶段.md）",
               "priority": "P1",
               "createdDate": "2026-08-04",
@@ -2073,14 +2117,15 @@
             },
             {
               "text": "分析 cas 验证的升级",
-              "priority": "P1",
+              "priority": null,
               "createdDate": "2026-07-24",
-              "dueDate": "2026-08-31",
-              "completedDate": null,
+              "dueDate": null,
+              "completedDate": "2026-08-06",
               "tags": [
-                "security"
+                "security",
+                "feature"
               ],
-              "completed": false
+              "completed": true
             },
             {
               "text": "登录登出缺口确认（checkPoliceStatus 接口 / policeStationName_yy 字段，随 APP 联调确认是否补）",
@@ -3409,7 +3454,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-05T19:00:31.766439"
+  "generated_at": "2026-08-06T10:00:32.801852"
 };
 
         let currentFilter = 'all';
