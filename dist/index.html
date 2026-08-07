@@ -2050,6 +2050,40 @@
               "completed": false
             },
             {
+              "text": "打包部署 appserver（含 PersonCompareThread 三逃比对注释 + CommunictyMapper.xml 修复），更新到 21/22/50 三台服务器的 webapps",
+              "priority": null,
+              "createdDate": "2026-08-07",
+              "dueDate": null,
+              "completedDate": "2026-08-07",
+              "tags": [
+                "devops"
+              ],
+              "completed": true
+            },
+            {
+              "text": "nginx upstream 加健康检查（`max_fails=3 fail_timeout=30s`，自动摘掉不健康后端，避免再出现实例挂了 14 天无人发现的情况）",
+              "priority": "P1",
+              "createdDate": "2026-08-07",
+              "dueDate": "2026-08-15",
+              "completedDate": null,
+              "tags": [
+                "devops",
+                "performance"
+              ],
+              "completed": false
+            },
+            {
+              "text": "Exchange.jar 彻底去除 QunzufangGather 空转（反编译修改 jar 去掉 batchupdateQunzufangStatus 调用，或改代码让 updateHouseQunzufangStatus 解析响应并更新 ISQZF）",
+              "priority": "P2",
+              "createdDate": "2026-08-07",
+              "dueDate": "2026-08-31",
+              "completedDate": null,
+              "tags": [
+                "performance"
+              ],
+              "completed": false
+            },
+            {
               "text": "新建 sip-rk-auth-server 独立认证服务（Sa-Token 1.45.0 签发 + LoginProvider SPI + LocalLoginProvider 迁入 + sso-callback 骨架，9093）",
               "priority": null,
               "createdDate": "2026-08-06",
@@ -2314,6 +2348,73 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "排查平板\"有时候获取不到接口数据\"问题：nginx error.log 106,858 次 upstream timed out 全指向 172.24.242.22:7000（Tomcat 启动失败 JPA/Jackson 冲突但 nginx 仍在转发）",
+              "priority": null,
+              "createdDate": "2026-08-07",
+              "dueDate": null,
+              "completedDate": "2026-08-07",
+              "tags": [
+                "bug",
+                "performance"
+              ],
+              "completed": true
+            },
+            {
+              "text": "确认 nginx upstream 已无 22:7000 但 reload 未生效，执行 nginx -s reload 后超时消失",
+              "priority": null,
+              "createdDate": "2026-08-07",
+              "dueDate": null,
+              "completedDate": "2026-08-07",
+              "tags": [
+                "devops"
+              ],
+              "completed": true
+            },
+            {
+              "text": "定位 42 服务器 Exchange.jar（living_log_check）的 selectRentHouse 空转：QunzufangGather 每 5 秒对 ~99 套房屋发 HTTP 请求但从不保存结果（ISQZF 永远为 '0'），每天 170 万次无效请求",
+              "priority": null,
+              "createdDate": "2026-08-07",
+              "dueDate": null,
+              "completedDate": "2026-08-07",
+              "tags": [
+                "performance"
+              ],
+              "completed": true
+            },
+            {
+              "text": "修改 Task.groovy：HouseGatherEarly 频率从 5 秒改为 2 分钟（HouseGatherLst 保持 5 秒，纯 DB 操作），HTTP 空转从 170 万次/天降至 7 万次/天",
+              "priority": null,
+              "createdDate": "2026-08-07",
+              "dueDate": null,
+              "completedDate": "2026-08-07",
+              "tags": [
+                "performance"
+              ],
+              "completed": true
+            },
+            {
+              "text": "注释 3 个 PersonCompareThread 的 suspecters HTTP 调用（population 服务接口已下线，持续 404）：PersonCompareThread / PGroundPersonCompareThread / PersonCompareForWorkSiteThread",
+              "priority": null,
+              "createdDate": "2026-08-07",
+              "dueDate": null,
+              "completedDate": "2026-08-07",
+              "tags": [
+                "bug"
+              ],
+              "completed": true
+            },
+            {
+              "text": "优化效果：upstream 超时 106,858→10 次，HTTP 200 成功率 99.9%，12:30 后零超时",
+              "priority": null,
+              "createdDate": "2026-08-07",
+              "dueDate": null,
+              "completedDate": "2026-08-07",
+              "tags": [
+                "performance"
+              ],
+              "completed": true
+            },
             {
               "text": "平板后台打包修复：IDEA 项目 SDK 改回 JDK 1.8 后打包成功（target/appserver.war 40MB/820 class），Spring 4.3.30 升级后代码编译通过无遗漏 API 变更",
               "priority": null,
@@ -3520,7 +3621,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-07T14:00:45.926957"
+  "generated_at": "2026-08-07T15:00:25.428104"
 };
 
         let currentFilter = 'all';
