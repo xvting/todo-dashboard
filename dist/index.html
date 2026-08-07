@@ -1937,7 +1937,7 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-08-06",
+      "last_update": "2026-08-07",
       "sections": [
         {
           "status": "进行中",
@@ -1952,6 +1952,17 @@
               "tags": [
                 "devops",
                 "database"
+              ],
+              "completed": false
+            },
+            {
+              "text": "修复 CommunictyMapper.xml 缺 selectAnalysisCommunicty SQL（账号 044279 两实工作路踪-工作检查菜单不显示根因，SQL 在 DormitoryMapper/WorkSiteMapper 有、CommunictyMapper 缺，运行时必报 MyBatis 错误）",
+              "priority": "P0",
+              "createdDate": "2026-08-07",
+              "dueDate": "2026-08-08",
+              "completedDate": null,
+              "tags": [
+                "bug"
               ],
               "completed": false
             }
@@ -2026,6 +2037,17 @@
                 "feature"
               ],
               "completed": true
+            },
+            {
+              "text": "恢复 log4j.properties 文件 appender（R/L 的 File 路径被注释，日志只输出控制台不落盘，影响线上排查）",
+              "priority": "P2",
+              "createdDate": "2026-08-07",
+              "dueDate": "2026-08-10",
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
             },
             {
               "text": "新建 sip-rk-auth-server 独立认证服务（Sa-Token 1.45.0 签发 + LoginProvider SPI + LocalLoginProvider 迁入 + sso-callback 骨架，9093）",
@@ -2292,6 +2314,39 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "平板后台打包修复：IDEA 项目 SDK 改回 JDK 1.8 后打包成功（target/appserver.war 40MB/820 class），Spring 4.3.30 升级后代码编译通过无遗漏 API 变更",
+              "priority": null,
+              "createdDate": "2026-08-07",
+              "dueDate": null,
+              "completedDate": "2026-08-07",
+              "tags": [
+                "devops"
+              ],
+              "completed": true
+            },
+            {
+              "text": "git 分支同步：master 提交三逃比对停用+版本号315（da931f2），develop fast-forward 同步 master，master/develop 双分支推送远端（四引用一致）",
+              "priority": null,
+              "createdDate": "2026-08-07",
+              "dueDate": null,
+              "completedDate": "2026-08-07",
+              "tags": [
+                "devops"
+              ],
+              "completed": true
+            },
+            {
+              "text": "打包失败根因定位：报错\"程序包 javax.annotation 不存在\"= IDEA 项目 SDK 为 JDK 17 编译（.idea/misc.xml 铁证），JDK 8 自带 JSR-250 注解；92 个 javax.annotation.Resource import 在 7/23 打包成功时代码里同样存在，与 Spring 4 升级无关",
+              "priority": null,
+              "createdDate": "2026-08-07",
+              "dueDate": null,
+              "completedDate": "2026-08-07",
+              "tags": [
+                "bug"
+              ],
+              "completed": true
+            },
             {
               "text": "合并 develop → main（e2b05a7，含骨架 + 自执行试点 handler + 联调准备）",
               "priority": null,
@@ -3465,7 +3520,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-07T12:01:00.586607"
+  "generated_at": "2026-08-07T14:00:45.926957"
 };
 
         let currentFilter = 'all';
