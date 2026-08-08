@@ -2117,6 +2117,28 @@
               "completed": true
             },
             {
+              "text": "SSO 集中登录改造（auth-server 认证中心：登录页 + sso-code/sso-verify + 一次性 code + returnUrl 白名单；admin/app 前端迁移 SSO + Callback 页）",
+              "priority": null,
+              "createdDate": "2026-08-06",
+              "dueDate": null,
+              "completedDate": "2026-08-06",
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "认证收敛：admin/app 移除认证接口，Web 直连 auth-server（login/logout/sso-verify/change-password + CORS 可配置）；平板登录恢复直连数据库 + 固定 auth.code",
+              "priority": null,
+              "createdDate": "2026-08-07",
+              "dueDate": null,
+              "completedDate": "2026-08-07",
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
               "text": "schedule-server token-clean 适配 Sa-Token Redis key（login:token:* → sa-token 会话 key）",
               "priority": "P2",
               "createdDate": "2026-08-06",
@@ -3621,7 +3643,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-07T18:00:41.344450"
+  "generated_at": "2026-08-08T15:07:38.787254"
 };
 
         let currentFilter = 'all';
