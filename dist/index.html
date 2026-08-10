@@ -1940,23 +1940,6 @@
       "last_update": "2026-08-10",
       "sections": [
         {
-          "status": "进行中",
-          "title": "",
-          "tasks": [
-            {
-              "text": "修复 CommunictyMapper.xml 缺 selectAnalysisCommunicty SQL（账号 044279 两实工作路踪-工作检查菜单不显示根因，SQL 在 DormitoryMapper/WorkSiteMapper 有、CommunictyMapper 缺，运行时必报 MyBatis 错误）",
-              "priority": "P0",
-              "createdDate": "2026-08-07",
-              "dueDate": "2026-08-08",
-              "completedDate": null,
-              "tags": [
-                "bug"
-              ],
-              "completed": false
-            }
-          ]
-        },
-        {
           "status": "待办",
           "title": "",
           "tasks": [
@@ -2160,10 +2143,10 @@
               "completed": false
             },
             {
-              "text": "平板 APP 端联调测试（登录已通过 admin 验证，采集/两实跟踪接口待联调）",
+              "text": "平板 APP 端联调测试（登录全链路已实测通过：admin+真实账号 046546+错误场景 4/4+Sa-Token 拦截；采集/两实跟踪接口待联调）",
               "priority": "P1",
               "createdDate": "2026-08-03",
-              "dueDate": "2026-08-10",
+              "dueDate": "2026-08-15",
               "completedDate": null,
               "tags": [
                 "test"
@@ -2219,34 +2202,34 @@
               "text": "验证 dm8-migrate 新实例参数（SQLark 自动检查全通过）",
               "priority": "P1",
               "createdDate": "2026-08-03",
-              "dueDate": "2026-08-07",
-              "completedDate": null,
+              "dueDate": null,
+              "completedDate": "2026-08-07",
               "tags": [
                 "database"
               ],
-              "completed": false
+              "completed": true
             },
             {
               "text": "在达梦迁移库创建 CENSUS / CENSUS_DC 表空间 + CENSUS 用户",
               "priority": "P1",
               "createdDate": "2026-08-03",
-              "dueDate": "2026-08-07",
-              "completedDate": null,
+              "dueDate": null,
+              "completedDate": "2026-08-07",
               "tags": [
                 "database"
               ],
-              "completed": false
+              "completed": true
             },
             {
               "text": "用 SQLark 迁移 Oracle 表结构到达梦（544 表 + 139 索引 + 17 序列 + 130 触发器，99.7% 直接迁）",
               "priority": "P1",
               "createdDate": "2026-08-03",
-              "dueDate": "2026-08-10",
-              "completedDate": null,
+              "dueDate": null,
+              "completedDate": "2026-08-10",
               "tags": [
                 "database"
               ],
-              "completed": false
+              "completed": true
             },
             {
               "text": "手工修复 3 个迁移问题对象（V_DQ_HCTJ 视图 / PROC_AUTO_EXE_C_JOB 存储过程 / 1 个函数）",
@@ -2272,10 +2255,21 @@
               "completed": false
             },
             {
-              "text": "迁移少量测试数据到 dm8-migrate（每表前 1000 行，够联调用）",
-              "priority": "P2",
+              "text": "迁移登录+基础表数据到达梦（湖东派出所范围：11 表，T_BUILDING 15933 / T_HOUSE_INFO 27770 / 用户 2652；admin 登录链路验证全通，见 改造/log/数据迁移-登录与基础表.md）",
+              "priority": "P0",
               "createdDate": "2026-08-05",
-              "dueDate": "2026-08-15",
+              "dueDate": null,
+              "completedDate": "2026-08-10",
+              "tags": [
+                "database"
+              ],
+              "completed": true
+            },
+            {
+              "text": "全量数据迁移（T_BASIC_INFO / T_LIVING_INFO 135 万级大表 + 剩余房屋，联调通过后执行）",
+              "priority": "P2",
+              "createdDate": "2026-08-10",
+              "dueDate": "2026-09-30",
               "completedDate": null,
               "tags": [
                 "database"
@@ -2432,6 +2426,17 @@
               "completedDate": "2026-08-10",
               "tags": [
                 "devops"
+              ],
+              "completed": true
+            },
+            {
+              "text": "修复 CommunictyMapper.xml 缺 selectAnalysisCommunicty SQL（b07418c：master/develop 双分支推送入库；修复实际随 8-07 打包已上线，本次补提交，044279 工作检查菜单恢复）",
+              "priority": "P0",
+              "createdDate": "2026-08-07",
+              "dueDate": null,
+              "completedDate": "2026-08-10",
+              "tags": [
+                "bug"
               ],
               "completed": true
             },
@@ -3720,7 +3725,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-10T12:00:45.976807"
+  "generated_at": "2026-08-10T14:00:36.929834"
 };
 
         let currentFilter = 'all';
