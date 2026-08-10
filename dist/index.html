@@ -2165,6 +2165,17 @@
               "completed": false
             },
             {
+              "text": "⚠️ 第三方 userinfo 登录接口安全隐患（前端拿 code 换 userinfo 后调 auth-server 登录——auth-server 无法服务端验证 userinfo 真实性，可伪造标识冒充他人）：要求前端 code/token 一并传 auth-server 做服务端验证（验签或调用户接口）+ 用户映射校验（映射不上拒绝）+ 审计限流；协议确定时作为对接硬性要求",
+              "priority": "P3",
+              "createdDate": "2026-08-11",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "security"
+              ],
+              "completed": false
+            },
+            {
               "text": "移动端 P0 14 功能点（信息采集3/人员查询/两实跟踪6/办事指南/系统设置/隐患采集/防诈宣传，见功能点-工作量与阶段.md）",
               "priority": "P1",
               "createdDate": "2026-08-04",
@@ -3769,7 +3780,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-10T17:00:18.487066"
+  "generated_at": "2026-08-10T18:00:28.744009"
 };
 
         let currentFilter = 'all';
