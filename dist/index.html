@@ -1937,7 +1937,7 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-08-07",
+      "last_update": "2026-08-10",
       "sections": [
         {
           "status": "进行中",
@@ -1983,7 +1983,7 @@
               "completed": false
             },
             {
-              "text": "前端正式工程 sip-rk-admin-web（独立 Vue3 项目，替代测试控制台）",
+              "text": "前端正式工程 sip-rk-admin-web（独立 Vue3 项目，替代测试控制台；视觉规范按 改造/design/DESIGN.md IBM Carbon 风格）",
               "priority": "P1",
               "createdDate": "2026-08-04",
               "dueDate": "2026-08-31",
@@ -2358,6 +2358,83 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "设计系统选型：对比 8 种风格（IBM Carbon / Linear / Vercel / Stripe / Notion / Airtable / 阿里百炼 / Dify），最终选定 IBM Carbon Design System",
+              "priority": null,
+              "createdDate": "2026-08-10",
+              "dueDate": null,
+              "completedDate": "2026-08-10",
+              "tags": [
+                "docs"
+              ],
+              "completed": true
+            },
+            {
+              "text": "编写 DESIGN.md 视觉设计系统文档（9 节 Stitch 格式：色彩/字体/组件/布局/阴影/响应式/Agent Prompt Guide）",
+              "priority": null,
+              "createdDate": "2026-08-10",
+              "dueDate": null,
+              "completedDate": "2026-08-10",
+              "tags": [
+                "docs"
+              ],
+              "completed": true
+            },
+            {
+              "text": "创建 8 个风格原型 Demo（改造/design/prototype/，含 IBM Carbon 详细版 prototype.html 92KB + 7 个风格对比 Demo）",
+              "priority": null,
+              "createdDate": "2026-08-10",
+              "dueDate": null,
+              "completedDate": "2026-08-10",
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "sip-rk-auth-server 登录页改造为 IBM Carbon 风格（纯 HTML，字体 IBM Plex Sans / 0px 圆角 / 底部边框输入框 / 主色 #0f62fe）",
+              "priority": null,
+              "createdDate": "2026-08-10",
+              "dueDate": null,
+              "completedDate": "2026-08-10",
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "sip-rk-admin-server 前端改造（新增 carbon-theme.css 300+ 行全局覆盖 Element Plus / 侧边栏改 #161616 Carbon 深色 / 图表配色 Carbon 色系）",
+              "priority": null,
+              "createdDate": "2026-08-10",
+              "dueDate": null,
+              "completedDate": "2026-08-10",
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "sip-rk-app-server 前端同步改造（复制 carbon-theme.css + 更新布局/回调/大盘页面）",
+              "priority": null,
+              "createdDate": "2026-08-10",
+              "dueDate": null,
+              "completedDate": "2026-08-10",
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "3 个项目 Jenkins 构建发布（auth-server deploy-main-0.0.20 / admin-server deploy-main-1.3.15 / app-server deploy-main-1.4.7）",
+              "priority": null,
+              "createdDate": "2026-08-10",
+              "dueDate": null,
+              "completedDate": "2026-08-10",
+              "tags": [
+                "devops"
+              ],
+              "completed": true
+            },
             {
               "text": "部署 dm8-migrate 新 K8s StatefulSet + Service（正确参数：COMPATIBLE_MODE=2/CASE_SENSITIVE=1/EXTENT_SIZE=32/BLANK_PAD_MODE=1，NodePort 30237，his 命名空间）",
               "priority": null,
@@ -3643,7 +3720,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-10T11:00:27.727802"
+  "generated_at": "2026-08-10T12:00:45.976807"
 };
 
         let currentFilter = 'all';
