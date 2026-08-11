@@ -2408,10 +2408,32 @@
               "completed": false
             },
             {
+              "text": "数据同步（2026-08-11 完成）：T_STREET_INFO 2121 / T_COMMUNITY_POLICE 1893 / T_USER_AREA 10642 / T_GD_ADMINAREA 173 / T_POLICE_RELATION 775（用户同步）；界面验证：街路巷回填/责任民警回填/广达下拉全部生效",
+              "priority": "P1",
+              "createdDate": "2026-08-11",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "database"
+              ],
+              "completed": true
+            },
+            {
               "text": "存量地址提取回填（T_ADDRESS 填充 + 3 表 ADDRESS_ID 回填：湖东 T_HOUSE_INFO 27770/T_BUILDING 15933/T_COMMUNICTY 647，提取→归一化→回填→校验；**依赖：建模地址改造完成后需先于建模功能上线执行**——楼栋管理前置校验小区 ADDRESS_ID）",
               "priority": "P2",
               "createdDate": "2026-08-11",
               "dueDate": "2026-09-30",
+              "completedDate": null,
+              "tags": [
+                "database"
+              ],
+              "completed": false
+            },
+            {
+              "text": "T_USER_INFO DELETED 归一化（1033 条有效记录 deleted=null 残留；查询已兼容 null，建议 `UPDATE T_USER_INFO SET DELETED=0 WHERE DELETED IS NULL AND STATUS='1'` 统一）",
+              "priority": "P2",
+              "createdDate": "2026-08-11",
+              "dueDate": null,
               "completedDate": null,
               "tags": [
                 "database"
@@ -3874,7 +3896,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-11T18:00:40.460747"
+  "generated_at": "2026-08-11T19:00:50.228664"
 };
 
         let currentFilter = 'all';
