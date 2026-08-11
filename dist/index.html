@@ -1940,6 +1940,23 @@
       "last_update": "2026-08-10",
       "sections": [
         {
+          "status": "进行中",
+          "title": "",
+          "tasks": [
+            {
+              "text": "建模重构开发（范围跟踪中：地址中心化建模体系 / BDM 建模树 / t_address，待开发会话明确）",
+              "priority": "P1",
+              "createdDate": "2026-08-11",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            }
+          ]
+        },
+        {
           "status": "待办",
           "title": "",
           "tasks": [
@@ -2408,7 +2425,18 @@
           "title": "",
           "tasks": [
             {
-              "text": "用户权限表重构核心链路（设计 改造/design/10-用户权限表设计.md）：BDM 树模型（菜单树+节点+资源项）；admin-server BDM 管理界面（门户/功能菜单/菜单项/资源域/资源项 5 页 + 角色分配 portal 维度）；D3 平板域数据录入（门户/平板功能树/10 节点/10 资源项/5 角色）；app-server 登录 portalId+functions（1.4.12 实测 5/5）；auth-server 角色码映射+sso-verify portalId（0.0.22，39 测试）；admin/app 前端 ssoVerify 携带门户 ID（1.3.24/1.4.12）；废弃表重命名（ARCH_T_SYS_LDMENU/USERROLETOMENU）；回归通过（平板+Web SSO 全链路）",
+              "text": "menu 返回结构定稿：functions（平铺）→ menu（组树）→ menu（菜单树对象 + children 菜单项组树，三端一致：auth 0.0.25 / app 1.4.15 / admin 1.3.26；实测平板登录+Web SSO 结构正确）",
+              "priority": null,
+              "createdDate": "2026-08-11",
+              "dueDate": null,
+              "completedDate": "2026-08-11",
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "用户权限表重构核心链路（设计 改造/design/10-用户权限表设计.md）：BDM 树模型（菜单树+节点+资源项）；admin-server BDM 管理界面（门户/功能菜单/菜单项/资源域/资源项 5 页 + 角色分配 portal 维度）；D3 平板域数据录入（门户/平板功能树/10 节点/10 资源项/5 角色）；app-server 登录 portalId+menu（1.4.15 实测通过）；auth-server 角色码映射+sso-verify portalId（0.0.25，39 测试）；admin/app 前端 ssoVerify 携带门户 ID（1.3.26/1.4.15）；废弃表重命名（ARCH_T_SYS_LDMENU/USERROLETOMENU）；回归通过（平板+Web SSO 全链路）",
               "priority": null,
               "createdDate": "2026-08-11",
               "dueDate": null,
@@ -3813,7 +3841,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-10T19:00:23.508160"
+  "generated_at": "2026-08-11T10:00:18.528826"
 };
 
         let currentFilter = 'all';
