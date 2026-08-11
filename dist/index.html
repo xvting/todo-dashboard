@@ -2016,7 +2016,18 @@
               "completed": false
             },
             {
-              "text": "地址中心化基础（t_address 标准地址表 + 地址服务，8月计划欠账）",
+              "text": "地址中心化-表结构（T_ADDRESS 沿用达梦现有 64 列表（昆山同构+4业务列），3 业务表 T_COMMUNICTY/T_BUILDING/T_HOUSE_INFO 加 ADDRESS_ID + sip-rk 侧 PO/Mapper；设计见 改造/design/01-数据模型.md）",
+              "priority": "P1",
+              "createdDate": "2026-08-04",
+              "dueDate": null,
+              "completedDate": "2026-08-31",
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "地址中心化-建模写入（地址服务创建/查询/树 + 建模 4 入口（小区/建筑/房屋/独体）事务内创建 T_ADDRESS 并回填 ADDRESS_ID）",
               "priority": "P1",
               "createdDate": "2026-08-04",
               "dueDate": "2026-08-31",
@@ -2392,6 +2403,17 @@
               "completedDate": null,
               "tags": [
                 "refactor",
+                "database"
+              ],
+              "completed": false
+            },
+            {
+              "text": "存量地址提取回填（T_ADDRESS 填充 + 3 表 ADDRESS_ID 回填：湖东 T_HOUSE_INFO 27770/T_BUILDING 15933/T_COMMUNICTY 647，提取→归一化→回填→校验；地址中心化开发完成后处理）",
+              "priority": "P2",
+              "createdDate": "2026-08-11",
+              "dueDate": "2026-09-30",
+              "completedDate": null,
+              "tags": [
                 "database"
               ],
               "completed": false
@@ -3841,7 +3863,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-11T14:00:45.857001"
+  "generated_at": "2026-08-11T15:00:22.210011"
 };
 
         let currentFilter = 'all';
