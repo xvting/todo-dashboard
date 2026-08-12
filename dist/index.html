@@ -1937,14 +1937,14 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-08-10",
+      "last_update": "2026-08-11",
       "sections": [
         {
           "status": "进行中",
           "title": "",
           "tasks": [
             {
-              "text": "建模重构开发（范围跟踪中：地址中心化建模体系 / BDM 建模树 / t_address，待开发会话明确）",
+              "text": "建模重构-后续（**建模地址中心化已交付 ✅**：D1-D7 全链路完成，见 改造/地址中心化-开发计划.md；剩余 BDM 建模树/正式菜单树录入等另行推进）",
               "priority": "P1",
               "createdDate": "2026-08-11",
               "dueDate": null,
@@ -2027,15 +2027,15 @@
               "completed": true
             },
             {
-              "text": "地址中心化-建模写入（地址服务创建/查询/树 + 建模 4 入口（小区/建筑/房屋/独体）事务内创建 T_ADDRESS 并回填 ADDRESS_ID）",
+              "text": "地址中心化-建模写入（地址服务 findOrCreate 三级（先查后建/QDZ_SHORT 匹配）+ 建模 4 入口（小区/建筑/房屋/独体）事务内创建 T_ADDRESS 并回填 ADDRESS_ID + 街路巷/门牌/楼幢号锁定；deploy-main-1.3.36）",
               "priority": "P1",
               "createdDate": "2026-08-04",
-              "dueDate": "2026-08-31",
-              "completedDate": null,
+              "dueDate": null,
+              "completedDate": "2026-08-31",
               "tags": [
                 "feature"
               ],
-              "completed": false
+              "completed": true
             },
             {
               "text": "前端正式工程 sip-rk-admin-web（独立 Vue3 项目，替代测试控制台；视觉规范按 改造/design/DESIGN.md IBM Carbon 风格）",
@@ -2408,24 +2408,25 @@
               "completed": false
             },
             {
-              "text": "数据同步（2026-08-11 完成）：T_STREET_INFO 2121 / T_COMMUNITY_POLICE 1893 / T_USER_AREA 10642 / T_GD_ADMINAREA 173 / T_POLICE_RELATION 775（用户同步）；界面验证：街路巷回填/责任民警回填/广达下拉全部生效",
-              "priority": "P1",
+              "text": "存量地址分批回填（**管理功能已交付**：标准地址管理页（基础数据管理→标准地址管理）按层级查看未回填+勾选补建，deploy-main-1.3.37；当前存量：小区 1258 / 建筑物 15933 / 房屋 27778 未回填，按\"小区→建筑物→房屋\"顺序分批操作）",
+              "priority": "P2",
               "createdDate": "2026-08-11",
               "dueDate": null,
-              "completedDate": null,
+              "completedDate": "2026-09-30",
               "tags": [
                 "database"
               ],
               "completed": true
             },
             {
-              "text": "存量地址提取回填（T_ADDRESS 填充 + 3 表 ADDRESS_ID 回填：湖东 T_HOUSE_INFO 27770/T_BUILDING 15933/T_COMMUNICTY 647，提取→归一化→回填→校验；**依赖：建模地址改造完成后需先于建模功能上线执行**——楼栋管理前置校验小区 ADDRESS_ID）",
-              "priority": "P2",
+              "text": "建模-标准地址回填功能优化（标准地址管理页/回填链路存在待优化点，具体优化项待开发会话明确后拆解）",
+              "priority": "P1",
               "createdDate": "2026-08-11",
-              "dueDate": "2026-09-30",
+              "dueDate": null,
               "completedDate": null,
               "tags": [
-                "database"
+                "feature",
+                "refactor"
               ],
               "completed": false
             },
@@ -2479,6 +2480,61 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "地址中心化改造全链路（建模部分）：D1 表结构（3 业务表加 ADDRESS_ID + TAddress PO/Mapper）→ D2 地址服务（findOrCreate 三级：先查后建 QDZ_SHORT 匹配，ADDRESS_ID=业务主键，全角中横杠归一化）→ D3 建模写入（小区街路巷必填+回填，楼栋校验小区 ADDRESS_ID+继承创建）→ D4 房屋生成（generateHouses/reconcileHouses 逐户创建）→ D5 回归（本地+线上全链路）→ D6 发布（deploy-main-1.3.35/1.3.36）",
+              "priority": null,
+              "createdDate": "2026-08-11",
+              "dueDate": null,
+              "completedDate": "2026-08-11",
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "Web 界面完善：社区/小区/建筑物/房屋列表增加派出所/社区/小区列+检索；小区编辑 4 项修复（街路巷回填/派出所选择/责任民警-负责警员联动/广达下拉）；街路巷必填+创建后锁定（deploy-main-1.3.30~1.3.36）",
+              "priority": null,
+              "createdDate": "2026-08-11",
+              "dueDate": null,
+              "completedDate": "2026-08-11",
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "标准地址管理页（基础数据管理→标准地址管理）：3 层统计卡片（已回填/未回填）+ 层级 Tab 未回填列表 + 前置条件提示（小区缺街路巷/楼栋小区未回填）+ 勾选批量补建（幂等复用 findOrCreate），deploy-main-1.3.37",
+              "priority": null,
+              "createdDate": "2026-08-11",
+              "dueDate": null,
+              "completedDate": "2026-08-11",
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "标准地址管理 bug 修复：①补建按钮永远灰色（模板内联箭头函数 ref 被编译器多解包一层 → selected.value.value 赋值失效，改 script 具名函数）②Tab 切换列表滞后一级（@change 时 level 未生效，改 onLevelChange 显式传值）；本地浏览器全链路验证通过 + 195 测试全过，deploy-main-1.3.38",
+              "priority": null,
+              "createdDate": "2026-08-11",
+              "dueDate": null,
+              "completedDate": "2026-08-11",
+              "tags": [
+                "bug"
+              ],
+              "completed": true
+            },
+            {
+              "text": "数据同步（2026-08-11 完成）：T_STREET_INFO 2121 / T_COMMUNITY_POLICE 1893 / T_USER_AREA 10642 / T_GD_ADMINAREA 173 / T_POLICE_RELATION 775（用户同步）；界面验证：街路巷回填/责任民警回填/广达下拉全部生效",
+              "priority": "P1",
+              "createdDate": "2026-08-11",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "database"
+              ],
+              "completed": true
+            },
             {
               "text": "menu 返回结构定稿：functions（平铺）→ menu（组树）→ menu（菜单树对象 + children 菜单项组树，三端一致：auth 0.0.25 / app 1.4.15 / admin 1.3.26；实测平板登录+Web SSO 结构正确）",
               "priority": null,
@@ -3896,7 +3952,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-11T19:00:50.228664"
+  "generated_at": "2026-08-12T10:00:35.840800"
 };
 
         let currentFilter = 'all';
