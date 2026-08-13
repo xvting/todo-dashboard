@@ -587,12 +587,205 @@
   "workspaces": [
     {
       "name": "AIStore ASR",
-      "last_update": "2026-08-03 (开发者指南 + Dockerfile 解耦)",
+      "last_update": "2026-08-06 (接口收敛收尾 v1.0.0-alpha.23)",
       "sections": [
+        {
+          "status": "进行中",
+          "title": "",
+          "tasks": [
+            {
+              "text": "音源业务编号 audioSourceCode（全局唯一必填 + id 不暴露 + update 按 code 原位更新，V15 迁移）",
+              "priority": null,
+              "createdDate": "2026-08-04",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "删除任务表冗余 channel_strategy 快照列（V16，策略实时从音源读取）",
+              "priority": null,
+              "createdDate": "2026-08-04",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "start 接口入参收敛（仅 interim/hotwords/taskParam，DTO 拆分 TaskRequest/StartRequest）",
+              "priority": null,
+              "createdDate": "2026-08-06",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "start 不再自动创建任务（不存在返回 1008，已删除任务可恢复）",
+              "priority": null,
+              "createdDate": "2026-08-04",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "update RUNNING 守卫（1002）+ 错误码映射修复（2001→1002）",
+              "priority": null,
+              "createdDate": "2026-08-06",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "deviceCode 必填（create/换音源时与 audioSourceCode 关联校验）",
+              "priority": null,
+              "createdDate": "2026-08-06",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "构建修复：maven-compiler release=17 + 版本号自动读取 pom（@project.version@）",
+              "priority": null,
+              "createdDate": "2026-08-06",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "API Key 撤销修复（ApiKeyVO 返回 id）",
+              "priority": null,
+              "createdDate": "2026-08-06",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "前端：设备弹窗列宽/源类型（仅 RTSP）/音源表格优化",
+              "priority": null,
+              "createdDate": "2026-08-06",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "开发者指南全面修正（认证/日志/Webhook id/sourceType/order/trafficLight 等 9 处 + 三个核心接口完整描述）",
+              "priority": null,
+              "createdDate": "2026-08-06",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "前端全页面浏览器测试 + API Key 全量接口测试通过",
+              "priority": null,
+              "createdDate": "2026-08-06",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            }
+          ]
+        },
         {
           "status": "待办",
           "title": "",
           "tasks": [
+            {
+              "text": "transcripts `order` 参数生效 — 当前固定升序（文档已如实标注），需改造 ResultEsClient 排序",
+              "priority": "P2",
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "status 端点返回真实 trafficLight — 当前仅 /api/tasks/active 返回，buildResponse 不填充",
+              "priority": "P2",
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "statistics 真实统计 — 当前占位数据（transcriptCount=0/durationMs=0/segmentCount=1）",
+              "priority": "P2",
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "ES 故障显式报错 — 当前 ES 异常静默返回空结果（code=0），无法区分\"无数据\"与\"ES 挂了\"",
+              "priority": "P2",
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "错误码体系规范化 — Controller 中文消息关键词匹配脆弱，建议 @ControllerAdvice + 异常携带 ErrorCode",
+              "priority": "P2",
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "分页三套风格统一 — Spring Page / offset-limit / Map 并存",
+              "priority": "P3",
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "create/start 非事务 — sinks 无效时任务行已落库（孤儿任务）",
+              "priority": "P3",
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "flaky 测试修复 — RtspPullNodeTest#testConcurrentStopDuringStart、SinkChannelTest#testLogger_ShouldRecordFailureAndRecovery",
+              "priority": "P2",
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
             {
               "text": "GPU LASR `rec` 缓冲合并 — 一句话分多次 `rec` 定稿（VAD 停顿切分），当前每次 `rec` 都触发 `isEnd=true` 回调，导致业务系统收到碎片化定稿。方案：缓冲 `rec`，`var` 为空时 flush 合并输出。`errno=9` 也走缓冲逻辑。`disconnect()` 时检查残留。`postType=1` 标记不可靠（有时不标记），用 `var` 是否为空判断句终",
               "priority": "P1",
@@ -815,7 +1008,7 @@
               "completed": false
             },
             {
-              "text": "实现统计字段实际计算（sentenceCount/durationMs/segmentCount 当前为硬编码桩数据）",
+              "text": "实现统计字段实际计算（sentenceCount/durationMs/segmentCount 当前为硬编码桩数据，与「接口遗留优化」statistics 项重复）",
               "priority": "P2",
               "createdDate": "2026-08-24",
               "dueDate": null,
@@ -826,18 +1019,16 @@
               "completed": false
             },
             {
-              "text": "实现 interim 标志控制中间结果推送",
-              "priority": "P3",
-              "createdDate": "2026-09-24",
+              "text": "实现 interim 标志控制中间结果推送（TaskRunner 设置 RunningTask.interim，任务创建/启动均支持）",
+              "priority": null,
+              "createdDate": "2026-08-06",
               "dueDate": null,
               "completedDate": null,
-              "tags": [
-                "feature"
-              ],
-              "completed": false
+              "tags": [],
+              "completed": true
             },
             {
-              "text": "实现 hotwords 转发给 ASR 引擎",
+              "text": "实现 hotwords 转发给 ASR 引擎（当前仅存储到任务，未转发）",
               "priority": "P3",
               "createdDate": "2026-09-24",
               "dueDate": null,
@@ -2510,7 +2701,7 @@
               "completed": false
             },
             {
-              "text": "存量地址分批回填（**管理功能已交付**：标准地址管理页（基础数据管理→标准地址管理）按层级查看未回填+勾选补建，deploy-main-1.3.37；当前存量：小区 1258 / 建筑物 15933 / 房屋 27778 未回填，按\"小区→建筑物→房屋\"顺序分批操作）",
+              "text": "存量地址分批回填（**管理功能已交付并增强**：标准地址管理页已升级为\"建模地址查询\"——层级列表/前置条件提示/勾选补建 + **表头\"全选当前过滤\"跨分页勾选 + 500条/批批量绑定**（deploy-main-1.3.37~1.3.61）；存量分批操作进行中（admin 全量视角小区 653 未绑定 635 / 建筑物 14686 未绑定 14679 / 房屋 27794，已过滤软删除））",
               "priority": "P2",
               "createdDate": "2026-08-11",
               "dueDate": null,
@@ -2521,7 +2712,7 @@
               "completed": true
             },
             {
-              "text": "建模-标准地址回填功能优化（标准地址管理页/回填链路存在待优化点，具体优化项待开发会话明确后拆解）",
+              "text": "建模-标准地址回填功能优化（2026-08-13 一轮交付完成，deploy-main-1.3.46~1.3.61 共 16 个版本）：预计标准地址列/派出所社区小区建筑物四级过滤+小区类型/统计联动/钻取/独体建筑地址算法/已绑定行匹配展示/详情弹窗（T_ADDRESS字段+关联建模+复制ID）/全选批量绑定/排序/软删除过滤/分页与Tab交互修复",
               "priority": "P1",
               "createdDate": "2026-08-11",
               "dueDate": null,
@@ -2530,7 +2721,7 @@
                 "feature",
                 "refactor"
               ],
-              "completed": false
+              "completed": true
             },
             {
               "text": "T_USER_INFO DELETED 归一化（1033 条有效记录 deleted=null 残留；查询已兼容 null，建议 `UPDATE T_USER_INFO SET DELETED=0 WHERE DELETED IS NULL AND STATUS='1'` 统一）",
@@ -4054,7 +4245,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-13T18:00:23.522444"
+  "generated_at": "2026-08-13T19:00:27.246273"
 };
 
         let currentFilter = 'all';
