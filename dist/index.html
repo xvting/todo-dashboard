@@ -2208,6 +2208,18 @@
               "completed": false
             },
             {
+              "text": "5 表编码列重命名落地：达梦 DDL（POLICE_STATION_ID/ADMIN_AREA_ID/COMMUNITY_ID/BUILDING_ID/HOUSE_ID → *_CODE）+ app 1.4.34 + admin 1.3.67（PO/SQL/编码生成链路/测试同步，BO/VO 契约不变）；**补漏 7 处 SQL 残留（当日线上事故：auth 登录 500 `Member access unresolved`）——auth/app/admin 三端 TUserInfoMapper 登录 SQL + TWorkSiteMapper.getWorkSiteDetail + THouseInfoMapper.xml 已全改为 *_CODE（auth 0.0.31 / app 1.4.35 / admin 1.3.68，JDBC 实测+42 测试全过）**",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "database",
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
               "text": "**ZHZX 派出所过滤疑似列语义错配**：ZHZXController 传 userInfo.getPoliceStationId()（T_POLICE_STATION.UNIQUE_KEY 主键语义），SQL 比对 T_ZHZX_USER_POLICE_STATION.POLICE_STATION_ID（注释为\"派出所编码\"）——需确认该表存值语义并修复",
               "priority": "P2",
               "createdDate": "2026-08-14",
@@ -2220,7 +2232,7 @@
               "completed": false
             },
             {
-              "text": "注意约定（后继查询必读）：policeStationId 参数 → 查 T_POLICE_STATION.UNIQUE_KEY；policeStationCode 参数 → 查 T_POLICE_STATION.POLICE_STATION_ID（编码）；T_COMMUNICTY.POLEIC_STATION_ID/T_ADMIN_AREA.POLICE_STATION_ID 关联维度存主键；新 SQL 涉及派出所过滤先确认参数语义再选比对列",
+              "text": "注意约定（后继查询必读）：policeStationId 参数 → 查 T_POLICE_STATION.UNIQUE_KEY；policeStationCode 参数 → 查 T_POLICE_STATION.POLICE_STATION_CODE（编码，2026-08-14 已重命名）；T_COMMUNICTY.POLEIC_STATION_ID/T_ADMIN_AREA.POLICE_STATION_ID 关联维度存主键；新 SQL 涉及派出所过滤先确认参数语义再选比对列",
               "priority": "P3",
               "createdDate": "2026-08-14",
               "dueDate": null,
@@ -2552,7 +2564,7 @@
               "completed": false
             },
             {
-              "text": "DB 唯一索引登记：T_COMMUNICTY.COMMUNITY_ID 部分唯一索引（达梦 WHERE STATUS='1'，随数据迁移执行）",
+              "text": "DB 唯一索引登记：T_COMMUNICTY.COMMUNITY_CODE 部分唯一索引（达梦 WHERE STATUS='1'，随数据迁移执行；编码列 2026-08-14 由 COMMUNITY_ID 重命名）",
               "priority": "P2",
               "createdDate": "2026-08-04",
               "dueDate": "2026-08-31",
@@ -2609,10 +2621,10 @@
               "completed": true
             },
             {
-              "text": "恢复 log4j.properties 文件 appender（R/L 的 File 路径被注释，日志只输出控制台不落盘，影响线上排查）",
+              "text": "恢复 log4j.properties 文件 appender（R/L 的 File 路径被注释，日志只输出控制台不落盘，影响线上排查）    （2026-08-14 决策：随移动端主线空档处理，顺延）",
               "priority": "P2",
               "createdDate": "2026-08-07",
-              "dueDate": "2026-08-10",
+              "dueDate": "2026-08-20",
               "completedDate": null,
               "tags": [
                 "refactor"
@@ -2631,10 +2643,10 @@
               "completed": true
             },
             {
-              "text": "nginx upstream 加健康检查（`max_fails=3 fail_timeout=30s`，自动摘掉不健康后端，避免再出现实例挂了 14 天无人发现的情况）",
+              "text": "nginx upstream 加健康检查（`max_fails=3 fail_timeout=30s`，自动摘掉不健康后端，避免再出现实例挂了 14 天无人发现的情况）     （运维侧小活，2026-08-14 决策顺延至 8-20）",
               "priority": "P1",
               "createdDate": "2026-08-07",
-              "dueDate": "2026-08-15",
+              "dueDate": "2026-08-20",
               "completedDate": null,
               "tags": [
                 "devops",
@@ -2890,7 +2902,7 @@
               "text": "改造 oracle.sql.* 类型（10 个 Java 文件：BLOB/CLOB/DATE 替换为 java.sql 标准类型）",
               "priority": "P1",
               "createdDate": "2026-08-03",
-              "dueDate": "2026-08-15",
+              "dueDate": "2026-09-01",
               "completedDate": null,
               "tags": [
                 "refactor",
@@ -2902,7 +2914,7 @@
               "text": "批量替换 JDBC URL/Driver/Hibernate Dialect（30+ 配置 + 10 pom.xml + OracleLobHandler）",
               "priority": "P1",
               "createdDate": "2026-08-05",
-              "dueDate": "2026-08-15",
+              "dueDate": "2026-09-01",
               "completedDate": null,
               "tags": [
                 "refactor",
@@ -2914,7 +2926,7 @@
               "text": "ROWNUM 分页改造验证（90+ 处，评估批量改 LIMIT/OFFSET）",
               "priority": "P2",
               "createdDate": "2026-08-07",
-              "dueDate": "2026-08-20",
+              "dueDate": "2026-09-05",
               "completedDate": null,
               "tags": [
                 "refactor",
@@ -2926,7 +2938,7 @@
               "text": "DB Link 跨库引用改造（139 处 `@census`/`@CENSUS_BI` 改为 Schema 跨表访问）",
               "priority": "P1",
               "createdDate": "2026-08-07",
-              "dueDate": "2026-08-15",
+              "dueDate": "2026-09-01",
               "completedDate": null,
               "tags": [
                 "refactor",
@@ -2980,10 +2992,10 @@
               "completed": false
             },
             {
-              "text": "xxl-job 调度中心对接联调（XXL_JOB_ADMIN_ADDRESSES 配置实际平台地址，executor 注册 + 任务调度验证；本地验证已完成，只差真实调度中心）",
+              "text": "xxl-job 调度中心对接联调（XXL_JOB_ADMIN_ADDRESSES 配置实际平台地址，executor 注册 + 任务调度验证；本地验证已完成，只差真实调度中心）    （外部阻塞等平台地址，2026-08-14 决策顺延）",
               "priority": "P1",
               "createdDate": "2026-08-05",
-              "dueDate": "2026-08-15",
+              "dueDate": "2026-09-15",
               "completedDate": null,
               "tags": [
                 "devops"
@@ -4678,7 +4690,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-14T14:00:24.300820"
+  "generated_at": "2026-08-14T15:00:28.151779"
 };
 
         let currentFilter = 'all';
