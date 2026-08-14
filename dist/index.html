@@ -2128,7 +2128,7 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-08-13",
+      "last_update": "2026-08-14",
       "sections": [
         {
           "status": "进行中",
@@ -2184,6 +2184,73 @@
           "status": "待办",
           "title": "",
           "tasks": [
+            {
+              "text": "平板登录统一走 auth-server（当前 app-server 直连数据库独立服务平板端）：app-server AuthController.login 改转发 auth-server（APP 零改动）+ auth-server 加平板固定码通道（auth.tablet-code 兼容旧 APP 无 captchaId）+ 平板 portalId 传递；**暂缓原因**：保持 app-server 对平板端独立服务能力，auth-server 故障时平板仍可登录",
+              "priority": "P2",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "数据范围收紧-待办：未使用角色（AssemblyDist_user/CRJ_ADMIN 等 9 个）已配本所兜底，业务启用时确认档位；GHRQ（港华燃气）/Role_fy（法院）等外部角色是否需特殊数据范围",
+              "priority": "P3",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "security",
+                "database"
+              ],
+              "completed": false
+            },
+            {
+              "text": "所有角色必须配置数据范围，登录未配置报错（27 角色全配：ALL 8/本所 17/小区 2；auth 0.0.27 + app 1.4.29 登录强制校验）",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "security"
+              ],
+              "completed": true
+            },
+            {
+              "text": "删除身份兜底（canViewAll 改 dataScope=ALL 判断，删分局机关常量；admin 靠 Role_adm→ALL）",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "security"
+              ],
+              "completed": true
+            },
+            {
+              "text": "删除网格员（18 处 isWGUser 判断块清理；resolveQueryScope 删网格分支）",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "方案 A：COMMUNITY 无绑定不降级本所（空集合+401；app 1.4.28 + admin 1.3.62）",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "security"
+              ],
+              "completed": true
+            },
             {
               "text": "Web 端小区采集页面（复刻昆山 Android：小区主页/房屋详情 4 Tab/人员表单/全局搜索；app 1.4.23，9 个前端文件 + 路由菜单）",
               "priority": "P1",
@@ -4511,7 +4578,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-14T10:00:16.135096"
+  "generated_at": "2026-08-14T11:00:20.104817"
 };
 
         let currentFilter = 'all';
