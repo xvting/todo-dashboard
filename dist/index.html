@@ -2135,6 +2135,40 @@
           "title": "",
           "tasks": [
             {
+              "text": "**昆山独有业务/表清理完成**：判定清单 design/12（70 删/40 保留/9 新架构/网格保留）；366 文件 -26175 行（07446b6 已提交推送）；编译清零 + 24 单测 + 写链路回归通过",
+              "priority": "P0",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "**清理遗留**：Device/Sq 园区重写（T_REGISTER_INFO/T_ADMIN_AREA）；网格 T_USER_AREA_WG 达梦补表+恢复链路；集宿区园区化验证（COMMUNITY_TYPE='1'）；照片 MinIO 写入链路改造+存量迁移；完成后 24 单测+回归+打 tag 发布",
+              "priority": "P0",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**地址中心化设计固化完成**：ADDRESS_ID=业务表 UNIQUE_KEY 策略 + 35 张 HOUSE 关联表全清单 + T_LANDLORD 一对一方案（复制式，脚本 plan/sql/landlord_to_addressid.sql，不建关系表）→ `改造/log/问题与决策.md [04]`；**执行前提：老 T_LANDLORD 数据 SQLark 导入达梦（当前 0 条，T_HOUSE_INFO.LANDLORDID 80980 条待转换）**",
+              "priority": "P0",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "database",
+                "docs"
+              ],
+              "completed": false
+            },
+            {
               "text": "写入链路联调：Web 端\"添加人员\"实测保存测试人员（addLiving/update/sure/del + 一人一住所 + 广达上报），确认写链路无昆山遗留问题；**2026-08-14 主体链路已实测通过（add/update/del/一人一住所 + 统计闭环），修复 12 处昆山遗留（建 T_BASIC_PIC_URL + XMLType SQL + checkAddressInScope bug + PO/SQL 无效列 + 缺失表 join + LIVING_LOG 过程/序列 + 天翔房屋 ADDRESS_ID 回填）；字典已导入（6254/437/21079）；剩余：sure/广达上报留专网 + update 扩展字段映射 + CODEMANAGE 缺值**",
               "priority": "P0",
               "createdDate": "2026-08-13",
@@ -4690,7 +4724,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-14T16:00:35.164922"
+  "generated_at": "2026-08-14T17:00:33.868130"
 };
 
         let currentFilter = 'all';
