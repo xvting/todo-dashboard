@@ -2208,6 +2208,83 @@
               "completed": false
             },
             {
+              "text": "UserLoginVo 三端清理：删 permissions/sqCode/sqName/wgCode/wgName 字段 + isKsAdminUser/isPcsAdminUser/isWGUser 方法（app 1.4.32 + auth 0.0.28 + admin 1.3.64）",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "登录装载删 permissions（LEGACY_IDENTITY_CODE 老契约映射删除）",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "管理端写权限\"能看就能改\"：checkManagePermission 删除（15 个 Controller 调用点）",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "security"
+              ],
+              "completed": true
+            },
+            {
+              "text": "昆山遗留模块 39 处 isKsAdminUser/isPcsAdminUser 判断改为 dataScope 驱动",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "QueryScope 死字段清理（wgCode/sqCode 1.4.30 / policeStationCode 1.4.31，只剩 policeStationId+communityIds）",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "注释更新重发（auth 0.0.29 / app 1.4.33 / admin 1.3.65）",
+              "priority": "P3",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "docs"
+              ],
+              "completed": true
+            },
+            {
+              "text": "三端测试适配（auth 0.0.30：UserInfoLoaderTest/AuthServiceTest 补数据范围 mock；admin 1.3.66：AuthUtilsTest/Stats/Workload/AdminArea 8 用例改 dataScope=ALL+方案A 语义；最终 app 24 / auth 42 / admin 243 全通过）",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
               "text": "所有角色必须配置数据范围，登录未配置报错（27 角色全配：ALL 8/本所 17/小区 2；auth 0.0.27 + app 1.4.29 登录强制校验）",
               "priority": "P1",
               "createdDate": "2026-08-14",
@@ -4578,7 +4655,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-14T11:00:20.104817"
+  "generated_at": "2026-08-14T12:00:39.953541"
 };
 
         let currentFilter = 'all';
