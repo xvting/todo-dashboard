@@ -2208,6 +2208,29 @@
               "completed": false
             },
             {
+              "text": "**ZHZX 派出所过滤疑似列语义错配**：ZHZXController 传 userInfo.getPoliceStationId()（T_POLICE_STATION.UNIQUE_KEY 主键语义），SQL 比对 T_ZHZX_USER_POLICE_STATION.POLICE_STATION_ID（注释为\"派出所编码\"）——需确认该表存值语义并修复",
+              "priority": "P2",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug",
+                "security"
+              ],
+              "completed": false
+            },
+            {
+              "text": "注意约定（后继查询必读）：policeStationId 参数 → 查 T_POLICE_STATION.UNIQUE_KEY；policeStationCode 参数 → 查 T_POLICE_STATION.POLICE_STATION_ID（编码）；T_COMMUNICTY.POLEIC_STATION_ID/T_ADMIN_AREA.POLICE_STATION_ID 关联维度存主键；新 SQL 涉及派出所过滤先确认参数语义再选比对列",
+              "priority": "P3",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "database"
+              ],
+              "completed": false
+            },
+            {
               "text": "UserLoginVo 三端清理：删 permissions/sqCode/sqName/wgCode/wgName 字段 + isKsAdminUser/isPcsAdminUser/isWGUser 方法（app 1.4.32 + auth 0.0.28 + admin 1.3.64）",
               "priority": "P1",
               "createdDate": "2026-08-14",
@@ -4655,7 +4678,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-14T12:00:39.953541"
+  "generated_at": "2026-08-14T14:00:24.300820"
 };
 
         let currentFilter = 'all';
