@@ -2128,31 +2128,42 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-08-11",
+      "last_update": "2026-08-13",
       "sections": [
         {
           "status": "进行中",
           "title": "",
           "tasks": [
             {
-              "text": "平板端统计链路 + 昆山体系清理（统计刷新链：切面→触发表→HouseGatherHandler→三级统计表（主键均 ADDRESS_ID）；园区版 QueryService 3 个；10 Controller 切换；删除 View*/TModel*/T_BUSINESS*/Business*/DataUpdate/Company 约 190 文件；移除房间必填检查；发布 app 1.4.19~1.4.22，详见 改造/log/变更日志.md）",
-              "priority": "P1",
-              "createdDate": "2026-08-12",
-              "dueDate": null,
-              "completedDate": "2026-08-12",
-              "tags": [
-                "refactor"
-              ],
-              "completed": true
-            },
-            {
-              "text": "建模重构-后续（**建模地址中心化已交付 ✅**：D1-D7 全链路完成，见 改造/地址中心化-开发计划.md；剩余 BDM 建模树/正式菜单树录入等另行推进）",
-              "priority": "P1",
-              "createdDate": "2026-08-11",
+              "text": "写入链路联调：Web 端\"添加人员\"实测保存测试人员（addLiving/update/sure/del + 一人一住所 + 广达上报），确认写链路无昆山遗留问题",
+              "priority": "P0",
+              "createdDate": "2026-08-13",
               "dueDate": null,
               "completedDate": null,
               "tags": [
-                "feature"
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "统计刷新链路：schedule-server HouseGatherHandler 在测试环境注册并跑一次，三级统计表（T_HOUSEHOLD_STATS/T_BUILDHOLD_STATS/T_COMMUNITYHOLD_STATS）出数（当前全 0，统计条全 0）",
+              "priority": "P0",
+              "createdDate": "2026-08-13",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": false
+            },
+            {
+              "text": "测试数据补录：T_BASIC_INFO/T_LIVING_INFO/T_JOB_INFO 迁一批真实数据（当前 0 条），供采集/查询演示",
+              "priority": "P1",
+              "createdDate": "2026-08-13",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "database"
               ],
               "completed": false
             },
@@ -2173,6 +2184,62 @@
           "status": "待办",
           "title": "",
           "tasks": [
+            {
+              "text": "Web 端小区采集页面（复刻昆山 Android：小区主页/房屋详情 4 Tab/人员表单/全局搜索；app 1.4.23，9 个前端文件 + 路由菜单）",
+              "priority": "P1",
+              "createdDate": "2026-08-13",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "后端昆山遗留修复（5 处：TBuilding/THouseInfo 无效列、livings 昆山表引用、搜索昆山表、专项核查表；app 1.4.23/1.4.24）",
+              "priority": "P1",
+              "createdDate": "2026-08-13",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": true
+            },
+            {
+              "text": "湖西 3 个测试小区地址回填（天翔/188公寓/都市花园二期：3 小区+17 楼栋+1128 房屋；T_ADDRESS 24→1636）",
+              "priority": "P1",
+              "createdDate": "2026-08-13",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "database"
+              ],
+              "completed": true
+            },
+            {
+              "text": "数据范围参数化重构（QueryScope 加 communityIds/policeStationId；service 有值就过滤；12 接口补归属校验；app 1.4.26/1.4.27；三档实测通过）",
+              "priority": "P1",
+              "createdDate": "2026-08-13",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "security",
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "小区卡片条拖拽滚动（app 1.4.25）",
+              "priority": "P3",
+              "createdDate": "2026-08-13",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
             {
               "text": "数据大盘匿名访问修复（admin/app 两处 StatsController.dashboard 带 @AnonymousAccess + 无数据范围，需登录 + resolveScope 过滤；设计见 改造/design/11-数据范围设计.md §7，已发布 admin 1.3.39 + app 1.4.16）",
               "priority": "P0",
@@ -4243,9 +4310,208 @@
           ]
         }
       ]
+    },
+    {
+      "name": "AgentScope 纪委谈话质检系统",
+      "last_update": "2026-08-14",
+      "sections": [
+        {
+          "status": "待办",
+          "title": "",
+          "tasks": [
+            {
+              "text": "完成 AgentScope Java 2.0.0 环境配置和依赖安装",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": "2026-08-15",
+              "completedDate": null,
+              "tags": [
+                "docs"
+              ],
+              "completed": false
+            },
+            {
+              "text": "配置 MySQL 数据库连接（119.45.40.133:33060/aistore_agent）",
+              "priority": "P0",
+              "createdDate": "2026-08-14",
+              "dueDate": "2026-08-15",
+              "completedDate": null,
+              "tags": [
+                "docs"
+              ],
+              "completed": false
+            },
+            {
+              "text": "配置 MCP 服务环境（aistore-mcp，端口 8202）",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": "2026-08-15",
+              "completedDate": null,
+              "tags": [
+                "docs"
+              ],
+              "completed": false
+            },
+            {
+              "text": "配置 Web 服务环境（demo-web，端口 8200）",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": "2026-08-15",
+              "completedDate": null,
+              "tags": [
+                "docs"
+              ],
+              "completed": false
+            },
+            {
+              "text": "验证 Web 服务启动和前端页面访问（http://localhost:8200/）",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": "2026-08-16",
+              "completedDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "验证 MCP 服务启动和连接（端口 8202）",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": "2026-08-16",
+              "completedDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "验证 Agent 创建和管理功能",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": "2026-08-16",
+              "completedDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "验证质检流程（实时转写 + Agent 分析 + 结果展示）",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": "2026-08-17",
+              "completedDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "验证 watchdog.bat 守护进程自愈功能",
+              "priority": "P2",
+              "createdDate": "2026-08-14",
+              "dueDate": "2026-08-17",
+              "completedDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "研究 AgentScope Java 2.0.0 核心架构（ReActAgent / SkillBox / Toolkit）",
+              "priority": "P2",
+              "createdDate": "2026-08-14",
+              "dueDate": "2026-08-21",
+              "completedDate": null,
+              "tags": [
+                "research"
+              ],
+              "completed": false
+            },
+            {
+              "text": "研究 MCP 协议实现和工具调用机制",
+              "priority": "P2",
+              "createdDate": "2026-08-14",
+              "dueDate": "2026-08-21",
+              "completedDate": null,
+              "tags": [
+                "research"
+              ],
+              "completed": false
+            },
+            {
+              "text": "研究 SSE 流式数据传输实现",
+              "priority": "P2",
+              "createdDate": "2026-08-14",
+              "dueDate": "2026-08-21",
+              "completedDate": null,
+              "tags": [
+                "research"
+              ],
+              "completed": false
+            },
+            {
+              "text": "研究 Spring Boot 3.2 WebFlux 响应式编程模型",
+              "priority": "P2",
+              "createdDate": "2026-08-14",
+              "dueDate": "2026-08-21",
+              "completedDate": null,
+              "tags": [
+                "research"
+              ],
+              "completed": false
+            },
+            {
+              "text": "分析 ARCHITECTURE.md，识别架构优化点",
+              "priority": "P3",
+              "createdDate": "2026-08-14",
+              "dueDate": "2026-08-24",
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "优化数据库查询性能（9 张表的索引和查询优化）",
+              "priority": "P3",
+              "createdDate": "2026-08-14",
+              "dueDate": "2026-08-24",
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "改进前端单文件架构（当前 index.html，计划迁移到 Vue 3 工程）",
+              "priority": "P3",
+              "createdDate": "2026-08-14",
+              "dueDate": "2026-08-24",
+              "completedDate": null,
+              "tags": [
+                "frontend"
+              ],
+              "completed": false
+            },
+            {
+              "text": "完善错误处理和日志记录",
+              "priority": "P3",
+              "createdDate": "2026-08-14",
+              "dueDate": "2026-08-24",
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            }
+          ]
+        }
+      ]
     }
   ],
-  "generated_at": "2026-08-13T19:00:27.246273"
+  "generated_at": "2026-08-14T10:00:16.135096"
 };
 
         let currentFilter = 'all';
