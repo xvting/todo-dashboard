@@ -4529,160 +4529,56 @@
       "last_update": "2026-08-14",
       "sections": [
         {
+          "status": "进行中",
+          "title": "",
+          "tasks": [
+            {
+              "text": "开发技能系统（6 个 Skills + SkillService/SkillController + 技能编辑工具）",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "迁移前端到 Vue 3 工程化（vite + pinia + vue-router，替换单文件 index.html）",
+              "priority": "P1",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "frontend"
+              ],
+              "completed": false
+            },
+            {
+              "text": "实现质检轮次与工具调用日志记录（QcRoundEntity / ToolCallLogEntity）",
+              "priority": "P2",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            }
+          ]
+        },
+        {
           "status": "待办",
           "title": "",
           "tasks": [
             {
-              "text": "完成 AgentScope Java 2.0.0 环境配置和依赖安装",
+              "text": "提交并合入进行中的技能系统/前端工程/日志改动",
               "priority": "P1",
               "createdDate": "2026-08-14",
               "dueDate": "2026-08-15",
               "completedDate": null,
               "tags": [
-                "docs"
-              ],
-              "completed": false
-            },
-            {
-              "text": "配置 MySQL 数据库连接（119.45.40.133:33060/aistore_agent）",
-              "priority": "P0",
-              "createdDate": "2026-08-14",
-              "dueDate": "2026-08-15",
-              "completedDate": null,
-              "tags": [
-                "docs"
-              ],
-              "completed": false
-            },
-            {
-              "text": "配置 MCP 服务环境（aistore-mcp，端口 8202）",
-              "priority": "P1",
-              "createdDate": "2026-08-14",
-              "dueDate": "2026-08-15",
-              "completedDate": null,
-              "tags": [
-                "docs"
-              ],
-              "completed": false
-            },
-            {
-              "text": "配置 Web 服务环境（demo-web，端口 8200）",
-              "priority": "P1",
-              "createdDate": "2026-08-14",
-              "dueDate": "2026-08-15",
-              "completedDate": null,
-              "tags": [
-                "docs"
-              ],
-              "completed": false
-            },
-            {
-              "text": "验证 Web 服务启动和前端页面访问（http://localhost:8200/）",
-              "priority": "P1",
-              "createdDate": "2026-08-14",
-              "dueDate": "2026-08-16",
-              "completedDate": null,
-              "tags": [
-                "test"
-              ],
-              "completed": false
-            },
-            {
-              "text": "验证 MCP 服务启动和连接（端口 8202）",
-              "priority": "P1",
-              "createdDate": "2026-08-14",
-              "dueDate": "2026-08-16",
-              "completedDate": null,
-              "tags": [
-                "test"
-              ],
-              "completed": false
-            },
-            {
-              "text": "验证 Agent 创建和管理功能",
-              "priority": "P1",
-              "createdDate": "2026-08-14",
-              "dueDate": "2026-08-16",
-              "completedDate": null,
-              "tags": [
-                "test"
-              ],
-              "completed": false
-            },
-            {
-              "text": "验证质检流程（实时转写 + Agent 分析 + 结果展示）",
-              "priority": "P1",
-              "createdDate": "2026-08-14",
-              "dueDate": "2026-08-17",
-              "completedDate": null,
-              "tags": [
-                "test"
-              ],
-              "completed": false
-            },
-            {
-              "text": "验证 watchdog.bat 守护进程自愈功能",
-              "priority": "P2",
-              "createdDate": "2026-08-14",
-              "dueDate": "2026-08-17",
-              "completedDate": null,
-              "tags": [
-                "test"
-              ],
-              "completed": false
-            },
-            {
-              "text": "研究 AgentScope Java 2.0.0 核心架构（ReActAgent / SkillBox / Toolkit）",
-              "priority": "P2",
-              "createdDate": "2026-08-14",
-              "dueDate": "2026-08-21",
-              "completedDate": null,
-              "tags": [
-                "research"
-              ],
-              "completed": false
-            },
-            {
-              "text": "研究 MCP 协议实现和工具调用机制",
-              "priority": "P2",
-              "createdDate": "2026-08-14",
-              "dueDate": "2026-08-21",
-              "completedDate": null,
-              "tags": [
-                "research"
-              ],
-              "completed": false
-            },
-            {
-              "text": "研究 SSE 流式数据传输实现",
-              "priority": "P2",
-              "createdDate": "2026-08-14",
-              "dueDate": "2026-08-21",
-              "completedDate": null,
-              "tags": [
-                "research"
-              ],
-              "completed": false
-            },
-            {
-              "text": "研究 Spring Boot 3.2 WebFlux 响应式编程模型",
-              "priority": "P2",
-              "createdDate": "2026-08-14",
-              "dueDate": "2026-08-21",
-              "completedDate": null,
-              "tags": [
-                "research"
-              ],
-              "completed": false
-            },
-            {
-              "text": "分析 ARCHITECTURE.md，识别架构优化点",
-              "priority": "P3",
-              "createdDate": "2026-08-14",
-              "dueDate": "2026-08-24",
-              "completedDate": null,
-              "tags": [
-                "refactor"
+                "backend"
               ],
               "completed": false
             },
@@ -4698,17 +4594,6 @@
               "completed": false
             },
             {
-              "text": "改进前端单文件架构（当前 index.html，计划迁移到 Vue 3 工程）",
-              "priority": "P3",
-              "createdDate": "2026-08-14",
-              "dueDate": "2026-08-24",
-              "completedDate": null,
-              "tags": [
-                "frontend"
-              ],
-              "completed": false
-            },
-            {
               "text": "完善错误处理和日志记录",
               "priority": "P3",
               "createdDate": "2026-08-14",
@@ -4720,11 +4605,179 @@
               "completed": false
             }
           ]
+        },
+        {
+          "status": "已完成",
+          "title": "",
+          "tasks": [
+            {
+              "text": "完成 AgentScope Java 2.0.0 环境配置和依赖安装",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-05",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "配置 MySQL 数据库连接（119.45.40.133:33060/aistore_agent）",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-05",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "配置 MCP 服务环境（aistore-mcp，端口 8202）",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-05",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "配置 Web 服务环境（demo-web，端口 8200）",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-05",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "验证 Web 服务启动和前端页面访问（http://localhost:8200/）",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-06",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "验证 MCP 服务启动和连接（端口 8202）",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-06",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "验证 Agent 创建和管理功能（Agent 配置持久化到 MySQL）",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-06",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "验证质检流程（实时转写 + Agent 分析 + 结果展示）",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-06",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "验证 watchdog.bat 守护进程自愈功能",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-06",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "实现违规记录与转写句精确关联（interview_message_id 优先，文字匹配兜底）",
+              "priority": null,
+              "createdDate": "2026-08-06",
+              "dueDate": null,
+              "completedDate": "2026-08-13",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "实现质检虚报检测 + 自动补录兜底",
+              "priority": null,
+              "createdDate": "2026-08-06",
+              "dueDate": null,
+              "completedDate": "2026-08-13",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "实现实时质检工作区 UI（会话列/违规标注/点击定位跳转）",
+              "priority": null,
+              "createdDate": "2026-08-06",
+              "dueDate": null,
+              "completedDate": "2026-08-13",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "增强被谈话人信息采集（save_person_info 防误清空 + 已采集字段清单）",
+              "priority": null,
+              "createdDate": "2026-08-06",
+              "dueDate": null,
+              "completedDate": "2026-08-13",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "编写 DEPLOYMENT.md 部署发布手册 + 更新 ARCHITECTURE.md 运维章节",
+              "priority": null,
+              "createdDate": "2026-08-13",
+              "dueDate": null,
+              "completedDate": "2026-08-13",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "研究 AgentScope Java 2.0.0 核心架构（ReActAgent / SkillBox / Toolkit）",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-13",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "研究 MCP 协议实现和工具调用机制",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-13",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "研究 SSE 流式数据传输实现",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-13",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "研究 Spring Boot 3.2 WebFlux 响应式编程模型",
+              "priority": null,
+              "createdDate": "2026-08-05",
+              "dueDate": null,
+              "completedDate": "2026-08-13",
+              "tags": [],
+              "completed": true
+            }
+          ]
         }
       ]
     }
   ],
-  "generated_at": "2026-08-14T17:00:33.868130"
+  "generated_at": "2026-08-14T18:00:49.842467"
 };
 
         let currentFilter = 'all';
