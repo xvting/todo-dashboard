@@ -2169,7 +2169,7 @@
               "completed": false
             },
             {
-              "text": "写入链路联调：Web 端\"添加人员\"实测保存测试人员（addLiving/update/sure/del + 一人一住所 + 广达上报），确认写链路无昆山遗留问题；**2026-08-14 主体链路已实测通过（add/update/del/一人一住所 + 统计闭环），修复 12 处昆山遗留（建 T_BASIC_PIC_URL + XMLType SQL + checkAddressInScope bug + PO/SQL 无效列 + 缺失表 join + LIVING_LOG 过程/序列 + 天翔房屋 ADDRESS_ID 回填）；字典已导入（6254/437/21079）；剩余：sure/广达上报留专网 + update 扩展字段映射 + CODEMANAGE 缺值**",
+              "text": "**2026-08-17 修复扩展字段落库 null：字段名错配（czkssj→rentbegindate 等）+ 显式清空 `living.setRentenddate(null)` 删除；CODEMANAGE 排查 Android spinner 一致无需补；curl 实测全部正确落库**",
               "priority": "P0",
               "createdDate": "2026-08-13",
               "dueDate": null,
@@ -2218,6 +2218,17 @@
           "status": "待办",
           "title": "",
           "tasks": [
+            {
+              "text": "selectCommunityList 返回结构去昆山残留：ViewCommunityVO/CommunityBO 删 sqCode/wgCodes（死字段）→ adminAreaId/adminAreaName（fillAdminArea 批量填社区名）；实测 188公寓→师惠社区等；deploy-main-1.4.41 已发布；其余 VO（BuildingVO/HouseVO 等）sqCode 遗留待建模清理",
+              "priority": "P1",
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
             {
               "text": "Web 端两实跟踪第二批：工作检查（五级层级）/被动注销（层级+人员弹窗+确认恢复）/到期提醒（层级+工地 Tab）；修复 5 处后端（police_station_name 列/2 处 null/3 处缺 policeId 参数）+ 补全 selectPersonList 空实现；本地全链路验证（确认→清空→恢复闭环）；deploy-main-1.4.40 已发布",
               "priority": "P1",
@@ -4923,7 +4934,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-17T11:00:34.232006"
+  "generated_at": "2026-08-17T12:00:52.402538"
 };
 
         let currentFilter = 'all';
