@@ -4570,7 +4570,7 @@
     },
     {
       "name": "AgentScope 纪委谈话质检系统",
-      "last_update": "2026-08-15",
+      "last_update": "2026-08-17",
       "sections": [
         {
           "status": "进行中",
@@ -4620,6 +4620,17 @@
               "priority": "P3",
               "createdDate": "2026-08-14",
               "dueDate": "2026-08-24",
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "多副本部署时 agents-config-backup 本地备份目录的持久化方案",
+              "priority": "P3",
+              "createdDate": "2026-08-17",
+              "dueDate": null,
               "completedDate": null,
               "tags": [
                 "refactor"
@@ -4928,13 +4939,148 @@
               "completedDate": "2026-08-15",
               "tags": [],
               "completed": true
+            },
+            {
+              "text": "demo-web 重命名为 aistore-qms（独立 git 仓库，推送到 GitLab aistore/refactor/aistore-qms）",
+              "priority": null,
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": "2026-08-17",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "Java 命名空间迁移 io.agentscope.demo → com.siyun.qms（43 个文件 + 目录结构）",
+              "priority": null,
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": "2026-08-17",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "项目名统一为 aistore-qms（artifactId / jar / watchdog / IDEA 配置）",
+              "priority": null,
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": "2026-08-17",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "配置改造为环境变量（WEB_PORT/MYSQL_*/DB_POOL_*/MCP_URL/MCP_PORT）",
+              "priority": null,
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": "2026-08-17",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "新增日志配置 logback-spring.xml（控制台 + 按天滚动 + 错误分离 + 实例ID）",
+              "priority": null,
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": "2026-08-17",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "新增部署配置（Dockerfile / docker-compose.yml / k8s.yaml / k8s-configmap.yaml）",
+              "priority": null,
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": "2026-08-17",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "启动日志降噪（框架工具注册 WARN + 业务日志汇总 + 工具数代替全列表）",
+              "priority": null,
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": "2026-08-17",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "MCP 默认地址改为远程部署（119.45.40.133:32202），application.yml 可配",
+              "priority": null,
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": "2026-08-17",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "Skill 存储迁移 MinIO 对象存储（主存储 + 本地工作副本，参照 aistore-asr 模式）",
+              "priority": null,
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": "2026-08-17",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "多副本 skill 定时同步（30s 从 MinIO 拉取比对覆盖本地）",
+              "priority": null,
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": "2026-08-17",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "本地 skills 迁移到 MinIO（6 个 skill + 12 个版本备份，prefix=qms/skills/）",
+              "priority": null,
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": "2026-08-17",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "k3s 部署上线（NodePort 32200，trace-log 日志挂载，MinIO/MySQL/MCP 全通）",
+              "priority": null,
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": "2026-08-17",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "K8s 发布验证（首页 200 / 6 Agent / 6 Skill / MCP connected）",
+              "priority": null,
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": "2026-08-17",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "重写 README（系统说明/架构/配置/部署/结构）",
+              "priority": null,
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": "2026-08-17",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "Git 版本重新发布（deploy-main-0.0.1 起，删除旧 tag）",
+              "priority": null,
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": "2026-08-17",
+              "tags": [],
+              "completed": true
             }
           ]
         }
       ]
     }
   ],
-  "generated_at": "2026-08-17T15:00:22.727972"
+  "generated_at": "2026-08-17T18:02:09.387369"
 };
 
         let currentFilter = 'all';
