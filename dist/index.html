@@ -2128,7 +2128,7 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-08-14",
+      "last_update": "2026-08-17",
       "sections": [
         {
           "status": "进行中",
@@ -2218,6 +2218,39 @@
           "status": "待办",
           "title": "",
           "tasks": [
+            {
+              "text": "Web 端两实跟踪第二批：工作检查（五级层级）/被动注销（层级+人员弹窗+确认恢复）/到期提醒（层级+工地 Tab）；修复 5 处后端（police_station_name 列/2 处 null/3 处缺 policeId 参数）+ 补全 selectPersonList 空实现；本地全链路验证（确认→清空→恢复闭环）；deploy-main-1.4.40 已发布",
+              "priority": "P1",
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "Web 端两实跟踪第一批：定期核查（层级钻取）/工作量统计（明细+日期）/漏登记提醒（列表）+ 人员查询页（搜索+表格+跳详情）；6 接口统一 /api/v1 前缀（保留旧路径别名）；新增 persons/search（园区表+数据范围）；修复 policeId 语义错配与 3 处达梦 SQL；design/14-安卓对接差异说明；本地全链路验证出数；deploy-main-1.4.39 已发布",
+              "priority": "P0",
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "安卓对接差异说明 review：登录响应字段/业务域裁剪/两实跟踪接口/policeId 工号语义（design/14）",
+              "priority": "P2",
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "docs"
+              ],
+              "completed": false
+            },
             {
               "text": "平板登录统一走 auth-server（当前 app-server 直连数据库独立服务平板端）：app-server AuthController.login 改转发 auth-server（APP 零改动）+ auth-server 加平板固定码通道（auth.tablet-code 兼容旧 APP 无 captchaId）+ 平板 portalId 传递；**暂缓原因**：保持 app-server 对平板端独立服务能力，auth-server 故障时平板仍可登录",
               "priority": "P2",
@@ -4526,23 +4559,12 @@
     },
     {
       "name": "AgentScope 纪委谈话质检系统",
-      "last_update": "2026-08-14",
+      "last_update": "2026-08-15",
       "sections": [
         {
           "status": "进行中",
           "title": "",
           "tasks": [
-            {
-              "text": "开发技能系统（6 个 Skills + SkillService/SkillController + 技能编辑工具）",
-              "priority": "P1",
-              "createdDate": "2026-08-14",
-              "dueDate": null,
-              "completedDate": null,
-              "tags": [
-                "feature"
-              ],
-              "completed": false
-            },
             {
               "text": "迁移前端到 Vue 3 工程化（vite + pinia + vue-router，替换单文件 index.html）",
               "priority": "P1",
@@ -4553,17 +4575,6 @@
                 "frontend"
               ],
               "completed": false
-            },
-            {
-              "text": "实现质检轮次与工具调用日志记录（QcRoundEntity / ToolCallLogEntity）",
-              "priority": "P2",
-              "createdDate": "2026-08-14",
-              "dueDate": null,
-              "completedDate": null,
-              "tags": [
-                "feature"
-              ],
-              "completed": false
             }
           ]
         },
@@ -4572,10 +4583,10 @@
           "title": "",
           "tasks": [
             {
-              "text": "提交并合入进行中的技能系统/前端工程/日志改动",
+              "text": "提交并合入进行中的前端工程/日志改动",
               "priority": "P1",
               "createdDate": "2026-08-14",
-              "dueDate": "2026-08-15",
+              "dueDate": "2026-08-16",
               "completedDate": null,
               "tags": [
                 "backend"
@@ -4638,7 +4649,7 @@
               "completed": true
             },
             {
-              "text": "配置 Web 服务环境（demo-web，端口 8200）",
+              "text": "配置 Web 服务环境（aistore-qms，端口 8200）",
               "priority": null,
               "createdDate": "2026-08-05",
               "dueDate": null,
@@ -4771,13 +4782,148 @@
               "completedDate": "2026-08-13",
               "tags": [],
               "completed": true
+            },
+            {
+              "text": "开发技能系统（6 个 Skills + SkillService/SkillController + 技能编辑工具）",
+              "priority": null,
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": "2026-08-15",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "实现质检轮次与工具调用日志记录（QcRoundEntity / ToolCallLogEntity）",
+              "priority": null,
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": "2026-08-15",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "实现 Skill 管理员系统 Agent（skillAdmin=true，6 个技能编辑工具）",
+              "priority": null,
+              "createdDate": "2026-08-15",
+              "dueDate": null,
+              "completedDate": "2026-08-15",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "实现 Agent 构建助手系统 Agent（agentBuilder=true，6 个 Agent 管理工具）",
+              "priority": null,
+              "createdDate": "2026-08-15",
+              "dueDate": null,
+              "completedDate": "2026-08-15",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "前端重构为三栏工作台（Agents/Skills/System Admin 三个工作台）",
+              "priority": null,
+              "createdDate": "2026-08-15",
+              "dueDate": null,
+              "completedDate": "2026-08-15",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "实现消息对齐（用户右侧、助手左侧）、工具调用折叠、@ 提及功能",
+              "priority": null,
+              "createdDate": "2026-08-15",
+              "dueDate": null,
+              "completedDate": "2026-08-15",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "实现会话按时间倒序排序、列表↔详情切换（内嵌，非模态框）",
+              "priority": null,
+              "createdDate": "2026-08-15",
+              "dueDate": null,
+              "completedDate": "2026-08-15",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "实现 Markdown 轻量级渲染（renderMarkdown：代码块/标题/表格/列表/引用/粗体/斜体/链接）",
+              "priority": null,
+              "createdDate": "2026-08-15",
+              "dueDate": null,
+              "completedDate": "2026-08-15",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "Agent 配置增加 mermaid TEXT 字段 + 保留语义（普通编辑不清空流程图）",
+              "priority": null,
+              "createdDate": "2026-08-15",
+              "dueDate": null,
+              "completedDate": "2026-08-15",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "实现 ChatService.generateMermaid(sysPrompt) 纯函数（模型调用，90s 超时）",
+              "priority": null,
+              "createdDate": "2026-08-15",
+              "dueDate": null,
+              "completedDate": "2026-08-15",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "AgentBuilderTools create/update 自动生成 mermaid + RegenerateMermaidTool 手动重生成",
+              "priority": null,
+              "createdDate": "2026-08-15",
+              "dueDate": null,
+              "completedDate": "2026-08-15",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "前端 Mermaid 渲染（mermaid.min.js 本地 3.3MB，按需加载，详情页独立 tab，模态框放大）",
+              "priority": null,
+              "createdDate": "2026-08-15",
+              "dueDate": null,
+              "completedDate": "2026-08-15",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "实现 Agent 配置版本管理（agents-config-backup/ 目录，版本递增，历史查看，回滚）",
+              "priority": null,
+              "createdDate": "2026-08-15",
+              "dueDate": null,
+              "completedDate": "2026-08-15",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "实现 Skill 版本管理（skills/<name>/.versions/ 目录，自动备份，回滚）",
+              "priority": null,
+              "createdDate": "2026-08-15",
+              "dueDate": null,
+              "completedDate": "2026-08-15",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "生成系统架构图（agentscope-architecture.html，archify showcase 级别，9/9 验证通过）",
+              "priority": null,
+              "createdDate": "2026-08-15",
+              "dueDate": null,
+              "completedDate": "2026-08-15",
+              "tags": [],
+              "completed": true
             }
           ]
         }
       ]
     }
   ],
-  "generated_at": "2026-08-17T10:00:32.347365"
+  "generated_at": "2026-08-17T11:00:34.232006"
 };
 
         let currentFilter = 'all';
