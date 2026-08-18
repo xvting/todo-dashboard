@@ -2128,7 +2128,7 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-08-17",
+      "last_update": "2026-08-17（移动端 P0 补充完成，1.4.59 已发布）",
       "sections": [
         {
           "status": "进行中",
@@ -2211,6 +2211,105 @@
                 "test"
               ],
               "completed": false
+            },
+            {
+              "text": "multiLevelSearch 搜索范围增强：小区搜名称+地址、楼幢/房屋搜地址（T_ADDRESS.QDZ_SHORT/QDZ）",
+              "priority": "P0",
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "multiLevelSearch 楼幢搜索支持\"小区名+幢号\"组合词检索（如\"188公寓2幢\"）",
+              "priority": "P0",
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "园区业务规则修正：Building 改用 policeStationId（主键）、房屋类型改用园区枚举映射、删除 pendingVerifyTaskCount",
+              "priority": "P0",
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "房屋列表返回核查进度字段（chgTime + checkPeriod），前端计算进度条",
+              "priority": "P0",
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "web 前端适配：清理 StatsBar 昆山字段、房屋卡片展示房屋类型+核查进度条、楼幢详情接入",
+              "priority": "P0",
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "楼幢详情补地址（T_ADDRESS.QDZ）、楼幢信息横向排列",
+              "priority": "P0",
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "fix"
+              ],
+              "completed": true
+            },
+            {
+              "text": "房屋列表人数统计匹配键改用 ADDRESS_ID（避开冗余列断链）",
+              "priority": "P0",
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "fix"
+              ],
+              "completed": true
+            },
+            {
+              "text": "CommunityBuildingController 清理：删除 getBuilding 死变量、selectHouseViewList 签名去 policeStationCode/wgCode",
+              "priority": "P1",
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "五层建模业务规则文档（design/15）创建并持续更新",
+              "priority": "P0",
+              "createdDate": "2026-08-17",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "docs"
+              ],
+              "completed": true
             }
           ]
         },
@@ -4570,40 +4669,12 @@
     },
     {
       "name": "AgentScope 纪委谈话质检系统",
-      "last_update": "2026-08-17",
+      "last_update": "2026-08-18",
       "sections": [
-        {
-          "status": "进行中",
-          "title": "",
-          "tasks": [
-            {
-              "text": "迁移前端到 Vue 3 工程化（vite + pinia + vue-router，替换单文件 index.html）",
-              "priority": "P1",
-              "createdDate": "2026-08-14",
-              "dueDate": null,
-              "completedDate": null,
-              "tags": [
-                "frontend"
-              ],
-              "completed": false
-            }
-          ]
-        },
         {
           "status": "待办",
           "title": "",
           "tasks": [
-            {
-              "text": "提交并合入进行中的前端工程/日志改动",
-              "priority": "P1",
-              "createdDate": "2026-08-14",
-              "dueDate": "2026-08-16",
-              "completedDate": null,
-              "tags": [
-                "backend"
-              ],
-              "completed": false
-            },
             {
               "text": "优化数据库查询性能（9 张表的索引和查询优化）",
               "priority": "P3",
@@ -4643,6 +4714,114 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "新建 frontend/ 工程（Vite 5 + Vue 3.4 + TypeScript + vue-router + pinia）",
+              "priority": null,
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": "2026-08-18",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "视觉风格按 8084 参考站重构（白顶栏 #FFF、主色 #1890FF、Ant Design 蓝白系）",
+              "priority": null,
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": "2026-08-18",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "广场式卡片布局 + 三栏详情页（Agent/Skill/谈话/违规/质检）",
+              "priority": null,
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": "2026-08-18",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "自研组件体系（AppButton/Modal/Table/Tag/Toast/Icon 等 + SquareCard/ChatBox/MessageBubble）",
+              "priority": null,
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": "2026-08-18",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "新建操作改为卡片 grid 第一个位置（NewCard）",
+              "priority": null,
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": "2026-08-18",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "构建产物直接输出 static/，SPA history 路由 fallback",
+              "priority": null,
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": "2026-08-18",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "前端全流程联调验证（Agent/Skill/MCP/违规/谈话/质检工作区）",
+              "priority": null,
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": "2026-08-18",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "新增 Skill 编辑器系统智能体（skillEditor=true，绑定当前 skill）",
+              "priority": null,
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": "2026-08-18",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "Skill 编辑器工具集：读取/更新/发布/版本历史（全部绑定当前 skill，无法操作其他 skill）",
+              "priority": null,
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": "2026-08-18",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "Skill 详情页自动绑定 Skill 编辑器会话（过滤旧 Skill 管理员会话）",
+              "priority": null,
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": "2026-08-18",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "系统管理页展示 Skill 编辑器",
+              "priority": null,
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": "2026-08-18",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "skill 卡片删除按钮（仅未关联 Agent 的技能可删）+ usedByAgents 字段",
+              "priority": null,
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": "2026-08-18",
+              "tags": [],
+              "completed": true
+            },
             {
               "text": "完成 AgentScope Java 2.0.0 环境配置和依赖安装",
               "priority": null,
@@ -5080,7 +5259,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-18T14:00:35.308092"
+  "generated_at": "2026-08-18T15:00:31.190301"
 };
 
         let currentFilter = 'all';
