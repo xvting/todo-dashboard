@@ -4049,6 +4049,149 @@
               "completedDate": null,
               "tags": [],
               "completed": true
+            },
+            {
+              "text": "Controller 拆分：CommunityAddressController → House/Rental/Living 三个 Controller",
+              "priority": "P0",
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "房东信息接口：GET/POST/DELETE /house/landlord，新增 cardType 证件类型",
+              "priority": "P0",
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "车库信息接口：GET/POST/DELETE /house/garages，改为按 addressId 维度",
+              "priority": "P0",
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "房屋详情接口：GET /house/detail（含 houseInfo+landlord+garages），回填 T_ADDRESS.QDZ",
+              "priority": "P0",
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "房屋详情更新/注销：POST /house/detail/update、/house/detail/delete",
+              "priority": "P0",
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "Web 端 HouseTab.vue 重构：展示房东/车库信息（支持编辑）",
+              "priority": "P0",
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "Web 端 CommunityDetailView.vue：keep-alive 缓存返回状态",
+              "priority": "P0",
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "fix"
+              ],
+              "completed": true
+            },
+            {
+              "text": "Web 端 CommunityView.vue：小区卡片 + 楼栋分组增加租/常/寄/外统计",
+              "priority": "P0",
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "修复 T_GARAGE_INFO 表结构适配（无 DELETED 列，主键为 ID）",
+              "priority": "P1",
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": true
+            },
+            {
+              "text": "修复 T_HOUSE_CHECK 匹配键（UNIQUE_KEY 而非 ADDRESS_ID，97% 房屋类型显示修复）",
+              "priority": "P1",
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": true
+            },
+            {
+              "text": "清理 ModelHouseVO 昆山残留（sqCode/wgCode）",
+              "priority": "P1",
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "移除 431 隐患功能（用户决策废弃）",
+              "priority": "P1",
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "文档更新：变更日志 + 问题与决策",
+              "priority": "P2",
+              "createdDate": "2026-08-18",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "docs"
+              ],
+              "completed": true
             }
           ]
         }
@@ -5259,7 +5402,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-19T11:00:29.348668"
+  "generated_at": "2026-08-19T12:00:35.480965"
 };
 
         let currentFilter = 'all';
