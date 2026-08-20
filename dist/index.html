@@ -4812,7 +4812,7 @@
     },
     {
       "name": "AgentScope 纪委谈话质检系统",
-      "last_update": "2026-08-18",
+      "last_update": "2026-08-20",
       "sections": [
         {
           "status": "待办",
@@ -4857,6 +4857,114 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "修复「发起实时质检」弹窗不显示（QcWorkspace 漏导入 AppModal 组件）",
+              "priority": null,
+              "createdDate": "2026-08-19",
+              "dueDate": null,
+              "completedDate": "2026-08-20",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "修复前端编译产物未同步 resources/static（npm run build 后产物进 static/）",
+              "priority": null,
+              "createdDate": "2026-08-19",
+              "dueDate": null,
+              "completedDate": "2026-08-20",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "修复 Dockerfile 硬编码 jar 版本导致镜像构建失败（改通配符 target/aistore-qms-*.jar）",
+              "priority": null,
+              "createdDate": "2026-08-19",
+              "dueDate": null,
+              "completedDate": "2026-08-20",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "修复发起弹窗质检 Agent 下拉框宽度不足（min-width 432px 撑满表单）",
+              "priority": null,
+              "createdDate": "2026-08-20",
+              "dueDate": null,
+              "completedDate": "2026-08-20",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "修复违规记录串线（按会话+轮次 bySession 精确过滤，不再显示其他谈话违规）",
+              "priority": null,
+              "createdDate": "2026-08-20",
+              "dueDate": null,
+              "completedDate": "2026-08-20",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "被谈话人信息完整展示（9 字段全渲染：性别/年龄/职务/单位/身份证/电话/住址/备注）",
+              "priority": null,
+              "createdDate": "2026-08-20",
+              "dueDate": null,
+              "completedDate": "2026-08-20",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "输入框贴底 + 说话人下拉与输入框同排 + 纪委↔被谈话人自动切换",
+              "priority": null,
+              "createdDate": "2026-08-20",
+              "dueDate": null,
+              "completedDate": "2026-08-20",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "对话气泡左右对齐（纪委左/被谈话人右，MessageBubble 增加 speaker 对齐）",
+              "priority": null,
+              "createdDate": "2026-08-20",
+              "dueDate": null,
+              "completedDate": "2026-08-20",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "转写记录列被谈话人行靠右展示（tr-right 类）",
+              "priority": null,
+              "createdDate": "2026-08-20",
+              "dueDate": null,
+              "completedDate": "2026-08-20",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "修复滚动条丢失（col-body 恢复 overflow-y:auto，输入框用 sticky 贴底）",
+              "priority": null,
+              "createdDate": "2026-08-20",
+              "dueDate": null,
+              "completedDate": "2026-08-20",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "AppDropdown 显示当前选中项 label（selectedLabel 计算属性）",
+              "priority": null,
+              "createdDate": "2026-08-20",
+              "dueDate": null,
+              "completedDate": "2026-08-20",
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "发布 deploy-main-0.0.30 ~ 0.0.38（9 个版本，含 Dockerfile 修复后通配符兼容版本升级）",
+              "priority": null,
+              "createdDate": "2026-08-19",
+              "dueDate": null,
+              "completedDate": "2026-08-20",
+              "tags": [],
+              "completed": true
+            },
             {
               "text": "新建 frontend/ 工程（Vite 5 + Vue 3.4 + TypeScript + vue-router + pinia）",
               "priority": null,
@@ -5402,7 +5510,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-20T11:03:09.940013"
+  "generated_at": "2026-08-20T12:00:31.763347"
 };
 
         let currentFilter = 'all';
