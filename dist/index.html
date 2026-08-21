@@ -2135,7 +2135,7 @@
           "title": "",
           "tasks": [
             {
-              "text": "**广达接口模拟器 sip-rk-mock-server 完成**：完整复现广达 SOAP 契约（6 服务/49 操作，Axis Wrapped/Literal）；**数据持久化到达梦库 census_mock 模式（自动建 6 张表 + UPSERT + 旧 JSON 一次性迁移）**；管理台（React+shadcn/ui：数据查看/造数/清空、延迟模拟、失败注入、调用日志）；SOAP 自测 24/24 + Axis 1.4 兼容 4/4；业务端 GD_* 环境变量指向 mock 联调通过（ISCK/searchBzdz/searchYhxxInfo/insertHouseAll）",
+              "text": "**广达接口模拟器 sip-rk-mock-server 完成并上线**：完整复现广达 SOAP 契约（6 服务/49 操作）；数据持久化达梦（census_mock 用户 + 6 表自动建 + UPSERT）；管理台（React+shadcn/ui）；SOAP 自测 24/24 + Axis 1.4 兼容 4/4；**线上对接验证通过**（app-server 1.4.80 → 模拟器 32099：ISCK/searchBzdz/searchYhxxInfo/insertHouseAll 全部 ReturnID=0）",
               "priority": "P1",
               "createdDate": "2026-08-21",
               "dueDate": null,
@@ -2146,13 +2146,24 @@
               "completed": true
             },
             {
-              "text": "**mock 远程仓库**：sip-rk-mock-server 已推送 GitLab（https://git.ciyon.com.cn/smart-city/police/sip-rk/sip-rk-mock-server，main 分支 8 个提交）",
+              "text": "**mock 远程仓库 + 发布**：GitLab 推送（main）；deploy-main-0.0.1/0.0.2（0.0.2 修前端资源 base 404）",
               "priority": "P2",
               "createdDate": "2026-08-21",
               "dueDate": null,
               "completedDate": null,
               "tags": [
                 "devops"
+              ],
+              "completed": true
+            },
+            {
+              "text": "**苏心卡配置恢复**：园区有苏心卡业务（issxk=1 触发），业务端 GD_CITIZEN_URL 单独配置（生产 IP 10.32.251.63:8488 与其他服务不同），app-server 1.4.80",
+              "priority": "P2",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
               ],
               "completed": true
             },
@@ -2164,6 +2175,17 @@
               "completedDate": null,
               "tags": [
                 "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**线上 app-server ConfigMap 与 git 同步**：线上 AUTH_CODE 实际为 UUID（git 为 development），GD_* 已手工 apply——两边同步或明确维护约定",
+              "priority": "P2",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "devops"
               ],
               "completed": false
             },
@@ -4845,7 +4867,7 @@
     },
     {
       "name": "AgentScope 纪委谈话质检系统",
-      "last_update": "2026-08-22",
+      "last_update": "2026-08-21",
       "sections": [
         {
           "status": "待办",
@@ -4901,6 +4923,90 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "后端对话流升级 SSE 事件流（doChat 去 collectList + 事件帧 + 单测 6 用例）",
+              "priority": "P1",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": "2026-08-21",
+              "tags": [
+                "feature",
+                "backend",
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "React 工程底座（Vite6 + shadcn New York/Neutral + 12 基础组件 + 路由布局）",
+              "priority": "P1",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": "2026-08-21",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "Agent/Skill 对话页（SSE 流式 + 思考块 + 工具卡片 + 版本回滚）",
+              "priority": "P1",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": "2026-08-21",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "质检工作区 + 谈话详情（四区布局 + 转写对话气泡 + 轮询 + 违规定位）",
+              "priority": "P1",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": "2026-08-21",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "广场与管理页 15 页全量（谈话/违规/样本/技能测试/MCP/系统管理）",
+              "priority": "P1",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": "2026-08-21",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生产构建（TS 检查）+ jar 打包 + 截图回归 + 发布 0.0.47",
+              "priority": "P1",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": "2026-08-21",
+              "tags": [
+                "deployment"
+              ],
+              "completed": true
+            },
+            {
+              "text": "清理旧 Vue 前端（删除 frontend/ + README 更新）+ 发布 0.0.48",
+              "priority": "P1",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": "2026-08-21",
+              "tags": [
+                "refactor",
+                "deployment"
+              ],
+              "completed": true
+            },
             {
               "text": "新增 room 谈话室字典（业务对话分组：类型/默认质检 Agent/状态，启动种子 2 个示例 + 删除引用保护）",
               "priority": "P1",
@@ -5715,7 +5821,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-21T16:01:03.371137"
+  "generated_at": "2026-08-21T17:00:31.024210"
 };
 
         let currentFilter = 'all';
