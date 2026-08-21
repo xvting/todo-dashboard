@@ -4812,23 +4812,12 @@
     },
     {
       "name": "AgentScope 纪委谈话质检系统",
-      "last_update": "2026-08-20",
+      "last_update": "2026-08-21",
       "sections": [
         {
           "status": "待办",
           "title": "",
           "tasks": [
-            {
-              "text": "优化数据库查询性能（9 张表的索引和查询优化）",
-              "priority": "P3",
-              "createdDate": "2026-08-14",
-              "dueDate": "2026-08-24",
-              "completedDate": null,
-              "tags": [
-                "refactor"
-              ],
-              "completed": false
-            },
             {
               "text": "完善错误处理和日志记录",
               "priority": "P3",
@@ -4850,6 +4839,28 @@
                 "refactor"
               ],
               "completed": false
+            },
+            {
+              "text": "skill 版本历史生产环境为空（.versions 备份不同步到本地，API 读本地）",
+              "priority": "P3",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "skill_test_run.sample_ids 历史快照为旧数字 id（休眠数据）",
+              "priority": "P3",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
             }
           ]
         },
@@ -4857,6 +4868,72 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "agent 表族命名规范化（agent_config→agent 等 3 张 + 删死标记字段）",
+              "priority": "P1",
+              "createdDate": "2026-08-20",
+              "dueDate": null,
+              "completedDate": "2026-08-20",
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "skill 双名制（skill_meta→skill：id/slug/name + 关联改 skill_id + API slug 化 + 前端适配）",
+              "priority": "P1",
+              "createdDate": "2026-08-20",
+              "dueDate": null,
+              "completedDate": "2026-08-20",
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "修复 deleteSkill 事务 bug（@Transactional）",
+              "priority": "P0",
+              "createdDate": "2026-08-20",
+              "dueDate": null,
+              "completedDate": "2026-08-20",
+              "tags": [
+                "bug"
+              ],
+              "completed": true
+            },
+            {
+              "text": "优化数据库查询性能（9 张表的索引和查询优化 → 21 个业务查询索引）",
+              "priority": "P3",
+              "createdDate": "2026-08-14",
+              "dueDate": null,
+              "completedDate": "2026-08-20",
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "主键统一 UUID（9 张明细表自增改 UUID + 多级关联链迁移 + mcp 契约同步 + 前端类型适配）",
+              "priority": "P1",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": "2026-08-21",
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "修复前端构建产物未提交问题（static 随源码提交，违规详情页 NaN bug）",
+              "priority": "P0",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": "2026-08-21",
+              "tags": [
+                "bug"
+              ],
+              "completed": true
+            },
             {
               "text": "修复「发起实时质检」弹窗不显示（QcWorkspace 漏导入 AppModal 组件）",
               "priority": null,
@@ -5510,7 +5587,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-21T11:00:40.707509"
+  "generated_at": "2026-08-21T12:00:34.423882"
 };
 
         let currentFilter = 'all';
