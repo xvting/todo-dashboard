@@ -2128,12 +2128,45 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-08-17（移动端 P0 补充完成，1.4.59 已发布）",
+      "last_update": "2026-08-21（广达接口模拟器完成，业务端广达地址配置化）",
       "sections": [
         {
           "status": "进行中",
           "title": "",
           "tasks": [
+            {
+              "text": "**广达接口模拟器 sip-rk-mock-server 完成**：完整复现广达 SOAP 契约（6 服务/49 操作，Axis Wrapped/Literal）；**数据持久化到达梦库 census_mock 模式（自动建 6 张表 + UPSERT + 旧 JSON 一次性迁移）**；管理台（React+shadcn/ui：数据查看/造数/清空、延迟模拟、失败注入、调用日志）；SOAP 自测 24/24 + Axis 1.4 兼容 4/4；业务端 GD_* 环境变量指向 mock 联调通过（ISCK/searchBzdz/searchYhxxInfo/insertHouseAll）",
+              "priority": "P1",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "**mock 远程仓库**：sip-rk-mock-server 已推送 GitLab（https://git.ciyon.com.cn/smart-city/police/sip-rk/sip-rk-mock-server，main 分支 8 个提交）",
+              "priority": "P2",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": true
+            },
+            {
+              "text": "业务端 sure 链路 insertzzrk 联调补验：达梦 T_RENTHOUSE 落库 RENTHOUSEID 非空约束（测试库数据问题）解决后，实测确认居住触发 insertzzrk 上报",
+              "priority": "P2",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
             {
               "text": "**昆山独有业务/表清理完成**：判定清单 design/12（70 删/40 保留/9 新架构/网格保留）；366 文件 -26175 行（07446b6 已提交推送）；编译清零 + 24 单测 + 写链路回归通过",
               "priority": "P0",
@@ -5682,7 +5715,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-21T15:00:25.126145"
+  "generated_at": "2026-08-21T16:01:03.371137"
 };
 
         let currentFilter = 'all';
