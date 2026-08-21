@@ -4812,7 +4812,7 @@
     },
     {
       "name": "AgentScope 纪委谈话质检系统",
-      "last_update": "2026-08-21",
+      "last_update": "2026-08-22",
       "sections": [
         {
           "status": "待办",
@@ -4868,6 +4868,101 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "新增 room 谈话室字典（业务对话分组：类型/默认质检 Agent/状态，启动种子 2 个示例 + 删除引用保护）",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "interview 扩展业务字段（room_id/started_at/ended_at/remark，create/update 校验 + finish 写结束时间）",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "新增参与人员 interview_participant（两套角色：审讯/纪委谈话，整体替换接口 + 级联删除 + 默认说话人）",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "迁移脚本 V20260822（room/participant 建表 + interview 加列 + 索引 + 幂等种子）",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "docs"
+              ],
+              "completed": true
+            },
+            {
+              "text": "前端谈话广场：谈话室筛选/管理弹窗/新建表单（谈话室+时间+参与人员）",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "详情页展示 + 编辑信息弹窗（谈话室/时间/备注/参与人员）",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "质检工作区：说话人下拉参与人员化 + 主持↔对象交替 + 默认 Agent 预填",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生产回归（0.0.46 发布：room/谈话/participants CRUD + 引用保护 + 级联删除全通过）",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "test",
+                "deployment"
+              ],
+              "completed": true
+            },
             {
               "text": "agent 表族命名规范化（agent_config→agent 等 3 张 + 删死标记字段）",
               "priority": "P1",
@@ -5587,7 +5682,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-21T12:00:34.423882"
+  "generated_at": "2026-08-21T13:00:21.589334"
 };
 
         let currentFilter = 'all';
