@@ -587,7 +587,7 @@
   "workspaces": [
     {
       "name": "AIStore ASR",
-      "last_update": "2026-08-06 (接口收敛收尾 v1.0.0-alpha.23)",
+      "last_update": "2026-08-22 (测试环境完整回归 + 开发者文档核查)",
       "sections": [
         {
           "status": "进行中",
@@ -783,6 +783,84 @@
               "completedDate": null,
               "tags": [
                 "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "任务详情面板 iframe 交互元素点击被遮挡 — GUI 测试发现详情页 iframe 内「停止/▶播放/运行日志 tab」自动化点击报 covered by div（视觉无异常遮挡），需人工确认是否真实 UI 问题",
+              "priority": "P2",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "sink test-connection 对不存在的 sinkCode 返回 HTTP 500 — 应返回明确的\"未找到\"错误码（当前异常未捕获）",
+              "priority": "P2",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "PUT RUNNING 任务守卫文案不准确 — 错误码 1002 正确，但提示\"该任务仍在活跃中，无法重复启动\"（start 场景文案），应改为\"运行中任务不可编辑\"",
+              "priority": "P3",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "中文全文搜索为单字粒度 OR 匹配 — ES standard analyzer 中文按单字分词，多字关键词（如\"谈话\"）命中所有含任一单字的文档，结果面偏宽；建议文档补充说明或用 IK 分词",
+              "priority": "P3",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "docs",
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "API Key 撤销 UI 首次点击未生效 — GUI 测试第一次点击撤销无反应，第二次才成功（无确认框），待确认是否网络延迟",
+              "priority": "P3",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "转写查询播放按钮点击无视觉反馈 — 按钮不切换暂停态（音频资源本身可访问，HTTP 200）",
+              "priority": "P3",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "sourceType=file 服务端仍允许创建 — 前端已禁用（仅 RTSP），但后端白名单含 file/push（内部预留），对外发布前需确认",
+              "priority": "P3",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
               ],
               "completed": false
             },
@@ -6015,7 +6093,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-22T16:00:33.607890"
+  "generated_at": "2026-08-22T17:00:38.323270"
 };
 
         let currentFilter = 'all';
