@@ -2128,7 +2128,7 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-08-21（广达接口模拟器完成，业务端广达地址配置化）",
+      "last_update": "2026-08-21（出租屋 Web 端改造 + 业务对齐旧系统完成，app 1.4.69~1.4.85 / mock 0.0.3~0.0.4）",
       "sections": [
         {
           "status": "进行中",
@@ -4106,6 +4106,83 @@
               "completed": true
             },
             {
+              "text": "Web 端出租屋界面对齐 Android 平板（RentTab.vue 重写）：字典 6 项（fwjg/zzlx/czlx/fwdj/zdjzry/fwyh）+ 必填校验 + 五大隐患明细区域（DangerDetail.vue）+ 联动逻辑（隐患→重点户、床位≥10→群租）+ 登记时间只读",
+              "priority": "P0",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "保存链路修复 7 处：API 路径 /house/rental→/rental（404）；多选字段校验 prop 与 v-model 不同步；SQL 重复列别名 fwjg（达梦报错）；字典 value 语义（中文名 vs 编码）；广达社区编号 sqdm 回填顺序；fillHouseHierarchy/toBuilding 地址 NPE；照片 BLOB 落库（RISK_PIC1/2/3 从文件路径读转 byte[]）",
+              "priority": "P0",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": true
+            },
+            {
+              "text": "隐患照片链路 3 处：DangerDetail pics 同步到每条明细（后端 checkHouseDanger 校验 detailView.getPics）；Vue emit 不返回监听器返回值→改 :upload-file prop；照片写入 BLOB（getRiskInfo 恢复赋值）",
+              "priority": "P0",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": true
+            },
+            {
+              "text": "mock 隐患回查闭环：insertHouseAll 解析 yhxxlb/tx*/yhbz 存 yhxxList（0.0.3）；隐患大类按编码前缀推导 2xxx→2 消防（0.0.4）——sync 不再误删本地隐患",
+              "priority": "P0",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "出租屋业务逻辑对齐旧系统 3 处：群租判定补人数≥10；重点户 contains bug（按分隔符拆分）；注销后关联表改更新 is_inuse='1'（保留记录）——均实测通过",
+              "priority": "P0",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": true
+            },
+            {
+              "text": "隐患明细选项对齐 Android 47 项（治安 9/消防 14/住建 7/用电 9/燃气 8），浏览器实测五类全部一致",
+              "priority": "P0",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": true
+            },
+            {
+              "text": "遗留：FileController 上传目录 /opt/his/file/ 无持久卷，Pod 重建照片丢失——生产建议接 MinIO",
+              "priority": "P2",
+              "createdDate": "2026-08-21",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": false
+            },
+            {
               "text": "Controller 拆分：CommunityAddressController → House/Rental/Living 三个 Controller",
               "priority": "P0",
               "createdDate": "2026-08-18",
@@ -5008,6 +5085,123 @@
               "completed": true
             },
             {
+              "text": "谈话室一览条（占用状态/今日场数/总场数，点击筛选该室谈话）",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "卡片按业务时间分组（今天/更早/未安排置底）+ 信息分层（谈话室标签/时间/人数/统计）",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "新建谈话表单补全（谈话室必选/开始时间必填/参与人员动态行，角色按类型联动）",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "谈话室管理补全（行内编辑/停用切换/默认 Agent）",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "详情页左栏档案化（谈话室块/时间块/备注块/角色中文）",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "存量 10 条谈话分配到审讯室 1 号（4 场）/纪委谈话室 A（6 场）",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "data"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生产回归（0.0.49 发布：览条/表单/管理/列表字段全通过）",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "test",
+                "deployment"
+              ],
+              "completed": true
+            },
+            {
+              "text": "弹窗宽度修复（0.0.50 的 max-w-* 被 sm:max-w-lg 覆盖无效，0.0.51 改 sm:max-w-* 实测 768/672px）",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "前端浏览器自动化测试体系（agent-browser 对接谷歌浏览器内核，本地 5175 + 生产全量测试通过）",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "测试规范文档 FRONTEND-TESTING.md + AGENTS.md 前端测试规范章节",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "docs"
+              ],
+              "completed": true
+            },
+            {
               "text": "新增 room 谈话室字典（业务对话分组：类型/默认质检 Agent/状态，启动种子 2 个示例 + 删除引用保护）",
               "priority": "P1",
               "createdDate": "2026-08-22",
@@ -5821,7 +6015,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-21T18:00:22.706677"
+  "generated_at": "2026-08-22T15:00:44.617460"
 };
 
         let currentFilter = 'all';
