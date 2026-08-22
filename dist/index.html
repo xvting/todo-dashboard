@@ -587,12 +587,66 @@
   "workspaces": [
     {
       "name": "AIStore ASR",
-      "last_update": "2026-08-22 (测试环境完整回归 + 开发者文档核查)",
+      "last_update": "2026-08-22 (前端 React 重构完成 + 浏览器全流程验收)",
       "sections": [
         {
           "status": "进行中",
           "title": "",
           "tasks": [
+            {
+              "text": "前端整体迁移 React 19 + TypeScript + Vite + shadcn/ui + Tailwind v4 + lucide-react（HashRouter SPA）",
+              "priority": null,
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "frontend/ 源码目录 + 构建写回 static（clean-static 保留 docs/），部署链路不变",
+              "priority": null,
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "任务详情页 iframe → SPA 路由页 #/tasks/:code（4 状态卡 + canvas 曲线 + 结果/日志 tab）",
+              "priority": null,
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "删除旧前端（logs.html/task-detail.html/login.html/js/css/vendor，docs 保留）",
+              "priority": null,
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "浏览器全流程验收：登录→任务→详情→设备→分发→转写→日志(甘特图)→接收端→API Keys→用户 全部通过",
+              "priority": null,
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "修复：详情页未运行任务启停按钮显示\"启动\"",
+              "priority": null,
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
             {
               "text": "音源业务编号 audioSourceCode（全局唯一必填 + id 不暴露 + update 按 code 原位更新，V15 迁移）",
               "priority": null,
@@ -6093,7 +6147,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-22T22:00:30.523553"
+  "generated_at": "2026-08-22T23:00:29.286974"
 };
 
         let currentFilter = 'all';
