@@ -587,12 +587,66 @@
   "workspaces": [
     {
       "name": "AIStore ASR",
-      "last_update": "2026-08-22 (前端 React 重构完成 + 浏览器全流程验收)",
+      "last_update": "2026-08-23 (并发能力测试 + aistore-asr 监控修复发布)",
       "sections": [
         {
           "status": "进行中",
           "title": "",
           "tasks": [
+            {
+              "text": "并发能力测试：7 路全绿 → 15 路×30min（引擎容量 ~10）→ 12 路上限 8（显式拒绝）→ 全链路带分发 20min（302 推送 0 失败）",
+              "priority": null,
+              "createdDate": "2026-08-23",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "ASR LASRCPU 上限 8 生效（修复 deployment 硬编码 env 覆盖 configmap 问题）",
+              "priority": null,
+              "createdDate": "2026-08-23",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "实时概览 active 恒为 0 修复（查 sessions 索引 status=ACTIVE，含长期连接）",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "幽灵 ACTIVE 修复（upsertSession 随机 ID → sessionId 做 doc ID + 历史闭合）",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "存量 2647 条陈旧 ACTIVE 摘要清理",
+              "priority": null,
+              "createdDate": "2026-08-23",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "32181 切回 alpha.24 + k8s.yaml 镜像钉住（task alpha.24.1 / asr 1.0.9）+ 镜像 tar 交付",
+              "priority": null,
+              "createdDate": "2026-08-23",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
             {
               "text": "前端整体迁移 React 19 + TypeScript + Vite + shadcn/ui + Tailwind v4 + lucide-react（HashRouter SPA）",
               "priority": null,
@@ -770,6 +824,28 @@
           "status": "待办",
           "title": "",
           "tasks": [
+            {
+              "text": "确认 LASR CPU 引擎并发许可（实测稳定并发约 10 路，超限被引擎静默断开；平台代理上限 20 形同虚设，建议与引擎提供方核对许可数并设置一致）",
+              "priority": "P1",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "performance"
+              ],
+              "completed": false
+            },
+            {
+              "text": "超限任务重试退避优化 — 被拒（WS_REJECTED/code=-1）后按既有节奏高频重试（实测 502 次拒绝/11min），建议收到连接上限拒绝后退避上限拉长（如 60s→10min）",
+              "priority": "P2",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "performance"
+              ],
+              "completed": false
+            },
             {
               "text": "transcripts `order` 参数生效 — 当前固定升序（文档已如实标注），需改造 ResultEsClient 排序",
               "priority": "P2",
@@ -6248,7 +6324,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-23T18:00:26.531375"
+  "generated_at": "2026-08-23T19:00:28.256312"
 };
 
         let currentFilter = 'all';
