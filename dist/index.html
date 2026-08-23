@@ -648,6 +648,24 @@
               "completed": true
             },
             {
+              "text": "发布收尾：合并 master/develop + 推送远程 + tag deploy-aistore-task-v1.0.0-alpha.24 + 删除 feature 分支",
+              "priority": null,
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "测试环境 32181 发布验收：页面全流程 + 真实转写链路通过（remote-t1~t4 截图）",
+              "priority": null,
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
               "text": "音源业务编号 audioSourceCode（全局唯一必填 + id 不暴露 + update 按 code 原位更新，V15 迁移）",
               "priority": null,
               "createdDate": "2026-08-04",
@@ -5133,6 +5151,89 @@
           "title": "",
           "tasks": [
             {
+              "text": "主题整改：primary 换 shadcn blue 色相 + useTheme 亮/暗/system 三态（localStorage 记忆 + index.html 防闪烁 + 系统跟随）+ 暗色语义色适配 + components.json baseColor=blue",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "frontend",
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "错误提示体系：sonner Toaster 全局挂载 + notify.ts 统一 ApiError→toast（15 页约 40 处操作类 catch，轮询保持静默）+ McpDetail 三态（加载/错误+重试/不存在）",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "frontend",
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "加载态补齐：PageLoading/Skeleton 组件 + 8 个缺失页面（TalksSquare/TalkDetail/QcWorkspace/ViolationsSquare/SamplesSquare/SampleSetDetail/SystemAdmin/McpDetail）",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "frontend",
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "组件统一：ChatBubble 公共气泡消重、ToolCallCard/ViolationCard Card 化、4 处裸 button 换 Button、MainLayout 导航类串提取、qc-locate 动画工具类化",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "frontend",
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "结构拆分：useChatSession hook（Agent/Skill SSE 消重）+ 9 个弹窗/展示组件文件化（5 个超 400 行页面全部瘦身）",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "frontend",
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "清理：删 PagePlaceholder 死代码 + 卸载零引用 zustand + static 构建产物随提交（af436d9）",
+              "priority": "P2",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生产发布与回归：deploy-main-0.0.52 发布 + 生产 8 页复测 + 暗黑切换/蓝色主色实测通过",
+              "priority": "P1",
+              "createdDate": "2026-08-22",
+              "dueDate": null,
+              "completedDate": "2026-08-22",
+              "tags": [
+                "test",
+                "deployment"
+              ],
+              "completed": true
+            },
+            {
               "text": "后端对话流升级 SSE 事件流（doChat 去 collectList + 事件帧 + 单测 6 用例）",
               "priority": "P1",
               "createdDate": "2026-08-21",
@@ -6147,7 +6248,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-22T23:00:29.286974"
+  "generated_at": "2026-08-23T14:00:23.314621"
 };
 
         let currentFilter = 'all';
