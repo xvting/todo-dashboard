@@ -5216,6 +5216,78 @@
           "title": "",
           "tasks": [
             {
+              "text": "从谈话详情退回后列表状态重置 → 筛选/搜索/谈话室/滚动位置持久化到 sessionStorage（数据渲染完成后恢复滚动），生产复测通过",
+              "priority": "P1",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "新建弹窗关模式升级为非实时质检创建：转写文件（必填）+ 质检 Agent（预填谈话室默认）+ 模式（逐句/整篇），创建后自动发起质检轮",
+              "priority": "P1",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "创建后不跳详情：实时/非实时创建后台自动运行，web 停留列表页（卡片「质检中」），点击进入详情",
+              "priority": "P1",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "详情页三种形态：实时运行中（输入栏可用+结束按钮）/ 非实时运行中（「质检执行中，不可输入」+自动结束）/ 查看（轮次切换+重新质检）",
+              "priority": "P1",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "列表页 10s 静默轮询：卡片状态自动变化（质检中 → 处理完自动已完成）",
+              "priority": "P2",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生产发布 deploy-main-0.0.54 + 谷歌浏览器生产复测（非实时整篇自动完成 48s/实时推句/清理验证全通过）",
+              "priority": "P1",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "test",
+                "deployment"
+              ],
+              "completed": true
+            },
+            {
               "text": "TXT 转写解析器纯函数（transcriptParser.ts：前缀识别/无前缀继承/统计/常量，node 冒烟断言）",
               "priority": "P1",
               "createdDate": "2026-08-24",
@@ -6385,7 +6457,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-24T14:00:20.280932"
+  "generated_at": "2026-08-24T15:01:25.479632"
 };
 
         let currentFilter = 'all';
