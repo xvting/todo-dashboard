@@ -5159,7 +5159,7 @@
     },
     {
       "name": "AgentScope 纪委谈话质检系统",
-      "last_update": "2026-08-22",
+      "last_update": "2026-08-24",
       "sections": [
         {
           "status": "待办",
@@ -5215,6 +5215,90 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "app_page 表 + AppPageService/Controller（CRUD + publish/unpublish slug 冲突重试 + by-slug 仅 PUBLISHED + 列表附谈话标题）",
+              "priority": "P1",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "App 构建助手系统 Agent：appBuilder 标记（三处转换透传）+ 种子（生成规范 sysPrompt）+ ChatService 挂载 7 工具（list/get/create/update/publish/delete + list_interviews）+ isSystemAgent 防护",
+              "priority": "P1",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "feature",
+                "backend",
+                "agent"
+              ],
+              "completed": true
+            },
+            {
+              "text": "应用中心页 /apps：卡片列表（状态/关联谈话/打开大屏/发布/编辑/删除/撤销，10s 轮询）+ 右侧内嵌构建助手对话面板（useChatSession + ChatBox，editTargetId='apps' 过滤）",
+              "priority": "P1",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "大屏页 /p/:slug（MainLayout 外全屏）：iframe srcdoc 渲染 content_html（sandbox allow-scripts allow-same-origin）+ 悬浮返回",
+              "priority": "P1",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "ECharts 本地化 public/vendor/echarts.min.js（构建进 static/vendor/，大屏不依赖外网 CDN）",
+              "priority": "P2",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "本地 agent-browser 实测：对话让助手生成大屏 HTML（统计卡+ECharts 图表+轮次列表，20.5KB）→ 发布前确认 → 发布 → 大屏渲染真实数据（10 谈话/37 违规/162 句/11 轮）→ 卡片状态更新 → 测试数据清理",
+              "priority": "P1",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生产发布 deploy-main-0.0.56 + agent-browser 生产复测（应用中心/种子 Agent/echarts 200/对话闭环发布大屏渲染真实数据全通过，测试数据清理）",
+              "priority": "P1",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "test",
+                "deployment"
+              ],
+              "completed": true
+            },
             {
               "text": "从谈话详情退回后列表状态重置 → 筛选/搜索/谈话室/滚动位置持久化到 sessionStorage（数据渲染完成后恢复滚动），生产复测通过",
               "priority": "P1",
@@ -6457,7 +6541,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-24T15:01:25.479632"
+  "generated_at": "2026-08-24T16:00:24.082557"
 };
 
         let currentFilter = 'all';
