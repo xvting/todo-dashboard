@@ -587,12 +587,129 @@
   "workspaces": [
     {
       "name": "AIStore ASR",
-      "last_update": "2026-08-23 (并发能力测试 + aistore-asr 监控修复发布)",
+      "last_update": "2026-08-24 (日志体系完善 + 发布链路修复 + 详细回归)",
       "sections": [
         {
           "status": "进行中",
           "title": "",
           "tasks": [
+            {
+              "text": "业务日志 CSV 导出（aistore-asr /api/sessions/export + 会话历史页按钮）",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "日志检索/任务详情导出（aistore-task /api/logs/export + /api/tasks/{code}/logs/export + 页面按钮）",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "aistore-asr 监控错误信息链路修复：会话摘要错误合并（2429 条空 ERROR 修复）/LASR 断开归类/堆栈入库/taskCode 关联",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "aistore-task 运行日志错误信息增强：TaskLogger 堆栈重载/WS 断开真实原因/任务级失败补打/FilePullNode 接入/分发失败真实原因",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "握手帧带 taskParam.taskCode（业务日志任务关联闭环）",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "拒绝会话错误信息（CONNECTION_LIMIT_REJECTED 上下文 + 不被传输异常覆盖）",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "发布链路修复：Dockerfile jar 通配符 + k8s.yaml 镜像钉同步（坑 17）+ version 硬编码识别（坑 18）",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "CSV 导出 data 列（堆栈/原始响应，离线分析闭环）",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "会话事件明细导出 /api/sessions/{id}/events/export",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "详细功能回归 5 批次 58 项（认证/设备/任务/分发/APIKeys/用户/日志/错误场景）+ 并发压力 12 路（8绿4拒 sendFail=0）",
+              "priority": null,
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "UserVO.id @JsonIgnore 修复（用户管理删除/重置密码/改角色失效）",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "日志查询页布局修复（两列网格撑满，消除宽屏空白）",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "分发配置页移除「失败消息」按钮",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
             {
               "text": "并发能力测试：7 路全绿 → 15 路×30min（引擎容量 ~10）→ 12 路上限 8（显式拒绝）→ 全链路带分发 20min（302 推送 0 失败）",
               "priority": null,
@@ -5216,6 +5333,111 @@
           "title": "",
           "tasks": [
             {
+              "text": "应用编辑页 /apps/:id（0.0.57）：三栏——左会话列表（editTargetId=appId）/中构建助手对话/右配置面板（界面预览 iframe/配置编辑/发布管理），ChatService 注入当前编辑应用信息",
+              "priority": "P1",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "发布指纹修复（0.0.58）：同名 tag 重推被 Jenkins 幂等跳过 → trivial commit 换 SHA 打新 tag 重新部署",
+              "priority": "P1",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "deployment"
+              ],
+              "completed": true
+            },
+            {
+              "text": "5 页广场卡片统一四段式模板（0.0.62，方案A）：MetricChip 组件 + 头部（图标/标题/徽标）/副信息/指标行/操作区，违规数标红保留",
+              "priority": "P1",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "frontend",
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "卡片固定布局（0.0.66~0.0.68）：h-full + flex-col + mt-auto 按钮贴底；CardContent flex-1 撑满修复按钮错位；统一 230px 等高（0.0.70）",
+              "priority": "P1",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "大屏 5 列布局（0.0.64）：2xl(≥1536px) 每行 5 张，常规屏 4 列",
+              "priority": "P2",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "MCP 移入系统管理（0.0.65）：主导航移除 MCP，系统管理页 Tabs（系统 Agent/MCP 服务），McpSquare embedded 模式",
+              "priority": "P1",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "refactor",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "应用中心交互（0.0.69）：打开按钮新 tab（window.open）+ 改名「打开」+ 状态徽标移至右上角 + 大屏页移除悬浮返回按钮",
+              "priority": "P1",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "导航收敛（0.0.71）：移除「违规记录」菜单与路由（数据保留在谈话详情/大屏，定位无转写时 toast 提示）；「谈话质检」改名「智能质检」",
+              "priority": "P1",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "refactor",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "MySQL 半开连接性能修复（0.0.72）：JDBC socketTimeout=10s + Hikari max-lifetime=3min/keepalive=60s/connection-test-query，生产接口从 12s+ 降到 0.1s 级",
+              "priority": "P0",
+              "createdDate": "2026-08-24",
+              "dueDate": null,
+              "completedDate": "2026-08-24",
+              "tags": [
+                "bug",
+                "backend",
+                "deployment"
+              ],
+              "completed": true
+            },
+            {
               "text": "app_page 表 + AppPageService/Controller（CRUD + publish/unpublish slug 冲突重试 + by-slug 仅 PUBLISHED + 列表附谈话标题）",
               "priority": "P1",
               "createdDate": "2026-08-24",
@@ -6541,7 +6763,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-24T19:02:04.045558"
+  "generated_at": "2026-08-25T10:00:21.371782"
 };
 
         let currentFilter = 'all';
