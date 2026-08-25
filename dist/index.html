@@ -5276,7 +5276,7 @@
     },
     {
       "name": "AgentScope 纪委谈话质检系统",
-      "last_update": "2026-08-24",
+      "last_update": "2026-08-25",
       "sections": [
         {
           "status": "待办",
@@ -5323,6 +5323,19 @@
               "completedDate": null,
               "tags": [
                 "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "API 接口变更导致已发布应用页面静默出错——缓解方案：①后端接口兼容纪律（路径不变/只增不删/重命名保留旧字段别名）②App 构建助手生成规范加字段级容错兜底（`a.b ?? a.c`、Array.isArray 判断）③API 变更后已发布页面重建流程",
+              "priority": "P3",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "backend",
+                "agent",
+                "deployment"
               ],
               "completed": false
             }
@@ -6763,7 +6776,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-25T11:00:21.775250"
+  "generated_at": "2026-08-25T12:01:08.992439"
 };
 
         let currentFilter = 'all';
