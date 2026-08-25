@@ -587,12 +587,66 @@
   "workspaces": [
     {
       "name": "AIStore ASR",
-      "last_update": "2026-08-24 (日志体系完善 + 发布链路修复 + 详细回归)",
+      "last_update": "2026-08-25 (完整测试 + 接口健壮性修复 + 幽灵会话自愈)",
       "sections": [
         {
           "status": "进行中",
           "title": "",
           "tasks": [
+            {
+              "text": "测试环境完整测试：功能 83 项 + 边界 44 项 + 压力 12 路（8绿4拒 sendFail=0 分发121次0失败）+ 日志核验",
+              "priority": null,
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "测试方法论沉淀 skill `aistore-asr-regression-test`（四层流程 + 脚本 + 踩坑清单）",
+              "priority": null,
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "幽灵 ACTIVE 会话自愈：每小时陈旧 ACTIVE 扫描（1.0.20）+ startedAt date 字段查询修正（1.0.21），线上验证闭合生效",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "接口健壮性：test-connection 不存在 sink→1001 / history 非法分页→1001 / sink 字段校验（uri/authType/customHeaders）/ 密码错误码 4090→1001",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "新版本回归确认：功能 82/83（1 项过时断言已修正）+ 修复项专项 17/17 + 存量数据检查 + 会话闭合（active=0 无幽灵）",
+              "priority": null,
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "任务软删编码占位 / API Key 明文仅创建时展示 — 业务要求确认，不修改",
+              "priority": null,
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
             {
               "text": "业务日志 CSV 导出（aistore-asr /api/sessions/export + 会话历史页按钮）",
               "priority": null,
@@ -6776,7 +6830,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-25T14:00:17.898517"
+  "generated_at": "2026-08-25T15:00:20.649855"
 };
 
         let currentFilter = 'all';
