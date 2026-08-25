@@ -5400,6 +5400,112 @@
           "title": "",
           "tasks": [
             {
+              "text": "App 构建助手前端技术规范（0.0.73）：vue.global.prod.js 无构建全局版本地化 /vendor/（Vue 3.4.38，createApp+运行时编译，零外网依赖），生成规范新增前端技术选型章节（仅 /vendor/ 两库、禁外链资源），代码种子 + 生产 MySQL sys_prompt 同步",
+              "priority": "P1",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": "2026-08-25",
+              "tags": [
+                "feature",
+                "frontend",
+                "agent"
+              ],
+              "completed": true
+            },
+            {
+              "text": "App 构建助手提示词 5 轮演进（0.0.73~0.0.74，MySQL 直改与种子逐字符一致）：界面风格先给方案让用户选（按用途默认）→ 先确认意图禁止脑补 → 多轮需求确认 → 页面形态放宽（大屏/报表/查询工具）→ 生成后自检清单（五项）",
+              "priority": "P1",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": "2026-08-25",
+              "tags": [
+                "agent"
+              ],
+              "completed": true
+            },
+            {
+              "text": "App 构建助手双作用域（0.0.74）：编辑页绑定模式只挂 get/update/publish 绑定型工具（构造器持 id、参数无 appId，仿 skillEditor）+ 全局模式 7 工具；生产验证编辑页新建请求被正确引导",
+              "priority": "P1",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": "2026-08-25",
+              "tags": [
+                "feature",
+                "backend",
+                "agent"
+              ],
+              "completed": true
+            },
+            {
+              "text": "大屏去 iframe 直出（0.0.75）：PageController /p/{slug} 直接返回 content_html（仅 PUBLISHED，text/html+no-cache），浏览器能力全开；移除 AppScreen 壳路由；打开按钮 noopener；深色 404 页",
+              "priority": "P1",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": "2026-08-25",
+              "tags": [
+                "feature",
+                "backend",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "三栏详情页交互（0.0.76）：进入自动创建/选中首个会话；会话 createdAt 倒序；内联改名（PUT /api/sessions/{id}）；中间标题=会话名；共享 SessionList 组件（App/Agent/Skill 三页统一）；发布 tab 新增打开按钮",
+              "priority": "P1",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": "2026-08-25",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "工具调用样式三轮迭代（0.0.77/0.0.78/0.0.82）：卡片 → 纯文本单行 20px → 移出气泡 → 最终回到气泡内（思考块与正文之间，按调用顺序）",
+              "priority": "P2",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": "2026-08-25",
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "三栏布局（0.0.79~0.0.81）：聊天区封顶 840 右栏吃满（宽屏只放宽右侧）；会话列表可收起（32px 细轨展开按钮常驻，收起按钮与 + 同款）",
+              "priority": "P2",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": "2026-08-25",
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "预览 iframe 隐藏滚动条（0.0.83）：srcDoc 追加 scrollbar-width:none（仅预览注入不落库），滚轮仍可滚动",
+              "priority": "P3",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": "2026-08-25",
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "应用中心卡片语义（0.0.84~0.0.85）：点击已发布卡片直接新 tab 打开大屏（草稿进编辑页）；新增编辑按钮；移除打开按钮（操作行：编辑/撤销发布|发布/删除）",
+              "priority": "P2",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": "2026-08-25",
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
               "text": "应用编辑页 /apps/:id（0.0.57）：三栏——左会话列表（editTargetId=appId）/中构建助手对话/右配置面板（界面预览 iframe/配置编辑/发布管理），ChatService 注入当前编辑应用信息",
               "priority": "P1",
               "createdDate": "2026-08-24",
@@ -6830,7 +6936,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-25T16:00:19.815722"
+  "generated_at": "2026-08-25T17:00:53.248244"
 };
 
         let currentFilter = 'all';
