@@ -5400,6 +5400,146 @@
           "title": "",
           "tasks": [
             {
+              "text": "去掉「录入中」独立状态：无任何质检轮次一律「待质检」（后端 DRAFT 分支删除 + 前端筛选/映射/类型同步）",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "refactor",
+                "frontend",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生产验证：DRAFT 归零、0 转写谈话显示待质检、筛选 3 项，截图存档",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "弹窗 768→896px（sm:max-w-4xl）+ 行内文本限制放宽 + 细滚动条样式兜底",
+              "priority": "P2",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生产复测：常规/长内容场景均无滚动条，6 角色行内完整显示，测试数据清理",
+              "priority": "P2",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "长内容挤出卡片界面——DialogContent 加 max-h-[calc(100dvh-4rem)] overflow-y-auto，列表区内部滚动承接多房间",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生产复测（agent-browser）：10 房间（长名称/长描述/全角色）列表滚动生效、弹窗底部 651≤720 不溢出，测试数据已清理",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "编辑态描述输入框太小 + 保存/取消换行——表单区改两行布局：第一行 标题/名称/类型/Agent + 按钮组 ml-auto 贴右，描述输入框独占第二行 w-full",
+              "priority": "P2",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生产复测（agent-browser）：描述框 701px 独占一行、保存/取消同排",
+              "priority": "P2",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "默认 Agent 下拉过滤系统 Agent（agents.filter(!systemAgent)，对齐 NewTalkDialog）",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "添加/编辑表单合并单一（editId 状态机，编辑替换添加区，列表行不再内联展开）",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "列表行单行化：文本 truncate（角色区 flex-1 min-w-0）+ 按钮组 shrink-0 不换行",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生产复测（agent-browser）：下拉 4 业务 Agent/编辑替换/6 角色单行 50px，测试数据还原",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
               "text": "谈话室角色配置（0.0.113）：管理谈话室添加/修改表单「场景选择（=现有类型）+ 可选角色多选」（勾选保存为该谈话室角色集合，未配置回退场景全量角色）；新表 room_role（uk(room_id,role)）+ RoomService create/update 整体替换 + 列表批量带出 + 删除级联；前端 checkbox 组件 + RoleCheckGroup + 行展示「角色：xxx/全部」；新建谈话角色下拉优先用谈话室配置",
               "priority": "P1",
               "createdDate": "2026-08-26",
@@ -5425,6 +5565,19 @@
               "completed": true
             },
             {
+              "text": "谈话室顺序调整（0.0.113 追加）：room 表加 sort_no + POST /api/rooms/{id}/move（up/down 整表重排 1..N 连续，存量自动归一）；管理弹窗每行 ↑/↓ 按钮（边界禁用）；列表/一览条/新建下拉统一按 sort_no 排序",
+              "priority": "P2",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "feature",
+                "frontend",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
               "text": "验证：tsc+vite build ✓ / mvn package ✓ / API 全链路实测（创建/顺序/PUT 替换/status-only/删除清理）✓",
               "priority": "P1",
               "createdDate": "2026-08-26",
@@ -5432,6 +5585,18 @@
               "completedDate": "2026-08-26",
               "tags": [
                 "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "RoomController 补 @ExceptionHandler(IllegalArgumentException) → 400 + error 消息（校验错误不再 500，对齐 AgentConfigController 风格）",
+              "priority": "P2",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "refactor",
+                "backend"
               ],
               "completed": true
             },
@@ -7086,7 +7251,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-26T10:00:49.462741"
+  "generated_at": "2026-08-26T11:00:52.001770"
 };
 
         let currentFilter = 'all';
