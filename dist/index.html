@@ -5400,6 +5400,160 @@
           "title": "",
           "tasks": [
             {
+              "text": "详情说话人下拉固定纪委/被谈话人——根因姓名空被过滤；修复：角色必填姓名可空，空姓名角色中文占位保存",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "bug",
+                "frontend",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "单测补「空白名占位」用例（全量 35 通过）+ 生产验证（角色行不填姓名 → 下拉显示角色）",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "业务规则记录：参与人员姓名仅限创建录入与档案展示，质检业务一律用角色（质检消息/Agent 上下文/违规 speaker/导入默认说话人）",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "docs",
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "修复泄漏：NewTalkDialog 导入默认说话人 姓名→主持方角色中文（谈话人/审讯员），全面复查无其他泄漏点",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "bug",
+                "frontend",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "角色清单注入初始化指令（buildInitMessage）+ 缺角色说明（转写句不必然含角色，照常质检）",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "saveParticipants 后向 RUNNING 轮次补发角色上下文（实时创建先启动后补录场景，0.0.122）",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "说话人下拉角色化（参与角色中文，不用人名）+ 缺省说话人角色化",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生产验证：按角色提取被谈话人姓名（save_person_info）/无参与人员仅说明段/下拉无姓名，测试数据清理",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "选谈话室自动预填：默认 Agent + 配置角色生成角色行 + 空标题填「{谈话室名}谈话」",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "开始时间默认当前时间 + 默认发起实时质检 + 参与人员改参与角色（去单位/职务）",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生产验证：联动全通过（标题/时间/角色行 3 行/默认 Agent），截图存档",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "新建弹窗非实时模式加「输入来源」切换（TXT 文件 / 样本集互斥）：样本集选中后按 seq 加载样本为转写行，走原三步创建流程",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生产验证：样本集下拉/加载提示/创建质检全链路（2 句样本 → 转写 2 句 → FULLTEXT FINISHED）",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
               "text": "去掉「录入中」独立状态：无任何质检轮次一律「待质检」（后端 DRAFT 分支删除 + 前端筛选/映射/类型同步）",
               "priority": "P1",
               "createdDate": "2026-08-26",
@@ -7251,7 +7405,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-26T11:00:52.001770"
+  "generated_at": "2026-08-26T12:00:30.443650"
 };
 
         let currentFilter = 'all';
