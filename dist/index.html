@@ -5330,7 +5330,7 @@
     },
     {
       "name": "AgentScope 纪委谈话质检系统",
-      "last_update": "2026-08-25",
+      "last_update": "2026-08-26",
       "sections": [
         {
           "status": "待办",
@@ -5399,6 +5399,156 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "谈话室角色配置（0.0.113）：管理谈话室添加/修改表单「场景选择（=现有类型）+ 可选角色多选」（勾选保存为该谈话室角色集合，未配置回退场景全量角色）；新表 room_role（uk(room_id,role)）+ RoomService create/update 整体替换 + 列表批量带出 + 删除级联；前端 checkbox 组件 + RoleCheckGroup + 行展示「角色：xxx/全部」；新建谈话角色下拉优先用谈话室配置",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "feature",
+                "frontend",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "踩坑修复：①Hibernate 同事务删旧写新 INSERT 先于 DELETE 撞 uk_room_role → @Modifying 批量删除；②DATETIME(6) 截断纳秒致排序不稳定 → createdAt 微秒递增",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "bug",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "验证：tsc+vite build ✓ / mvn package ✓ / API 全链路实测（创建/顺序/PUT 替换/status-only/删除清理）✓",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "卡片四段式规范化（0.0.86~0.0.96）：pt-4 顶部间距；shadow-md→lg + border；图标 bg-primary/10；gap-6→2 段间距；描述区/指标行固定 2 行高度（h-[2.25rem]）；智能质检补 remark 描述区；应用中心补空白描述区占位；按钮 mt-4 贴内容底部（去 mt-auto）；卡片高度定稿 220px",
+              "priority": "P1",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": "2026-08-25",
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "列表信息完善（0.0.97~0.0.98）：时间补月日 MM-DD HH:mm；按 startedAt 降序排列（最新在前）",
+              "priority": "P2",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": "2026-08-25",
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "背景与夜间模式（0.0.99/0.0.100/0.0.108/0.0.112）：广场页 bg-muted/60 浅灰底；暗黑模式页面回纯 background + 卡片边框提亮 dark:border-white/15 + 阴影 dark:shadow-black/40；hover 上浮动画（-translate-y-0.5 + shadow-xl + transition-all）",
+              "priority": "P1",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": "2026-08-25",
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "规则广场「新建技能」（0.0.101~0.0.103）：/skills/new 走 Skill 管理员全局对话（isNew 模式，editTargetId 为空）；修复静态路由 useParams 拿不到 slug（删静态路由走 :slug 动态匹配）；新建页始终开启全新会话（历史全局会话保留可切换）；右侧引导文案 + 发布/保存/回滚创建前禁用",
+              "priority": "P1",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": "2026-08-25",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "场景广场「新建场景」（0.0.105/0.0.107）：/agents/new 走 Agent 构建助手全局对话（agentBuilder 标记查找）；按钮文本「新建场景」",
+              "priority": "P1",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": "2026-08-25",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "状态中文化（0.0.104）：规则广场/样本广场 PUBLISHED/DRAFT/DISABLED → 已发布/草稿/已停用",
+              "priority": "P2",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": "2026-08-25",
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "应用中心头部统一（0.0.106）：加搜索框、新建按钮改 primary、移除刷新按钮（10s 轮询覆盖）",
+              "priority": "P2",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": "2026-08-25",
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "版本号去重（0.0.107）：后端 version 已带 v 前缀，卡片/详情页/版本列表/回滚文案统一去前缀（修复 vv1.0.1）",
+              "priority": "P2",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": "2026-08-25",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "标题省略号修复（0.0.109~0.0.111）：应用中心副信息 truncate；CardHeader grid 层级补 min-w-0（truncate 失效根因——grid 子项 min-width:auto 撑开列宽）；智能质检标题 line-clamp-2 → truncate 单行省略；「新建页面」→「新建应用」",
+              "priority": "P2",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": "2026-08-25",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生产验证（agent-browser 两轮）：新建技能/新建场景入口 + 全局对话 + 引导文案 + 状态中文 + 测试会话清理全通过",
+              "priority": "P1",
+              "createdDate": "2026-08-25",
+              "dueDate": null,
+              "completedDate": "2026-08-25",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
             {
               "text": "App 构建助手前端技术规范（0.0.73）：vue.global.prod.js 无构建全局版本地化 /vendor/（Vue 3.4.38，createApp+运行时编译，零外网依赖），生成规范新增前端技术选型章节（仅 /vendor/ 两库、禁外链资源），代码种子 + 生产 MySQL sys_prompt 同步",
               "priority": "P1",
@@ -6936,7 +7086,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-25T19:00:22.786702"
+  "generated_at": "2026-08-26T10:00:49.462741"
 };
 
         let currentFilter = 'all';
