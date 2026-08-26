@@ -5400,6 +5400,53 @@
           "title": "",
           "tasks": [
             {
+              "text": "ASR 环境检测（HTTP 非安全上下文明确提示，0.0.129）+ 推送失败可见化（0.0.132）+ 推送成功「✓ 已推送」反馈（0.0.133）",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "🔑 定稿字段修复：服务端 AsrStreamResult 序列化字段为 `end` 而非 `isEnd`（boolean isEnd → Jackson 去 is 前缀）——调试日志定位（0.0.134）→ 解析兼容修复（0.0.135）",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "说话人交替按角色类别（主持方↔对象方）适配配置角色场景，初始取首个选项（0.0.136）",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "真机实测：interim 6 / isEnd 1 定稿识别、自动推送、角色交替正常",
+              "priority": "P1",
+              "createdDate": "2026-08-26",
+              "dueDate": null,
+              "completedDate": "2026-08-26",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
               "text": "语音输入：录音→aistore-asr WS 转写（/asr/stream 握手+PCM16k）→转写文本自动推送质检会话",
               "priority": "P1",
               "createdDate": "2026-08-26",
@@ -7498,7 +7545,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-26T18:00:19.095217"
+  "generated_at": "2026-08-26T19:00:23.452099"
 };
 
         let currentFilter = 'all';
