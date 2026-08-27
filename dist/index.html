@@ -587,12 +587,75 @@
   "workspaces": [
     {
       "name": "AIStore ASR",
-      "last_update": "2026-08-25 (完整测试 + 接口健壮性修复 + 幽灵会话自愈)",
+      "last_update": "2026-08-27 (音源测试播放功能 + 播放链路修复链)",
       "sections": [
         {
           "status": "进行中",
           "title": "",
           "tasks": [
+            {
+              "text": "音源测试播放（RTSP→HLS 临时流 + 设备弹窗音源行「测试」按钮 + hls.js 播放弹窗）",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "预览参数调整：并发上限 2→5、watchdog 180s→60s、pagehide fetch keepalive 兜底清理",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "修复播放弹窗不播放：radix Dialog 延迟挂载致初始化时 videoRef null（hls.js 从未初始化，播放按钮灰），改回调 ref + state，浏览器自动化验证 readyState=4",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "修复转码超时误报：m3u8 等待 4s→10s、错误摘要过滤 ffmpeg 正常转码日志（Metadata/Stream mapping/Output #0）、加 -bsf:a aac_adtstoasc、失败区分「已连接但首片超时」vs「无法连接」",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "修复播放中被误杀：watchdog 改「无访问 60s」续期制（m3u8 拉取即 touch 续期）、m3u8 端点走 Controller（no-cache 防缓存旧 list）、hls_list_size 5→10，浏览器验证播放 >75s 不中断",
+              "priority": null,
+              "createdDate": null,
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "新建 PreviewStreamController（/preview/{id}/index.m3u8 免鉴权 + 续期 + no-cache）；AudioSourcePreviewService 生命周期三保险 + touch/loadResource",
+              "priority": null,
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
+            {
+              "text": "Windows 怪癖记录：Java 轮询等待（isAlive/waitFor 超时循环）时 ffmpeg 连接被拒挂起、stderr 只有 banner（机理未明，阻塞 waitFor 正常）——失败摘要不依赖错误行必现",
+              "priority": null,
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [],
+              "completed": true
+            },
             {
               "text": "测试环境完整测试：功能 83 项 + 边界 44 项 + 压力 12 路（8绿4拒 sendFail=0 分发121次0失败）+ 日志核验",
               "priority": null,
@@ -5330,7 +5393,7 @@
     },
     {
       "name": "AgentScope 纪委谈话质检系统",
-      "last_update": "2026-08-26",
+      "last_update": "2026-08-27",
       "sections": [
         {
           "status": "待办",
@@ -5392,6 +5455,77 @@
                 "deployment"
               ],
               "completed": false
+            },
+            {
+              "text": "逐句重检卡死加固：doChat 内 streamEvents 层硬超时熔断（60s 无输出即失败恢复）+ processNext 全链路 try-catch 防断链（8c31d711 案例：15/50 句后第 16 句挂起 9 分钟，collectList().timeout 对阻塞式 streamEvents 不生效）",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug",
+                "backend"
+              ],
+              "completed": false
+            },
+            {
+              "text": "detected_at / person_info 时区修复（aistore-mcp 进程 UTC，新数据 -8h；存量 50 行违规 + 14 行 person_info 偏差）——方案：McpTools 显式 ZoneId 或部署 TZ/-Duser.timezone",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug",
+                "mcp",
+                "deployment"
+              ],
+              "completed": false
+            },
+            {
+              "text": "存量孤儿违规修复执行：db/fix/2026-08-27-fix-orphan-violations.sql（53 行 interview_message_id/qc_round_id 双 NULL 回填 + speaker 姓名→角色；不含时间修复，先核对后执行）",
+              "priority": "P2",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug",
+                "backend"
+              ],
+              "completed": false
+            },
+            {
+              "text": "生产环境部署 aistore-mcp 1.0.6（生产仍是旧版 mcp，无必填/存在性校验——生产 qms 0.0.137+ 配套需要）",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "deployment"
+              ],
+              "completed": false
+            },
+            {
+              "text": "观察 skill-test 会话在 record_violation 必填/存在性校验下的行为（主流程不依赖落库，若 Agent 因报错异常再处理）",
+              "priority": "P2",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "REVIEW 轮消费进度展示（messages 接口对重检轮返回当前句 processing，前端显示「第 N/50 句」）",
+              "priority": "P3",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": false
             }
           ]
         },
@@ -5399,6 +5533,141 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "消息注入：逐句消息尾部带（转写句ID：xxx）+ 初始化指令注入本轮质检轮次 ID（0.0.137）",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "删除时间窗口回填（associate/associateFulltextViolations）+ 强制校验补录（缺 id/错 id/虚报 → 补录重跑）（0.0.137）",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "record_violation 契约：qc_round_id 新增 + interview_message_id 改 string（mcp 1.0.3）+ 必填（1.0.4）+ 存在性校验挡 unknown/编造值（1.0.6，无格式校验）",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "mcp"
+              ],
+              "completed": true
+            },
+            {
+              "text": "speaker 角色化提示词（质检员/审查员）+ 审查员提示词去掉「可填 unknown」引导（0.0.137/0.0.138）",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "backend",
+                "agent"
+              ],
+              "completed": true
+            },
+            {
+              "text": "启动时向 RUNNING 轮次补发质检轮次 ID（0.0.138，旧会话兜底）",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "前端剥 id 尾巴 + 单测断言（轮次 ID 注入 / 消息尾部 id）（0.0.137）",
+              "priority": "P2",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "frontend",
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "db/fix 存量孤儿违规修复 SQL 文档（53 行双 NULL，原话匹配，未执行）",
+              "priority": "P2",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "docs"
+              ],
+              "completed": true
+            },
+            {
+              "text": "mcp 校验矩阵实测（真实 id 放行 / unknown / 编造 UUID / 缺参拦截）+ 0.0.137 端到端（双字段非空且值有效 + 定位可用），测试数据清理",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "「中止质检」按钮：左栏 RUNNING 轮次显示，confirm 后调 cancelRound（0.0.139）",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "会话列标题显示当前轮次 Agent 名 + 图标 Mic→Bot（0.0.140/0.0.141）",
+              "priority": "P2",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "收起态竖排显示 Agent 名常驻（0.0.142）",
+              "priority": "P2",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "编辑按钮去文字只留图标 + 轮次状态徽标中文化（质检中/已完成/失败/已取消）（0.0.143）",
+              "priority": "P2",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
             {
               "text": "ASR 环境检测（HTTP 非安全上下文明确提示，0.0.129）+ 推送失败可见化（0.0.132）+ 推送成功「✓ 已推送」反馈（0.0.133）",
               "priority": "P1",
@@ -7545,7 +7814,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-27T13:00:30.072701"
+  "generated_at": "2026-08-27T14:00:31.412190"
 };
 
         let currentFilter = 'all';
