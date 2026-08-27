@@ -5526,6 +5526,17 @@
                 "frontend"
               ],
               "completed": false
+            },
+            {
+              "text": "归档谈话详情可访问但无列表入口（get 不过滤 ARCHIVED，仅直接链接可达）——如需入口再评估",
+              "priority": "P3",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
             }
           ]
         },
@@ -5533,6 +5544,105 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "TXT 上传支持纯文本一句一行（TxtParser 无 || 分隔符整行作 content + 默认说话人可填）（0.0.144）",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "feature",
+                "backend",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "样本字段精简：source_interview_id/source_violation_id 移除（保留 source_type）+ 复核字段移除 + 标注状态两态（0.0.144）",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "refactor",
+                "backend",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "样本说话人内联修改：PUT /api/samples/{id} + 列表徽标点击编辑（0.0.151/0.0.152）",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "feature",
+                "frontend",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "样本广场删除/导入弹窗溢出/列表化/统计移入头部（0.0.145~0.0.150）",
+              "priority": "P2",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "全站原生 confirm 替换为 ConfirmDialog 公共组件（12 处，0.0.153）",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "refactor",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "智能质检页谈话删除入口（0.0.154）+ 全部谈话室按谈话室分类折叠（0.0.155）",
+              "priority": "P2",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "谈话归档 + 逻辑删除：interview.status 三态（ACTIVE/ARCHIVED/DELETED），归档即隐藏无恢复 UI，删除改逻辑删除（移除物理级联），列表/违规出口 scope 双口径（0.0.156~0.0.158）",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "feature",
+                "backend",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生产验证：归档/恢复/逻辑删除/违规统计口径全链路（测试数据清理）",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
             {
               "text": "消息注入：逐句消息尾部带（转写句ID：xxx）+ 初始化指令注入本轮质检轮次 ID（0.0.137）",
               "priority": "P1",
@@ -7814,7 +7924,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-27T17:00:14.932934"
+  "generated_at": "2026-08-27T18:00:24.966195"
 };
 
         let currentFilter = 'all';
