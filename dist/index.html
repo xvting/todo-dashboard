@@ -5545,6 +5545,146 @@
           "title": "",
           "tasks": [
             {
+              "text": "根因：生产容器无 /etc/localtime 挂载，glibc/JVM 回退 UTC；JDBC serverTimezone=Asia/Shanghai 读取 datetime 时把库里的上海时间转成 JVM 时区（UTC）→ API 全部 -8h（库值正确，读取转换）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug",
+                "deployment"
+              ],
+              "completed": false
+            },
+            {
+              "text": "修复：k8s-configmap.yaml 加 TZ=Asia/Shanghai（JDK 内置时区库归位，存量数据无需修正）——已提交 d484731；待生产 apply configmap + kubectl rollout restart deployment/aistore-qms -n his 后验证",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "deployment"
+              ],
+              "completed": false
+            },
+            {
+              "text": "喇叭图标垂直对齐修复：移除残留 mt-1.5（0.0.169 内容下方布局间距）+ shrink-0，按钮在角色行 flex items-center 内垂直居中与文字基线对齐",
+              "priority": "P2",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "角色行显示完整时间（YYYY-MM-DD HH:mm:ss）+ 录音喇叭按钮移入角色行（角色名 + #序号 + 时间 + 喇叭同行）",
+              "priority": "P2",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "喇叭图标播放按钮：点击播放/暂停（无进度条），多句互斥单例（播放新句自动暂停旧句），播放结束/出错自动复位（TranscriptAudioButton 组件，替代 0.0.167 <audio controls> 内联条——h-8 被 Chrome 压成紧凑模式）",
+              "priority": "P2",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "无功能改动刷新前端产物指纹：ChatBubble 加 data-slot、audio 加 aria-label（编译进产物强制浏览器拉新资源）",
+              "priority": "P2",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "frontend",
+                "deployment"
+              ],
+              "completed": true
+            },
+            {
+              "text": "后端：application.yml 加 audio.base-url（${AUDIO_BASE_URL:}）+ InterviewService 注入并拼接 audioUrl（裸文件名 + baseUrl 去尾斜杠）透出到 transcript 接口",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "前端：TranscriptItem 加 audioUrl + TranscriptBubble 内联 <audio controls preload=\"none\"> 播放条（有 audioUrl 才显示）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "部署规范：k8s.yaml 移除全部内联静态 env（MYSQL_*/DB_POOL_*/MCP_*/MINIO_* 与 configmap 重复），保留 fieldRef（NODENAME/MY_POD_IP/MY_POD_NAME），环境变量统一 k8s-configmap.yaml（含 AUDIO_BASE_URL）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "refactor",
+                "deployment"
+              ],
+              "completed": true
+            },
+            {
+              "text": "单测 4 用例（拼接/去尾斜杠/未配置 null/无 audioFile null）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "开发验证：mvn test 57 全绿 + 本地 AUDIO_BASE_URL curl 拼接正确 + npm build 通过；发布后生产接口兼容（未配置 base-url → audioUrl null 不报错）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生产启用：k8s-configmap.yaml 的 AUDIO_BASE_URL 填入第三方音频静态服务实际地址并 apply（当前为空，填值后查询时自动拼接生效）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "deployment"
+              ],
+              "completed": false
+            },
+            {
               "text": "接收格式定稿：POST /api/external/transcripts/{roomKey} 只收嵌套 JSON `{\"id\":\"t_1\",\"end\":true,\"role\":{\"roleName\":\"谈话人\"},\"text\":{\"content\":\"…\",\"end\":true,\"audioFile\":\"a.wav\"}}`，旧扁平 {speaker,text} 废弃（text 非对象 → 400）",
               "priority": "P1",
               "createdDate": "2026-08-28",
@@ -8101,7 +8241,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-28T11:00:30.567480"
+  "generated_at": "2026-08-28T12:00:33.161304"
 };
 
         let currentFilter = 'all';
