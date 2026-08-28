@@ -5545,6 +5545,76 @@
           "title": "",
           "tasks": [
             {
+              "text": "接收格式定稿：POST /api/external/transcripts/{roomKey} 只收嵌套 JSON `{\"id\":\"t_1\",\"end\":true,\"role\":{\"roleName\":\"谈话人\"},\"text\":{\"content\":\"…\",\"end\":true,\"audioFile\":\"a.wav\"}}`，旧扁平 {speaker,text} 废弃（text 非对象 → 400）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "定稿过滤：顶层 end 与 text.end 双真才接受，任一 false/缺省 → 200 skipped 不推入",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "落库扩展：interview_message 加 external_msg_id（顶层 id，仅追溯不去重）/ audio_file（text.audioFile 录音文件地址）两列 + 迁移 V20260829 + pushSentenceAsync(IncomingTranscript) 重载",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "backend",
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "解析抽静态方法 parseExternalMessage + 单测 14 用例（提取/过滤矩阵 5 组/400 路径 4 条/落库断言）；顺带修复既有失败测试 restoreInterviewContexts（缺 setInterviewId）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "test",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "前端契约文案：管理弹窗一键复制改为定稿 JSON 示例 + 语义标注（id/audioFile 存储追溯、end 双真）",
+              "priority": "P2",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "开发验证：mvn test 全量 53 全绿 + 本地 8200 curl 全路径（双真 accepted 广播 2 场 / 4 种非双真 skipped / 扁平 400 / 404 / 409 / 落库查证 external_msg_id= t_TEST_1 + audio_file= test_connection.wav），测试数据清理 + 服务停止",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
               "text": "谈话室级接入码：room.external_key（8 位随机唯一）+ 迁移 V20260828（存量回填）+ 管理弹窗展示/复制/重置（0.0.161）",
               "priority": "P1",
               "createdDate": "2026-08-27",
@@ -8031,7 +8101,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-28T10:00:31.120630"
+  "generated_at": "2026-08-28T11:00:30.567480"
 };
 
         let currentFilter = 'all';
