@@ -5580,6 +5580,64 @@
               "completed": true
             },
             {
+              "text": "qc_summary 独立落库（1 轮 1 份 UNIQUE，不污染会话消息）+ 迁移 V20260830",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "三路触发：实时结束异步生成（FINISHED 后）/ 离线逐句队列空后生成再 FINISHED（summaryTriggered 防重）/ FULLTEXT 结论迁移到 qc_summary（修 chat_message 双写）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "总结任务带违规汇总（qms 直查共享库：总数/类型/严重程度/明细）+ chatForSummary 纯推理不落库 + chatForFulltext（工具日志保留不落 assistant）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "接口 GET /api/interviews/{id}/summary?qcRoundId + 前端 TalkDetail「质检总结」Tab（Markdown 渲染，轮询刷新）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "frontend",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "单测 5 用例（prompt 违规汇总/落库不写 chat_message/防重/查询）全量 62 绿；本地三路实测（实时 9s/离线 27s/整篇结论迁移）；生产验证（27s 出报告识别 1 条违规）+ 测试数据清理；零 MCP 改动",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
               "text": "角色行显示完整时间（YYYY-MM-DD HH:mm:ss）+ 录音喇叭按钮移入角色行（角色名 + #序号 + 时间 + 喇叭同行）",
               "priority": "P2",
               "createdDate": "2026-08-28",
@@ -8241,7 +8299,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-28T13:00:33.388560"
+  "generated_at": "2026-08-28T14:00:34.043842"
 };
 
         let currentFilter = 'all';
