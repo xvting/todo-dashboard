@@ -5580,6 +5580,29 @@
               "completed": true
             },
             {
+              "text": "总结任务作为队列消息（__SUMMARY_TASK__ 标记）推入消费队列：实时结束/离线逐句队列空时入队，processNext 统一串行消费（转写句之后执行总结，FINISHED 轮次放行）；Agent 调 save_qc_summary 保存后继续消费收尾（REVIEW FINISHED）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "单测更新全量 62 绿；本地两路实测（实时 12s / 离线 21s FINISHED），测试数据清理",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
               "text": "aistore-mcp 1.0.7 新增 save_qc_summary 工具：qc_round_id 必填 + 轮次存在性校验 + 该轮次未保存防重复（interview_id 从 qc_round 查防编造），返回保存回执供 Agent 确认",
               "priority": "P1",
               "createdDate": "2026-08-28",
@@ -8510,7 +8533,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-28T17:00:31.896993"
+  "generated_at": "2026-08-28T18:00:44.556551"
 };
 
         let currentFilter = 'all';
