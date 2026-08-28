@@ -5545,6 +5545,78 @@
           "title": "",
           "tasks": [
             {
+              "text": "谈话室级接入码：room.external_key（8 位随机唯一）+ 迁移 V20260828（存量回填）+ 管理弹窗展示/复制/重置（0.0.161）",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "feature",
+                "backend",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "外部接收接口：POST /api/external/transcripts/{roomKey}（0.0.163 起 roomKey 移入 URL），body {speaker,text}，按接入码定位谈话室当前进行中实时质检谈话推入（0.0.161）",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "广播推送：同谈话室多场进行中的实时质检谈话全部推入（pushedTo 数组），修复只推最新一场的缺陷（0.0.164）",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "一键复制对接示例：管理弹窗单个图标复制完整接口契约说明（用途/请求/参数/响应/错误码，可直接贴给智能体）（0.0.162/0.0.163）",
+              "priority": "P2",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "管理谈话室弹窗加宽 sm:max-w-6xl 修复横向滚动条（0.0.165）",
+              "priority": "P2",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生产验证：20 句剧本逐句 3s 推送 / 10 句违规剧本（多类型违规识别）/ 两场并存广播均收到 / 错误路径（404/409/400）",
+              "priority": "P1",
+              "createdDate": "2026-08-27",
+              "dueDate": null,
+              "completedDate": "2026-08-27",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
               "text": "模拟输入：输入栏「选择样本」按钮 + 弹窗选样本集 + 间隔 2/5/10s 定时逐句推送转写（SimulateInputDialog + TranscriptInputBar 扩展，进度条/停止/与录音互斥）（0.0.159）",
               "priority": "P1",
               "createdDate": "2026-08-27",
@@ -7959,7 +8031,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-27T19:00:19.209286"
+  "generated_at": "2026-08-28T10:00:31.120630"
 };
 
         let currentFilter = 'all';
