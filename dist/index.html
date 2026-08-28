@@ -5580,6 +5580,76 @@
               "completed": true
             },
             {
+              "text": "aistore-mcp 1.0.7 新增 save_qc_summary 工具：qc_round_id 必填 + 轮次存在性校验 + 该轮次未保存防重复（interview_id 从 qc_round 查防编造），返回保存回执供 Agent 确认",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "mcp",
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "qms 0.0.181：移除服务端自动落库（generateSummaryAsync/FULLTEXT 仅核对留痕）+ 总结任务/整篇任务指令引导 Agent 输出后调 save_qc_summary（qc_round_id 填轮次 ID、report 填全文）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "backend",
+                "agent"
+              ],
+              "completed": true
+            },
+            {
+              "text": "单测更新全量 62 绿；本地实测 Agent 保存成功（9s，interview_id 正确）；生产验证 Agent 调 save_qc_summary 保存（21s），测试数据清理",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "观察：Agent 未调 save_qc_summary 时总结缺失（服务端日志「⚠️ Agent 未调用 save_qc_summary」）——如需兜底/强制校验再评估",
+              "priority": "P2",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "预览 Tab 代码块（模板示例）看不清：prose-pre 加 text-foreground（浅灰底+浅色字对比度低）",
+              "priority": "P2",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "左侧会话列表按最近活动排序（updatedAt 降序，无则回退 createdAt），最新对话会话置顶（SessionList 共用，三详情页生效）",
+              "priority": "P2",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
               "text": "MarkdownBlock 加 remark-gfm 插件（react-markdown 默认不支持 GFM 表格，模型响应的 \\`| 管道表格\\` 显示为原始文本）；质检总结/技能编辑器等所有 Markdown 渲染处生效",
               "priority": "P1",
               "createdDate": "2026-08-28",
@@ -8440,7 +8510,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-28T16:00:18.605733"
+  "generated_at": "2026-08-28T17:00:31.896993"
 };
 
         let currentFilter = 'all';
