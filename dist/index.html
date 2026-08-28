@@ -5580,6 +5580,113 @@
               "completed": true
             },
             {
+              "text": "MarkdownBlock 加 remark-gfm 插件（react-markdown 默认不支持 GFM 表格，模型响应的 \\`| 管道表格\\` 显示为原始文本）；质检总结/技能编辑器等所有 Markdown 渲染处生效",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "三个广场页排序下拉（最近修改默认/创建时间/名称）；agent 表新增 updated_at 列（V20260831 手动脚本）+ 实体/DTO/Service 透出（create/update/rollback/系统 Agent）",
+              "priority": "P2",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "feature",
+                "frontend",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "⚠️ 项目无 Flyway（flyway_schema_history 不存在），迁移脚本为手动执行文档；列由 Hibernate ddl-auto 自动加（无回填）→ 生产手动执行存量回填（agent 4 + system_agent 5 条 updated_at=created_at）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "deployment"
+              ],
+              "completed": true
+            },
+            {
+              "text": "规则广场排序下拉（最近修改默认/创建时间/名称），默认最新修改在前；后端 skills 列表透出 createdAt/updatedAt",
+              "priority": "P2",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "feature",
+                "frontend",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "规则广场「新建技能」改弹窗（名称/slug 自动生成可改/描述）→ POST /api/skills status=DRAFT 创建草稿 → 自动跳转详情页（Skill 编辑器绑定模式对话完善，发布后生效）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "feature",
+                "frontend",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "后端 createSkill 支持 status 参数（默认 PUBLISHED 兼容 Skill 管理员对话创建）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "/skills/new 改为引导态（提示回规则广场新建），不再走 Skill 管理员全局对话",
+              "priority": "P2",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "实测：DRAFT 创建/详情读取/列表草稿徽标/编辑器绑定会话全通，测试数据清理",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "/skills/:slug 详情页会话从 Skill 管理员改为 Skill 编辑器（skillEditor 绑定模式：editTargetId=slug，只能操作当前 skill）；/skills/new 新建仍走 Skill 管理员全局对话；与 AGENTS.md 系统 Agent 表描述对齐",
+              "priority": "P2",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
               "text": "规则广场创建「质检总结」技能（qc-summary，PUBLISHED v1.0.0：报告结构/输出格式/敏感信息规则/执行策略，SKILL.md 基线已提交仓库）",
               "priority": "P1",
               "createdDate": "2026-08-28",
@@ -8333,7 +8440,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-28T15:00:41.075463"
+  "generated_at": "2026-08-28T16:00:18.605733"
 };
 
         let currentFilter = 'all';
