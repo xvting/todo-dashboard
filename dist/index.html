@@ -5580,6 +5580,40 @@
               "completed": true
             },
             {
+              "text": "规则广场创建「质检总结」技能（qc-summary，PUBLISHED v1.0.0：报告结构/输出格式/敏感信息规则/执行策略，SKILL.md 基线已提交仓库）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "feature",
+                "agent"
+              ],
+              "completed": true
+            },
+            {
+              "text": "绑定全部 4 个业务 Agent（实时质检员/纪委谈话审查员/离线质检员/执法记录仪接处警质检智能体）：selectedSkills 追加 + sysPrompt 追加「总结时先 load_skill_through_path 加载 qc-summary 再输出」",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "agent"
+              ],
+              "completed": true
+            },
+            {
+              "text": "实测：实时质检结束 → 总结报告按技能规范输出（「整场谈话质检总结报告」一级标题 + 三部分结构 + 类型/严重程度分布 + 引用原话 + 角色中文），12s 出报告，测试数据清理",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
               "text": "qc_summary 独立落库（1 轮 1 份 UNIQUE，不污染会话消息）+ 迁移 V20260830",
               "priority": "P1",
               "createdDate": "2026-08-28",
@@ -8299,7 +8333,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-28T14:00:34.043842"
+  "generated_at": "2026-08-28T15:00:41.075463"
 };
 
         let currentFilter = 'all';
