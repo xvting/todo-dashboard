@@ -5580,6 +5580,42 @@
               "completed": true
             },
             {
+              "text": "消息统一为会话业务事件骨架：【业务事件：会话开始/会话句子/会话结束/会话继续】+ 参数行（中文参数名、自然语言值、模型理解、无解析代码）；【系统】业务数据消息分层（违规统计等）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "cancelRound 补发「会话结束（结束原因=中止）」事件；质检要求（逐句/整篇/收尾总结+save_qc_summary）移入 Agent 系统提示词「业务事件处理」章节（已更新 4 个业务 Agent）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "agent",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "前端会话列解析适配事件格式（说话人/转写句ID 参数行）；单测更新全量 62 绿；本地实测（事件消息/总结保存 9s/中止 CANCELLED）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "test",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
               "text": "总结任务作为队列消息（__SUMMARY_TASK__ 标记）推入消费队列：实时结束/离线逐句队列空时入队，processNext 统一串行消费（转写句之后执行总结，FINISHED 轮次放行）；Agent 调 save_qc_summary 保存后继续消费收尾（REVIEW FINISHED）",
               "priority": "P1",
               "createdDate": "2026-08-28",
@@ -5593,6 +5629,41 @@
             },
             {
               "text": "单测更新全量 62 绿；本地两路实测（实时 12s / 离线 21s FINISHED），测试数据清理",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "「会话结束」事件（正常收尾/用户中止）由 appendMemoryMessage 改 saveUserMessage 落库 chat_message——原只进内存，会话列看不到结束事件与【系统】业务数据消息",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "bug",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "前端保留【业务事件：会话句子】事件头展示（原被剥掉看不到句子事件）；转写句ID 全局剥除（原只剥第一个致整篇多句 ID 泄漏）+ 剥尾部处理指令行与「内容：」前缀",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "单测新增 2 个落库契约断言（总结任务/中止事件 saveUserMessage 参数含会话结束事件），全量 64 绿",
               "priority": "P1",
               "createdDate": "2026-08-28",
               "dueDate": null,
@@ -8533,7 +8604,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-28T18:00:44.556551"
+  "generated_at": "2026-08-28T19:05:27.191322"
 };
 
         let currentFilter = 'all';
