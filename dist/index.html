@@ -5457,7 +5457,7 @@
               "completed": false
             },
             {
-              "text": "观察：Agent 收到「会话结束」事件后不调 save_qc_summary（0.0.185/0.0.186 生产 REVIEW 整篇轮多次复现——结束事件+业务数据已正常发送，Agent 完成质检推理但不生成总结/不保存；0.0.181 时 SUMMARY_PROMPT 直接指令可触发保存，事件化后依赖 sysPrompt「业务事件处理」章节行为不稳定）——需看服务端日志确认总结推理是否超时/未触发",
+              "text": "观察：Agent 收到「会话结束」事件后不调 save_qc_summary（0.0.185/0.0.186 生产 REVIEW 整篇轮多次复现——结束事件+业务数据已正常发送，Agent 完成质检推理但不生成总结/不保存；0.0.181 时 SUMMARY_PROMPT 直接指令可触发保存，事件化后依赖 sysPrompt「业务事件处理」章节行为不稳定）——需看服务端日志确认总结推理是否超时/未触发。**0.0.191 新证据（2026-08-30 实时轮复现）**：①发现并修复了根因之一——实时质检员/审查员/离线质检员提示词尾部【质检总结】老指令「除加载该技能外不要调用任何其他工具」与业务事件处理章节「除 save_qc_summary 外不调用其他工具」**直接矛盾**（0.0.183 加章节时未删老指令），三 Agent 提示词已更新（v1.0.12/v1.0.4/v1.0.4）+ demo-mcp 绑定清理；②矛盾修复后复测仍不保存：质检阶段正常（record_violation 落库/关联全对），但总结阶段 Agent **零动作零痕迹**（未 load qc-summary、未调 save_qc_summary、chatForSummary 纯推理不落库 assistant——报告若生成也已丢失）——下一步排查方向：chatForSummary 的 buildHistory 是否包含结束事件/业务数据两条消息、maxIters、流是否提前结束；建议给 chatForSummary 加 assistant 回复临时落日志定位模型实际输出",
               "priority": "P1",
               "createdDate": "2026-08-28",
               "dueDate": null,
@@ -5481,15 +5481,14 @@
               "completed": false
             },
             {
-              "text": "detected_at / person_info 时区修复（aistore-mcp 进程 UTC，新数据 -8h；存量 50 行违规 + 14 行 person_info 偏差）——方案：McpTools 显式 ZoneId 或部署 TZ/-Duser.timezone",
+              "text": "新数据 -8h 根因已随 aistore-mcp 收回消除",
               "priority": "P1",
               "createdDate": "2026-08-27",
               "dueDate": null,
               "completedDate": null,
               "tags": [
                 "bug",
-                "mcp",
-                "deployment"
+                "backend"
               ],
               "completed": false
             },
@@ -5506,15 +5505,15 @@
               "completed": false
             },
             {
-              "text": "生产环境部署 aistore-mcp 1.0.6（生产仍是旧版 mcp，无必填/存在性校验——生产 qms 0.0.137+ 配套需要）",
+              "text": "生产环境部署 aistore-mcp 1.0.6",
               "priority": "P1",
               "createdDate": "2026-08-27",
               "dueDate": null,
-              "completedDate": null,
+              "completedDate": "2026-08-29",
               "tags": [
                 "deployment"
               ],
-              "completed": false
+              "completed": true
             },
             {
               "text": "观察 skill-test 会话在 record_violation 必填/存在性校验下的行为（主流程不依赖落库，若 Agent 因报错异常再处理）",
@@ -5556,6 +5555,40 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "aistore-mcp 5 个 MCP 工具收回为 qms 本地工具 QcBusinessTools",
+              "priority": "P1",
+              "createdDate": "2026-08-29",
+              "dueDate": null,
+              "completedDate": "2026-08-29",
+              "tags": [
+                "refactor",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "部署清理：k8s-configmap/deployment 删 MCP_URL/PORT、docker-compose 删 mcp 服务、run.bat/watchdog.bat 去 8202、删 start-mcp/stop-mcp 脚本；aistore-mcp 仓库保留为对外门面储备（README 已标注）",
+              "priority": "P2",
+              "createdDate": "2026-08-29",
+              "dueDate": null,
+              "completedDate": "2026-08-29",
+              "tags": [
+                "deployment"
+              ],
+              "completed": true
+            },
+            {
+              "text": "**发布后待办**：①发布新 qms → 验证质检全流程 ②更新 3 个业务 Agent 提示词（session_id 教填句改「系统自动注入」）+ 移除 demo-mcp 绑定（实时质检员/纪委谈话审查员/离线质检员——以生产库实际提示词为准，备份已过时）③下线 k3s aistore-mcp Deployment/Service/configmap ④AGENTS/ARCHITECTURE/DEPLOYMENT 文档收尾",
+              "priority": "P1",
+              "createdDate": "2026-08-29",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "deployment"
+              ],
+              "completed": false
+            },
             {
               "text": "0.0.185 REVIEW 整篇收尾入队总结任务：startFulltextQc 完成后直接 finishRound 从不入队总结（结束事件/总结从未发送）→ 正常完成/补录重跑后 enqueueSummaryTask 走队列消费",
               "priority": "P1",
@@ -8687,7 +8720,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-30T00:00:44.452255"
+  "generated_at": "2026-08-30T01:00:34.462930"
 };
 
         let currentFilter = 'all';
