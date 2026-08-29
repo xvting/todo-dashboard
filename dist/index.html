@@ -5457,6 +5457,18 @@
               "completed": false
             },
             {
+              "text": "观察：Agent 收到「会话结束」事件后不调 save_qc_summary（0.0.185/0.0.186 生产 REVIEW 整篇轮多次复现——结束事件+业务数据已正常发送，Agent 完成质检推理但不生成总结/不保存；0.0.181 时 SUMMARY_PROMPT 直接指令可触发保存，事件化后依赖 sysPrompt「业务事件处理」章节行为不稳定）——需看服务端日志确认总结推理是否超时/未触发",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug",
+                "agent"
+              ],
+              "completed": false
+            },
+            {
               "text": "逐句重检卡死加固：doChat 内 streamEvents 层硬超时熔断（60s 无输出即失败恢复）+ processNext 全链路 try-catch 防断链（8c31d711 案例：15/50 句后第 16 句挂起 9 分钟，collectList().timeout 对阻塞式 streamEvents 不生效）",
               "priority": "P1",
               "createdDate": "2026-08-27",
@@ -5544,6 +5556,77 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "0.0.185 REVIEW 整篇收尾入队总结任务：startFulltextQc 完成后直接 finishRound 从不入队总结（结束事件/总结从未发送）→ 正常完成/补录重跑后 enqueueSummaryTask 走队列消费",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "bug",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "0.0.186 会话结束事件纯会话化：buildSummaryPrompt 只返回事件（会话ID/结束原因），违规统计/明细拆为独立【系统】业务数据消息（buildSummaryBusinessData），processSummaryTask 分两条 saveUserMessage 落库——事件只是发送消息事件，质检处理与会话解耦",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "refactor",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "0.0.187 前端保留转写句ID 展示（cleanEventMessage 不再剥除，质检追溯用）",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "0.0.188/0.0.189 逐句轮消息语义合并：0.0.188 按时间全局排序对 REVIEW 重检不成立（历史转写早于重检轮会话），0.0.189 改 开始→就绪→句子+回复→结束/业务数据 语义合并",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "bug",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "0.0.190 质检轮次倒序（最新在上）+ 滚动条收敛在轮次区（档案/操作固定）",
+              "priority": "P2",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "单测拆分断言（事件不含业务数据/业务数据不含事件）全量 65 绿",
+              "priority": "P1",
+              "createdDate": "2026-08-28",
+              "dueDate": null,
+              "completedDate": "2026-08-28",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
             {
               "text": "根因：生产容器无 /etc/localtime 挂载，glibc/JVM 回退 UTC；JDBC serverTimezone=Asia/Shanghai 读取 datetime 时把库里的上海时间转成 JVM 时区（UTC）→ API 全部 -8h（库值正确，读取转换）",
               "priority": "P1",
@@ -8604,7 +8687,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-28T19:05:27.191322"
+  "generated_at": "2026-08-29T12:01:14.116358"
 };
 
         let currentFilter = 'all';
