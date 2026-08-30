@@ -5393,7 +5393,7 @@
     },
     {
       "name": "AgentScope 纪委谈话质检系统",
-      "last_update": "2026-08-27",
+      "last_update": "2026-08-30",
       "sections": [
         {
           "status": "待办",
@@ -5579,9 +5579,43 @@
               "completed": true
             },
             {
-              "text": "**发布后待办**：①发布新 qms → 验证质检全流程 ②更新 3 个业务 Agent 提示词（session_id 教填句改「系统自动注入」）+ 移除 demo-mcp 绑定（实时质检员/纪委谈话审查员/离线质检员——以生产库实际提示词为准，备份已过时）③下线 k3s aistore-mcp Deployment/Service/configmap ④AGENTS/ARCHITECTURE/DEPLOYMENT 文档收尾",
+              "text": "发布新 qms（0.0.191）+ 生产验证质检全流程",
               "priority": "P1",
-              "createdDate": "2026-08-29",
+              "createdDate": "2026-08-30",
+              "dueDate": null,
+              "completedDate": "2026-08-30",
+              "tags": [
+                "deployment",
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "更新 3 个业务 Agent 提示词 + 移除 demo-mcp 绑定",
+              "priority": "P1",
+              "createdDate": "2026-08-30",
+              "dueDate": null,
+              "completedDate": "2026-08-30",
+              "tags": [
+                "agent"
+              ],
+              "completed": true
+            },
+            {
+              "text": "AGENTS/ARCHITECTURE/DEPLOYMENT/POSITIONING 文档收尾",
+              "priority": "P2",
+              "createdDate": "2026-08-30",
+              "dueDate": null,
+              "completedDate": "2026-08-30",
+              "tags": [
+                "docs"
+              ],
+              "completed": true
+            },
+            {
+              "text": "下线 k3s aistore-mcp Deployment/Service + aistore-mcp-config configmap（新 qms 已不依赖 8202，随时可下线）",
+              "priority": "P2",
+              "createdDate": "2026-08-30",
               "dueDate": null,
               "completedDate": null,
               "tags": [
@@ -8720,7 +8754,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-30T01:00:34.462930"
+  "generated_at": "2026-08-30T18:00:33.980605"
 };
 
         let currentFilter = 'all';
