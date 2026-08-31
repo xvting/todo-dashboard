@@ -5556,6 +5556,20 @@
           "title": "",
           "tasks": [
             {
+              "text": "系统 Agent 会话与业务 Agent 会话物理分表 + Service/Controller 双栈分离——新增 system_chat_session/system_chat_message（存量 57 会话 + 294 消息迁移，原表零残留）；SystemChatService（独立复制对话核心，系统表持久化，不复制质检链路）+ SystemChatController（/api/system/sessions 7 端点）；ChatService/ChatController 零改动；前端 sessionsApi scope 参数（Agent 新建页/Skill 详情页/App 编辑页走 system 接口）；tool_call_log 单表共用；98 单测绿（新增 7）+ 生产复测通过",
+              "priority": "P1",
+              "createdDate": "2026-08-31",
+              "dueDate": null,
+              "completedDate": "2026-08-31",
+              "tags": [
+                "refactor",
+                "backend",
+                "frontend",
+                "agent"
+              ],
+              "completed": true
+            },
+            {
               "text": "系统 Agent 从数据库配置改为代码内置定义（SystemAgentCatalog.java，slug id：system-assistant/system-skill-admin/system-skill-editor/system-agent-builder/system-app-builder）——提示词以生产库现行版为基线，随版本发布、升级即同步、零现场漂移；system_agent 三表已清理（chat_session 57 行 + qc_round 1 行旧 UUID 迁移为 slug 后 DROP，备份 db/backup/system-agent-tables-20260831.json）；update/delete/rollback 对系统 slug 一律 400 拒绝；前端系统管理页只读展示（「内置」徽标）；91 单测绿（新增 10）+ 本地端到端实测全通过",
               "priority": "P1",
               "createdDate": "2026-08-31",
@@ -8875,7 +8889,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-31T16:01:06.232757"
+  "generated_at": "2026-08-31T17:00:25.768647"
 };
 
         let currentFilter = 'all';
