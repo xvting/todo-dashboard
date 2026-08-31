@@ -5556,6 +5556,18 @@
           "title": "",
           "tasks": [
             {
+              "text": "navigator.clipboard 仅 HTTPS/localhost 安全上下文可用，生产 http 下 writeText 必失败（管理谈话室复制接入接口信息/发布应用复制链接/应用详情复制链接三处同病）——新增公共 copyText（lib/clipboard.ts）：优先 Clipboard API，失败回退 textarea+execCommand('copy')，三处统一替换；生产复测剪贴板内容完整（含接入码/契约说明）",
+              "priority": "P1",
+              "createdDate": "2026-08-31",
+              "dueDate": null,
+              "completedDate": "2026-08-31",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
               "text": "QcConversationColumn 收起态改受控（collapsed/onCollapsedChange 提升至 TalkDetail），收起后违规/被谈话人/质检总结列由固定 w-80 切换 min-w-0 flex-[5] 与转写列等分主区，自动占据会话列释放的 25% 空间；展开恢复原布局（1280 视口实测：中栏 320→476、转写 352→476、细轨 40px）",
               "priority": "P2",
               "createdDate": "2026-08-31",
@@ -8849,7 +8861,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-31T12:00:36.855607"
+  "generated_at": "2026-08-31T14:01:53.084089"
 };
 
         let currentFilter = 'all';
