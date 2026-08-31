@@ -5556,6 +5556,42 @@
           "title": "",
           "tasks": [
             {
+              "text": "QcConversationColumn 收起态改受控（collapsed/onCollapsedChange 提升至 TalkDetail），收起后违规/被谈话人/质检总结列由固定 w-80 切换 min-w-0 flex-[5] 与转写列等分主区，自动占据会话列释放的 25% 空间；展开恢复原布局（1280 视口实测：中栏 320→476、转写 352→476、细轨 40px）",
+              "priority": "P2",
+              "createdDate": "2026-08-31",
+              "dueDate": null,
+              "completedDate": "2026-08-31",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "会话列默认收起（无记录时细轨+竖排 Agent 名，中栏自动加宽占位）+ 用户展开/收起写入 localStorage（qms-qc-session-collapsed，'1'=收起/'0'=展开），下次进入按记录恢复；0.0.197 打包指纹刷新（Bot 图标/转写标题 data-slot）",
+              "priority": "P2",
+              "createdDate": "2026-08-31",
+              "dueDate": null,
+              "completedDate": "2026-08-31",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "违规记录 Tab 永远空（「暂无违规」）回归——0.0.194 refreshAll 竞态防护把 violations 查询放 Promise.all 外单独发起，而 rounds 每次刷新均为新数组引用触发 effect 重跑、refreshSeq 先行递增，bySession 返回必被 seq 检查丢弃；改为违规查询与其余数据同批并行（bySession 首参用 roundId，qcSessionId==roundId 为创建时不变式），依赖数组去掉 rounds 消除轮询风暴，seq 统一在 Promise.all 后检查；生产复测 004 实时轮 15 条 + 重检轮 10 条均正常显示",
+              "priority": "P1",
+              "createdDate": "2026-08-31",
+              "dueDate": null,
+              "completedDate": "2026-08-31",
+              "tags": [
+                "bug",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
               "text": "/person-info 支持 qcRoundId 严格按轮返回该轮会话采集的信息（person_info 本就按 session_id 每轮一行，仅展示层合并导致\"覆盖\"观感）；无参保留实时轮优先合并行为兼容",
               "priority": "P1",
               "createdDate": "2026-08-31",
@@ -8813,7 +8849,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-31T11:00:47.213888"
+  "generated_at": "2026-08-31T12:00:36.855607"
 };
 
         let currentFilter = 'all';
