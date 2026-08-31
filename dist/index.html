@@ -5556,6 +5556,20 @@
           "title": "",
           "tasks": [
             {
+              "text": "系统 Agent 从数据库配置改为代码内置定义（SystemAgentCatalog.java，slug id：system-assistant/system-skill-admin/system-skill-editor/system-agent-builder/system-app-builder）——提示词以生产库现行版为基线，随版本发布、升级即同步、零现场漂移；system_agent 三表已清理（chat_session 57 行 + qc_round 1 行旧 UUID 迁移为 slug 后 DROP，备份 db/backup/system-agent-tables-20260831.json）；update/delete/rollback 对系统 slug 一律 400 拒绝；前端系统管理页只读展示（「内置」徽标）；91 单测绿（新增 10）+ 本地端到端实测全通过",
+              "priority": "P1",
+              "createdDate": "2026-08-31",
+              "dueDate": null,
+              "completedDate": "2026-08-31",
+              "tags": [
+                "refactor",
+                "backend",
+                "frontend",
+                "agent"
+              ],
+              "completed": true
+            },
+            {
               "text": "navigator.clipboard 仅 HTTPS/localhost 安全上下文可用，生产 http 下 writeText 必失败（管理谈话室复制接入接口信息/发布应用复制链接/应用详情复制链接三处同病）——新增公共 copyText（lib/clipboard.ts）：优先 Clipboard API，失败回退 textarea+execCommand('copy')，三处统一替换；生产复测剪贴板内容完整（含接入码/契约说明）",
               "priority": "P1",
               "createdDate": "2026-08-31",
@@ -8861,7 +8875,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-31T14:01:53.084089"
+  "generated_at": "2026-08-31T15:00:24.139570"
 };
 
         let currentFilter = 'all';
