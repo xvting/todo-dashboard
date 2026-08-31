@@ -5393,7 +5393,7 @@
     },
     {
       "name": "AgentScope 纪委谈话质检系统",
-      "last_update": "2026-08-30",
+      "last_update": "2026-08-31",
       "sections": [
         {
           "status": "待办",
@@ -5457,7 +5457,7 @@
               "completed": false
             },
             {
-              "text": "观察：Agent 收到「会话结束」事件后不调 save_qc_summary（0.0.185/0.0.186 生产 REVIEW 整篇轮多次复现——结束事件+业务数据已正常发送，Agent 完成质检推理但不生成总结/不保存；0.0.181 时 SUMMARY_PROMPT 直接指令可触发保存，事件化后依赖 sysPrompt「业务事件处理」章节行为不稳定）——需看服务端日志确认总结推理是否超时/未触发。**0.0.191 新证据（2026-08-30 实时轮复现）**：①发现并修复了根因之一——实时质检员/审查员/离线质检员提示词尾部【质检总结】老指令「除加载该技能外不要调用任何其他工具」与业务事件处理章节「除 save_qc_summary 外不调用其他工具」**直接矛盾**（0.0.183 加章节时未删老指令），三 Agent 提示词已更新（v1.0.12/v1.0.4/v1.0.4）+ demo-mcp 绑定清理；②矛盾修复后复测仍不保存：质检阶段正常（record_violation 落库/关联全对），但总结阶段 Agent **零动作零痕迹**（未 load qc-summary、未调 save_qc_summary、chatForSummary 纯推理不落库 assistant——报告若生成也已丢失）——下一步排查方向：chatForSummary 的 buildHistory 是否包含结束事件/业务数据两条消息、maxIters、流是否提前结束；建议给 chatForSummary 加 assistant 回复临时落日志定位模型实际输出",
+              "text": "观察：Agent 收到「会话结束」事件后不调 save_qc_summary（0.0.185/0.0.186 生产 REVIEW 整篇轮多次复现——结束事件+业务数据已正常发送，Agent 完成质检推理但不生成总结/不保存；0.0.181 时 SUMMARY_PROMPT 直接指令可触发保存，事件化后依赖 sysPrompt「业务事件处理」章节行为不稳定）——需看服务端日志确认总结推理是否超时/未触发。**0.0.191 新证据（2026-08-30 实时轮复现）**：①发现并修复了根因之一——实时质检员/审查员/离线质检员提示词尾部【质检总结】老指令「除加载该技能外不要调用任何其他工具」与业务事件处理章节「除 save_qc_summary 外不调用其他工具」**直接矛盾**（0.0.183 加章节时未删老指令），三 Agent 提示词已更新（v1.0.12/v1.0.4/v1.0.4）+ demo-mcp 绑定清理；②矛盾修复后复测仍不保存：质检阶段正常（record_violation 落库/关联全对），但总结阶段 Agent **零动作零痕迹**（未 load qc-summary、未调 save_qc_summary、chatForSummary 纯推理不落库 assistant——报告若生成也已丢失）——下一步排查方向：chatForSummary 的 buildHistory 是否包含结束事件/业务数据两条消息、maxIters、流是否提前结束；建议给 chatForSummary 加 assistant 回复临时落日志定位模型实际输出。**0.0.193 落地（2026-08-31）**：chatForSummary 改为与逐句质检同路径落库（assistant 总结回复写 chat_message + save_qc_summary 工具调用写 tool_call_log）——总结阶段全程可观测；生产实测 8-31 多场实时轮收尾总结均正常保存（会话列可见 save_qc_summary 工具卡+总结回复，回执 #4be37082/#76718312 等）；Agent 未调 save_qc_summary 时会话列呈「有回复无工具卡」，P1 定位手段已就绪（不再依赖服务端日志）",
               "priority": "P1",
               "createdDate": "2026-08-28",
               "dueDate": null,
@@ -5555,6 +5555,65 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "/person-info 支持 qcRoundId 严格按轮返回该轮会话采集的信息（person_info 本就按 session_id 每轮一行，仅展示层合并导致\"覆盖\"观感）；无参保留实时轮优先合并行为兼容",
+              "priority": "P1",
+              "createdDate": "2026-08-31",
+              "dueDate": null,
+              "completedDate": "2026-08-31",
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "前端 personInfo 传当前轮次 + refreshAll 请求序号过期丢弃（切轮瞬间竞态防护）+ 质检总结占位按轮次状态区分（RUNNING=「质检结束后生成总结报告…」/ 其余=「该轮次未生成质检总结」）",
+              "priority": "P1",
+              "createdDate": "2026-08-31",
+              "dueDate": null,
+              "completedDate": "2026-08-31",
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "新增 5 单测（81 全绿）+ 生产实测双轮次隔离（r0/r1 各自独立 person 行、summary 各轮独立、无参仍实时轮合并）+ UI 切轮验证 + 测试数据清理",
+              "priority": "P1",
+              "createdDate": "2026-08-31",
+              "dueDate": null,
+              "completedDate": "2026-08-31",
+              "tags": [
+                "test",
+                "deployment"
+              ],
+              "completed": true
+            },
+            {
+              "text": "chatForSummary 复用 doChat 落库：save_qc_summary 工具调用聚合写 tool_call_log（会话列工具卡，日志截断 3500→20000 报告全文可见）、assistant 总结回复写 chat_message；buildPairedMessages 尾部按 createdAt 追加配对区外 assistant（结束事件→业务数据→总结回复顺序正确）",
+              "priority": "P1",
+              "createdDate": "2026-08-31",
+              "dueDate": null,
+              "completedDate": "2026-08-31",
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "生产端到端实测：收尾后会话列显示 结束事件→业务数据→load_skill/get_time/save_qc_summary 工具卡→总结回复「整场谈话质检总结报告已生成并保存（回执编号…）」；部署期间新老 pod 混部差异已确认新版本稳定",
+              "priority": "P1",
+              "createdDate": "2026-08-31",
+              "dueDate": null,
+              "completedDate": "2026-08-31",
+              "tags": [
+                "test"
+              ],
+              "completed": true
+            },
             {
               "text": "aistore-mcp 5 个 MCP 工具收回为 qms 本地工具 QcBusinessTools",
               "priority": "P1",
@@ -8754,7 +8813,7 @@
       ]
     }
   ],
-  "generated_at": "2026-08-31T10:00:29.348932"
+  "generated_at": "2026-08-31T11:00:47.213888"
 };
 
         let currentFilter = 'all';
