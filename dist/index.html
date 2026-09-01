@@ -5581,6 +5581,20 @@
           "title": "",
           "tasks": [
             {
+              "text": "模型管理打磨迭代——表单简化（名称/模型名/API Key/BaseURL）+ 真实问答测试按钮 + Base URL 完整地址展示/协议提醒 + 系统管理页左菜单布局 + API Key 必填（点击修改解锁/脱敏不污染缓存 maskedView/明文不显示）+ 模型厂商图标自动匹配（cc-switch SVG）+ ModelSwitcher 输入框底部工具栏（发送按钮右对齐同排）+ 切换显示与实际生效一致（resolveEntity 三级解析 + resolvedModelId，修复 Agent 级拦截致「切换没生效」错觉）",
+              "priority": "P1",
+              "createdDate": "2026-09-01",
+              "dueDate": null,
+              "completedDate": "2026-09-01",
+              "tags": [
+                "feature",
+                "backend",
+                "frontend",
+                "agent"
+              ],
+              "completed": true
+            },
+            {
               "text": "增加 LLM 模型管理功能——llm_model 表多模型配置（名称/API Key/BaseURL/超时/重试/采样参数）+ 三级模型解析（会话 modelId → Agent modelId → 系统默认）；LlmModelService 实例缓存 + formatter 自动判断（deepseek/glm/openai）；会话级切换（POST /sessions/{id}/model 重建 Agent 立即生效，业务/系统双栈）；AgentConfig.modelId（详情页下拉 + 构建助手工具）；系统管理页「模型管理」Tab；109 单测绿 + 生产复测通过",
               "priority": "P1",
               "createdDate": "2026-09-01",
@@ -8928,7 +8942,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-01T18:00:27.283814"
+  "generated_at": "2026-09-01T19:00:24.464896"
 };
 
         let currentFilter = 'all';
