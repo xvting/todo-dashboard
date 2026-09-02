@@ -5393,7 +5393,7 @@
     },
     {
       "name": "AgentScope 纪委谈话质检系统",
-      "last_update": "2026-08-31",
+      "last_update": "2026-09-01",
       "sections": [
         {
           "status": "待办",
@@ -5580,6 +5580,19 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "增加模型使用统计功能——统计每个模型实际调用次数与 token 消耗：①数据源 AgentScope 事件流 ModelCallEndEvent（ChatUsage 含 input/output/cached tokens + 耗时，每次 LLM 调用成功必发），ChatService/SystemChatService doChat 埋点只做内存累加（零 IO），流结束收尾异步落库（LlmUsageLogService.recordAsync，boundedElastic 线程池不阻塞响应流）；②两层表：llm_usage_log 明细（每对话 1 行：model_id + name/model_name 快照 + call_count + tokens + latency_ms，**无任何文本内容**）+ llm_usage_daily 每日汇总（每模型每天 1 行，UNIQUE(model_id, usage_date)）；③UsageSummaryScheduler 每天 00:10 归并「昨天及更早」明细进汇总表后清理明细（明细恒 ≤2 天；停机恢复自动补跑；@Transactional 保证归并+清理原子——实测首版缺事务致归并成功但删除明细报 No EntityManager 已修复）；④GET /api/models/usage?days=（空=全部累计/7/30，只读汇总表毫秒级）；⑤前端 ModelsSquare 顶部统计区块（汇总 MetricChip + 全部/近7天/近30天切换 + 按模型细分列表，ModelIcon 图标，已删除模型按快照名展示）；模型物理删除不影响历史统计（快照）；122 单测绿（新增 9）+ 本地端到端全链路实测（明细落库→cron 归并→汇总→API）",
+              "priority": "P1",
+              "createdDate": "2026-09-01",
+              "dueDate": null,
+              "completedDate": "2026-09-01",
+              "tags": [
+                "feature",
+                "backend",
+                "frontend"
+              ],
+              "completed": true
+            },
             {
               "text": "模型管理打磨迭代——表单简化（名称/模型名/API Key/BaseURL）+ 真实问答测试按钮 + Base URL 完整地址展示/协议提醒 + 系统管理页左菜单布局 + API Key 必填（点击修改解锁/脱敏不污染缓存 maskedView/明文不显示）+ 模型厂商图标自动匹配（cc-switch SVG）+ ModelSwitcher 输入框底部工具栏（发送按钮右对齐同排）+ 切换显示与实际生效一致（resolveEntity 三级解析 + resolvedModelId，修复 Agent 级拦截致「切换没生效」错觉）",
               "priority": "P1",
@@ -8942,7 +8955,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-01T19:00:24.464896"
+  "generated_at": "2026-09-02T12:03:47.206827"
 };
 
         let currentFilter = 'all';
