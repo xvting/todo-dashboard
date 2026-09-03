@@ -5481,7 +5481,7 @@
     },
     {
       "name": "AgentScope 纪委谈话质检系统",
-      "last_update": "2026-09-01",
+      "last_update": "2026-09-03",
       "sections": [
         {
           "status": "待办",
@@ -5668,6 +5668,33 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "质检全入口(新建谈话实时/非实时 + 详情页「重新质检」弹窗)发起质检时可选择本轮质检模型,默认「跟随质检 Agent」(现状不变,实时质检员绑 DeepSeek 则默认 DeepSeek),可选具体模型覆盖(会话级优先于 Agent 级)。实现:①qc_round 加 model_id 列(迁移 V20260903__qc_round_model_id.sql)轮次存档(历史轮在详情页轮次行显示「模型:xxx」)②InterviewService 三创建方法(createReviewRound/createAndStartRealtimeQc/startRealtimeQc)加 modelId → round 存档 + initializeAndRun 建会话改 4 参 getOrCreateSession(roundId, agentId, null, round.modelId) 透传 chat_session.model_id(已支持持久化+启动恢复)③Controller 两端点 body 加可选 modelId ④前端 QcModelSelect 公共组件(首项「跟随质检 Agent(默认)」+ 启用模型带厂商图标/默认标注)接入 NewTalkDialog 两区块与 ReviewRoundDialog;127 单测绿(新增 3)+ 本地端到端实测(选 Qwen→qc_round+chat_session 落库且实际用 Qwen;不选→NULL 走 Agent 级 DeepSeek;重检轮选模型→REVIEW 轮生效)",
+              "priority": "P1",
+              "createdDate": "2026-09-03",
+              "dueDate": null,
+              "completedDate": "2026-09-03",
+              "tags": [
+                "feature",
+                "backend",
+                "frontend",
+                "agent"
+              ],
+              "completed": true
+            },
+            {
+              "text": "实测复现：会话切到特定模型后删除该模型——对话自动回退正常（resolve 跳过无效 id 落 Agent 级/系统默认，无报错），但 chat_session.model_id 残留已删 id（重启/切换器显示层面留死引用）。修复：①三个 Repository 加 clearModelReference（@Modifying UPDATE model_id=null）②ChatService/SystemChatService.detachModel（内存会话 modelId 同步清空）+ AgentConfigService.detachModel（agent.model_id）③LlmModelController.delete 加 @Transactional 先 detach 再 rebuildAllAgents ④前端 ModelSwitcher 兜底（value 不在 models 列表时按「跟随默认」显示，防幽灵选中）；124 单测绿（新增 2）+ 本地复测（删除后 model_id=None、对话回退 Agent 级 DeepSeek 正常）+ 存量悬挂引用已清理",
+              "priority": "P1",
+              "createdDate": "2026-09-03",
+              "dueDate": null,
+              "completedDate": "2026-09-03",
+              "tags": [
+                "bug",
+                "backend",
+                "frontend"
+              ],
+              "completed": true
+            },
             {
               "text": "增加模型使用统计功能——统计每个模型实际调用次数与 token 消耗：①数据源 AgentScope 事件流 ModelCallEndEvent（ChatUsage 含 input/output/cached tokens + 耗时，每次 LLM 调用成功必发），ChatService/SystemChatService doChat 埋点只做内存累加（零 IO），流结束收尾异步落库（LlmUsageLogService.recordAsync，boundedElastic 线程池不阻塞响应流）；②两层表：llm_usage_log 明细（每对话 1 行：model_id + name/model_name 快照 + call_count + tokens + latency_ms，**无任何文本内容**）+ llm_usage_daily 每日汇总（每模型每天 1 行，UNIQUE(model_id, usage_date)）；③UsageSummaryScheduler 每天 00:10 归并「昨天及更早」明细进汇总表后清理明细（明细恒 ≤2 天；停机恢复自动补跑；@Transactional 保证归并+清理原子——实测首版缺事务致归并成功但删除明细报 No EntityManager 已修复）；④GET /api/models/usage?days=（空=全部累计/7/30，只读汇总表毫秒级）；⑤前端 ModelsSquare 顶部统计区块（汇总 MetricChip + 全部/近7天/近30天切换 + 按模型细分列表，ModelIcon 图标，已删除模型按快照名展示）；模型物理删除不影响历史统计（快照）；122 单测绿（新增 9）+ 本地端到端全链路实测（明细落库→cron 归并→汇总→API）",
               "priority": "P1",
@@ -9043,7 +9070,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-03T11:00:28.299308"
+  "generated_at": "2026-09-03T12:00:27.816684"
 };
 
         let currentFilter = 'all';
