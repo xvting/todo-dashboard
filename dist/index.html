@@ -2833,7 +2833,7 @@
               "completed": false
             },
             {
-              "text": "**身份证照片功能移除代码完成**（园区无此业务，昆山模型多余移植）：字段层 10 DTO/BO/VO + PO + 接口；TBasicInfoServiceImpl 上传块（含传错字节 bug）；TLivingInfoServiceImpl 两链路清理分支；广达推送兜底与照片校验简化；Mapper NULL 别名；前端 PersonFormTab 身份证采集区——mvn compile + 24 单测 + 前端 build 全过（2026-09-03 完成，**待提交/发布**）",
+              "text": "**身份证照片功能移除代码完成**（园区无此业务，昆山模型多余移植）：字段层 10 DTO/BO/VO + PO + 接口；TBasicInfoServiceImpl 上传块（含传错字节 bug）；TLivingInfoServiceImpl 两链路清理分支；广达推送兜底与照片校验简化；Mapper NULL 别名；前端 PersonFormTab 身份证采集区——mvn compile + 24 单测 + 前端 build 全过；本地起服务接口实测全过（add 带 idCardPic 不落库/不报错、BLOB 不写、换照滚动、pic 读取 200）；2026-09-03 已提交 main（b6f7993）+ 打 tag deploy-main-1.4.93 发布中（测试环境 32090 仍 1.4.92-full，待验证）",
               "priority": "P1",
               "createdDate": "2026-09-03",
               "dueDate": null,
@@ -9117,7 +9117,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-03T18:00:38.293100"
+  "generated_at": "2026-09-03T19:00:26.575563"
 };
 
         let currentFilter = 'all';
