@@ -2833,6 +2833,28 @@
               "completed": false
             },
             {
+              "text": "**身份证照片功能移除代码完成**（园区无此业务，昆山模型多余移植）：字段层 10 DTO/BO/VO + PO + 接口；TBasicInfoServiceImpl 上传块（含传错字节 bug）；TLivingInfoServiceImpl 两链路清理分支；广达推送兜底与照片校验简化；Mapper NULL 别名；前端 PersonFormTab 身份证采集区——mvn compile + 24 单测 + 前端 build 全过（2026-09-03 完成，**待提交/发布**）",
+              "priority": "P1",
+              "createdDate": "2026-09-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "**身份证照片存量收尾**（代码移除完成后）：MinIO `personbasic` 桶 `idCardPic/` 存量对象检查清理；`T_BASIC_PIC_URL.ID_CARD_PIC` 列 DROP（达梦 DDL 随发布窗口）",
+              "priority": "P2",
+              "createdDate": "2026-09-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "database"
+              ],
+              "completed": false
+            },
+            {
               "text": "平板登录统一走 auth-server（当前 app-server 直连数据库独立服务平板端）：app-server AuthController.login 改转发 auth-server（APP 零改动）+ auth-server 加平板固定码通道（auth.tablet-code 兼容旧 APP 无 captchaId）+ 平板 portalId 传递；**暂缓原因**：保持 app-server 对平板端独立服务能力，auth-server 故障时平板仍可登录",
               "priority": "P2",
               "createdDate": "2026-08-14",
@@ -9095,7 +9117,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-03T17:00:43.923124"
+  "generated_at": "2026-09-03T18:00:38.293100"
 };
 
         let currentFilter = 'all';
