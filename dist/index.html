@@ -5669,6 +5669,19 @@
           "title": "",
           "tasks": [
             {
+              "text": "模型管理页统计从纯文字升级为可视化（参考 cc-switch 统计页）：①前端引入 recharts（cc-switch 同款库）：UsageTrendChart 按天 token 消耗趋势面积图（输入蓝/输出绿渐变、暗色主题自适应轴/网格/tooltip 配色）+ UsageShareBar 模型调用占比横向堆叠条（色点+厂商图标+名称+次数+百分比）②统计区块重构：4 张数字卡（总调用/输入/输出/平均耗时）→ 图区 grid（趋势图 2 列 + 占比 1 列），保留全部/近7天/近30天切换 ③后端 LlmUsageLogService.usageDaily(days) 按天序列（汇总表按 usage_date 分组 + 今日明细并入 today，与 usageStats 同款不重叠语义），GET /api/models/usage 响应加 daily 字段 ④0.0.229 请求明细表（cc-switch RequestLogTable 式）：GET /api/models/usage/logs?limit=（明细表倒序最近 N 条，仅保留 ≤2 天），统计区块底部表格（时间/模型/次数/输入/输出/耗时）；134 单测绿（新增 5）+ 本地/生产实测（daily 含 9-1 与今日、logs 返回明细）",
+              "priority": "P2",
+              "createdDate": "2026-09-03",
+              "dueDate": null,
+              "completedDate": "2026-09-03",
+              "tags": [
+                "feature",
+                "frontend",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
               "text": "统计查询只读每日汇总表致今日调用次日 00:10 归并后才可见（页面滞后 1 天）——usageStats 在汇总表基础上叠加「今日 00:00 后」明细（findByCreatedAtGreaterThanEqual），今日调用立即出现；归并窗口 created_at < 今天，汇总表永不含今日行，无重叠不重复计；129 单测绿（新增 2）+ 本地/生产实测（汇总 3 次 + 今日 1 次 → API 立即 4 次）",
               "priority": "P2",
               "createdDate": "2026-09-03",
@@ -9082,7 +9095,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-03T14:00:32.753331"
+  "generated_at": "2026-09-03T15:00:33.784073"
 };
 
         let currentFilter = 'all';
