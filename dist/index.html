@@ -5669,6 +5669,18 @@
           "title": "",
           "tasks": [
             {
+              "text": "统计查询只读每日汇总表致今日调用次日 00:10 归并后才可见（页面滞后 1 天）——usageStats 在汇总表基础上叠加「今日 00:00 后」明细（findByCreatedAtGreaterThanEqual），今日调用立即出现；归并窗口 created_at < 今天，汇总表永不含今日行，无重叠不重复计；129 单测绿（新增 2）+ 本地/生产实测（汇总 3 次 + 今日 1 次 → API 立即 4 次）",
+              "priority": "P2",
+              "createdDate": "2026-09-03",
+              "dueDate": null,
+              "completedDate": "2026-09-03",
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
               "text": "质检全入口(新建谈话实时/非实时 + 详情页「重新质检」弹窗)发起质检时可选择本轮质检模型,默认「跟随质检 Agent」(现状不变,实时质检员绑 DeepSeek 则默认 DeepSeek),可选具体模型覆盖(会话级优先于 Agent 级)。实现:①qc_round 加 model_id 列(迁移 V20260903__qc_round_model_id.sql)轮次存档(历史轮在详情页轮次行显示「模型:xxx」)②InterviewService 三创建方法(createReviewRound/createAndStartRealtimeQc/startRealtimeQc)加 modelId → round 存档 + initializeAndRun 建会话改 4 参 getOrCreateSession(roundId, agentId, null, round.modelId) 透传 chat_session.model_id(已支持持久化+启动恢复)③Controller 两端点 body 加可选 modelId ④前端 QcModelSelect 公共组件(首项「跟随质检 Agent(默认)」+ 启用模型带厂商图标/默认标注)接入 NewTalkDialog 两区块与 ReviewRoundDialog;127 单测绿(新增 3)+ 本地端到端实测(选 Qwen→qc_round+chat_session 落库且实际用 Qwen;不选→NULL 走 Agent 级 DeepSeek;重检轮选模型→REVIEW 轮生效)",
               "priority": "P1",
               "createdDate": "2026-09-03",
@@ -9070,7 +9082,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-03T12:00:27.816684"
+  "generated_at": "2026-09-03T13:00:53.300910"
 };
 
         let currentFilter = 'all';
