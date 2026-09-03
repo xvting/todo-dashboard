@@ -587,7 +587,7 @@
   "workspaces": [
     {
       "name": "AIStore ASR",
-      "last_update": "2026-09-02 (v1.0.0 补发 + 南京纪委交付准备)",
+      "last_update": "2026-09-03 (7x24 长期运行稳定性评估 — P0×2/P1×3/P2×3 风险记录)",
       "sections": [
         {
           "status": "进行中",
@@ -1058,6 +1058,94 @@
           "status": "待办",
           "title": "",
           "tasks": [
+            {
+              "text": "aistore-asr 每会话泄漏 Jetty JSR-356 WS client 容器 — `AbstractLASRRealtimeProvider.open()` 每次 `new StandardWebSocketClient()`（Spring 每次取新 container → Jetty 新建 heavyweight 容器：≥8 非 daemon 线程 QueuedThreadPool + HttpClient），从不 close；会话随重连/任务数线性增长，数天~数周线程耗尽/OOM。改应用级单例共享 + 随 Spring 生命周期 stop",
+              "priority": "P0",
+              "createdDate": "2026-09-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "performance"
+              ],
+              "completed": false
+            },
+            {
+              "text": "aistore-task RunningTask 停止泄漏 — ①消费者线程 `while(running||!queue.isEmpty())` 停止时队列残留即永久空转（非 daemon、不 drain、不 interrupt，~19MB PCM 队列对象图无法 GC）②健康检查 `scheduleAtFixedRate` 从不 cancel（任务反复启停累积僵尸任务占满 2 线程 scheduler）③runTask 异常路径未调 runningTask.stop()。补 drain + interrupt + cancel",
+              "priority": "P0",
+              "createdDate": "2026-09-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "performance"
+              ],
+              "completed": false
+            },
+            {
+              "text": "ES 转写 doc id 4 位序号回绕覆盖 — `ResultPersistService.java:40` `t_{taskCode}_%04d`：单 run >9999 句定稿即覆盖旧文档；任务重启 seq 归零 → 新 run 覆盖旧 run。id 加 taskRunId；顺带处理 ES 写失败仅 log.error 不重试直接丢（同步阻塞消息线程）",
+              "priority": "P1",
+              "createdDate": "2026-09-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "aistore-task 侧 ES 索引无保留/清理 — `aistore-task-logs`/`aistore-transcripts` 无限增长（asr 侧有 30/90 天机制，task 侧零机制）。对齐加索引保留或容量告警（transcripts 为业务数据，删除策略需产品确认）",
+              "priority": "P1",
+              "createdDate": "2026-09-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "devops"
+              ],
+              "completed": false
+            },
+            {
+              "text": "24~72h soak 长稳测试 — 12 路并发脚本扩展长时间版，盯四指标：线程数（jstack，验证 P0 ①）、堆、ES 磁盘、temp-dir；跑前先修 P0 两项",
+              "priority": "P1",
+              "createdDate": "2026-09-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "aistore-asr 引擎僵尸会话看门狗 — LASR 建连后不回 feedingReady 无超时：音频静默丢弃、永久占许可槽位 + 连接计数 + PCM 文件无限增长（32KB/s ≈ 115MB/h/会话，temp-dir 无上限）；`max-retry`/`maxRecordTime` 是死配置从未读取。加 start-ack 超时 + 活跃会话 PCM 磁盘上限",
+              "priority": "P2",
+              "createdDate": "2026-09-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug"
+              ],
+              "completed": false
+            },
+            {
+              "text": "日志噪音收敛 — logback 强制 `com.aispeech.aistore=DEBUG` + AccessLogFilter 对 2~3s 轮询每请求打多行 INFO + WS 消息逐条 debug payload（PcmTranscribeNode:626）+ SinkChannel 重试失败每 60s 无冷却 ERROR；ERROR 文件无 size cap",
+              "priority": "P2",
+              "createdDate": "2026-09-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "performance"
+              ],
+              "completed": false
+            },
+            {
+              "text": "死配置/死代码清理 — AsyncConfig 两线程池 bean 从未被 @Async 引用（转写持久化实为同步）；PcmBufferNode 恢复缓冲 bufferData/flushBuffer 无调用；RunningTask health-check \"恢复降级 30s\" 逻辑不生效；ActiveMQ sink stub 恒成功会静默丢结果",
+              "priority": "P2",
+              "createdDate": "2026-09-03",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor"
+              ],
+              "completed": false
+            },
             {
               "text": "确认 LASR CPU 引擎并发许可（实测稳定并发约 10 路，超限被引擎静默断开；平台代理上限 20 形同虚设，建议与引擎提供方核对许可数并设置一致）",
               "priority": "P1",
@@ -2656,16 +2744,16 @@
               "completed": false
             },
             {
-              "text": "**地址中心化设计固化完成**：ADDRESS_ID=业务表 UNIQUE_KEY 策略 + 35 张 HOUSE 关联表全清单 + T_LANDLORD 一对一方案（复制式，脚本 plan/sql/landlord_to_addressid.sql，不建关系表）→ `改造/log/问题与决策.md [04]`；**执行前提：老 T_LANDLORD 数据 SQLark 导入达梦（当前 0 条，T_HOUSE_INFO.LANDLORDID 80980 条待转换）**",
+              "text": "**地址中心化设计固化 + T_LANDLORD 转换执行完成**（2026-08-24 JDBC 实测确认）：ADDRESS_ID=业务表 UNIQUE_KEY 策略 + 35 张 HOUSE 关联表全清单 + T_LANDLORD 一对一方案（复制式，脚本 plan/sql/landlord_to_addressid.sql，不建关系表）→ 改造/log/问题与决策.md [04]；**实际状态：老 T_LANDLORD 数据已导入（80986 行）+ 复制式转换已执行（80978 条 UNIQUE_KEY=房屋主键，目标 80980 差 2 条）+ 老 UUID 已清理（仅剩 4 条）；T_HOUSE_INFO.LANDLORDID 保留老 UUID 按设计弃用不删**",
               "priority": "P0",
               "createdDate": "2026-08-14",
               "dueDate": null,
-              "completedDate": null,
+              "completedDate": "2026-08-24",
               "tags": [
                 "database",
                 "docs"
               ],
-              "completed": false
+              "completed": true
             },
             {
               "text": "测试数据补录：T_BASIC_INFO/T_LIVING_INFO/T_JOB_INFO 迁一批真实数据（当前 0 条），供采集/查询演示",
@@ -8955,7 +9043,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-03T10:00:27.939428"
+  "generated_at": "2026-09-03T11:00:28.299308"
 };
 
         let currentFilter = 'all';
