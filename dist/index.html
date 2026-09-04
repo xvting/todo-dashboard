@@ -2867,6 +2867,50 @@
               "completed": false
             },
             {
+              "text": "**批次 1（1.4.98）**：境外登记（Web + foreigner-livings/add 接口）+ 境内类型分流 + datatype 兜底——已发布并 UI 回归通过",
+              "priority": "P1",
+              "createdDate": "2026-09-04",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "**批次 2（1.4.99）**：境外列表/编辑闭环（徽标园区口径/编辑分流/编辑回填与 upsert 保存）+ 境内必填与年龄联动/16+照片/居住证申领块 + visaType 幂等——已发布并 UI 回归通过",
+              "priority": "P1",
+              "createdDate": "2026-09-04",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": true
+            },
+            {
+              "text": "**字典口径核对专项**（批次 2 探查发现）：codemanage 的 rentType/rentaltype/userwithowner/jzcs/visatype/personTag 数据盘点 vs 老字典表——RK 居住字段落库字典错位（relaWithLandlord 已改由 inhabit_type 推导、INHABITTYPE 常量指向 rentType codetype）；结论供\"居住字典语义对齐\"专项",
+              "priority": "P2",
+              "createdDate": "2026-09-04",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "database"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**批次 3 候选**：重点人标签（RK 无表列/接口——需先定列语义与字典，老 7 标签 TAG_GZRY_*/TAG_GLRY_* 达梦列在但 PO 未映射）；入所/出所时间（老落点待核）；户籍地址行政区划联想",
+              "priority": "P2",
+              "createdDate": "2026-09-04",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
               "text": "平板登录统一走 auth-server（当前 app-server 直连数据库独立服务平板端）：app-server AuthController.login 改转发 auth-server（APP 零改动）+ auth-server 加平板固定码通道（auth.tablet-code 兼容旧 APP 无 captchaId）+ 平板 portalId 传递；**暂缓原因**：保持 app-server 对平板端独立服务能力，auth-server 故障时平板仍可登录",
               "priority": "P2",
               "createdDate": "2026-08-14",
@@ -9129,7 +9173,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-04T15:01:12.835191"
+  "generated_at": "2026-09-04T16:00:29.767043"
 };
 
         let currentFilter = 'all';
