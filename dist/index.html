@@ -2676,14 +2676,14 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-08-21（出租屋 Web 端改造 + 业务对齐旧系统完成，app 1.4.69~1.4.85 / mock 0.0.3~0.0.4；TODO 按 todo-manager 规范整理：已完成项归位 🟢、进行中收敛至 3 项、过期任务已标注）",
+      "last_update": "2026-09-04（小区采集功能域初步完成——四类人员登记/编辑/确认/注销+出租屋+照片链路 Web 端闭环，批次 1/2 已上线 app 1.4.93~1.4.99 / admin 1.3.75；TODO 核对：过期截止日期统一重排至 9 月、关闭\"前端正式工程 Vue3 项目\"（已被三端 React 统一取代）、新增 BLOB 双写清理小项；详见 会话交接-20260904.md）",
       "sections": [
         {
           "status": "进行中",
           "title": "",
           "tasks": [
             {
-              "text": "**昆山独有业务清理遗留**：Device/Sq 园区重写（T_REGISTER_INFO/T_ADMIN_AREA）；网格 T_USER_AREA_WG 达梦补表+恢复链路；集宿区园区化验证（COMMUNITY_TYPE='1'）；照片 MinIO 写入链路改造+存量迁移；完成后 24 单测+回归+打 tag 发布",
+              "text": "**昆山独有业务清理遗留**（照片 MinIO 子项已完成 ✅ 1.4.94/1.4.97：统一桶 yuanqu + chinese/foreigner 分类 + T_FOREIGNER_PIC_URL + 存量迁移；残留：sure/工地 2 处 BLOB 双写清理）：Device/Sq 园区重写（T_REGISTER_INFO/T_ADMIN_AREA）；网格 T_USER_AREA_WG 达梦补表+恢复链路；集宿区园区化验证（COMMUNITY_TYPE='1'）",
               "priority": "P0",
               "createdDate": "2026-08-14",
               "dueDate": null,
@@ -2725,7 +2725,7 @@
               "text": "业务端 sure 链路 insertzzrk 联调补验：达梦 T_RENTHOUSE 落库 RENTHOUSEID 非空约束（测试库数据问题）解决后，实测确认居住触发 insertzzrk 上报",
               "priority": "P2",
               "createdDate": "2026-08-21",
-              "dueDate": null,
+              "dueDate": "2026-09-30",
               "completedDate": null,
               "tags": [
                 "test"
@@ -2733,10 +2733,10 @@
               "completed": false
             },
             {
-              "text": "**线上 app-server ConfigMap 与 git 同步**：线上 AUTH_CODE 实际为 UUID（git 为 development），GD_* 已手工 apply——两边同步或明确维护约定",
+              "text": "**线上 app-server ConfigMap 与 git 同步**：线上 AUTH_CODE 实际为 UUID（git 为 development）；k8s-configmap.yaml 的 MinIO 地址配的是 119.45.40.133:31900（milvus-minio 容器，历史错误配置），线上实际为 minio:9000 + JLQBR 凭据——两边同步或明确维护约定，否则按 git 部署会回退配置",
               "priority": "P2",
               "createdDate": "2026-08-21",
-              "dueDate": null,
+              "dueDate": "2026-09-30",
               "completedDate": null,
               "tags": [
                 "devops"
@@ -2767,10 +2767,10 @@
               "completed": false
             },
             {
-              "text": "平板 APP 端联调测试（登录全链路已实测通过：admin+真实账号 046546+错误场景 4/4+Sa-Token 拦截；采集/两实跟踪接口待联调）",
+              "text": "平板 APP 端按 design/18 附录 A 契约开发联调（登录全链路已实测通过：admin+真实账号 046546+错误场景 4/4+Sa-Token 拦截；小区采集 Web 端已闭环、API 契约已稳定交付 App 前端——待对接采集/两实跟踪/境外登记接口）",
               "priority": "P0",
               "createdDate": "2026-08-03",
-              "dueDate": "2026-08-20",
+              "dueDate": "2026-09-15",
               "completedDate": null,
               "tags": [
                 "test"
@@ -2778,7 +2778,7 @@
               "completed": false
             },
             {
-              "text": "移动端 P0 14 功能点（信息采集3/人员查询/两实跟踪6/办事指南/系统设置/隐患采集/防诈宣传；**基础设施已就绪**：登录/权限/数据范围/统计链路/昆山清理全通（1.4.22），业务功能待开发；见功能点-工作量与阶段.md）",
+              "text": "移动端 P0 14 功能点（信息采集3/人员查询/两实跟踪6/办事指南/系统设置/隐患采集/防诈宣传；**进度**：小区采集功能域 Web 端闭环（四类登记/编辑/注销+出租屋+照片，1.4.99），API 契约已交付 App（design/18 附录 A）；剩余：App 端联调+硬件能力（蓝牙/拍照）/快速采集/任务下发链路/重点人标签；见功能点-工作量与阶段.md）",
               "priority": "P1",
               "createdDate": "2026-08-04",
               "dueDate": "2026-09-30",
@@ -2792,7 +2792,7 @@
               "text": "完善各模块标记 TODO 的业务逻辑（海康数据库链/中间表/水电气复合查询）",
               "priority": "P1",
               "createdDate": "2026-08-03",
-              "dueDate": "2026-08-10",
+              "dueDate": "2026-09-30",
               "completedDate": null,
               "tags": [
                 "feature"
@@ -2825,10 +2825,21 @@
               "text": "FileController 上传目录 /opt/his/file/ 无持久卷，Pod 重建照片丢失——生产建议接 MinIO",
               "priority": "P2",
               "createdDate": "2026-08-21",
-              "dueDate": null,
+              "dueDate": "2026-09-30",
               "completedDate": null,
               "tags": [
                 "devops"
+              ],
+              "completed": false
+            },
+            {
+              "text": "2 处 BLOB 双写清理（sure 链路 TLivingInfoServiceImpl:561 / 工地链路 :1781 的 `basic.setPersonPic(...)`——MinIO 已传+索引已写，BLOB 冗余；改动极小）",
+              "priority": "P2",
+              "createdDate": "2026-09-04",
+              "dueDate": "2026-09-30",
+              "completedDate": null,
+              "tags": [
+                "refactor"
               ],
               "completed": false
             },
@@ -2971,7 +2982,7 @@
               "text": "管理端正式菜单树录入（admin/app 门户配正式功能菜单树+节点+角色关联，替换当前占位的\"建模\"老树）",
               "priority": "P1",
               "createdDate": "2026-08-11",
-              "dueDate": "2026-08-31",
+              "dueDate": "2026-09-30",
               "completedDate": null,
               "tags": [
                 "feature"
@@ -2982,7 +2993,7 @@
               "text": "权限管理界面优化：功能菜单管理+菜单项管理整合为一个界面（菜单树与节点同屏管理，左侧树+右侧节点编辑）+ admin/app 前端按 functions 动态渲染侧边栏，待本次权限重构执行完后处理",
               "priority": "P2",
               "createdDate": "2026-08-11",
-              "dueDate": "2026-08-31",
+              "dueDate": "2026-09-30",
               "completedDate": null,
               "tags": [
                 "feature"
@@ -2993,7 +3004,7 @@
               "text": "权限管理界面优化：资源域+资源项整合为一个界面（左侧资源域+右侧资源项），同上",
               "priority": "P2",
               "createdDate": "2026-08-11",
-              "dueDate": "2026-08-31",
+              "dueDate": "2026-09-30",
               "completedDate": null,
               "tags": [
                 "feature"
@@ -3004,7 +3015,7 @@
               "text": "BDM 存量清理（D7）：孤儿菜单项 190 条/孤儿关联 15 条、sync_test/Role06bd5 测试数据、老 Web 门户存量，备份后清理",
               "priority": "P2",
               "createdDate": "2026-08-11",
-              "dueDate": "2026-08-31",
+              "dueDate": "2026-09-30",
               "completedDate": null,
               "tags": [
                 "database"
@@ -3023,21 +3034,19 @@
               "completed": false
             },
             {
-              "text": "前端正式工程 sip-rk-admin-web（独立 Vue3 项目，替代测试控制台；视觉规范按 改造/design/DESIGN.md IBM Carbon 风格）",
-              "priority": "P1",
+              "text": "前端正式工程 sip-rk-admin-web（独立 Vue3 项目，替代测试控制台）",
+              "priority": null,
               "createdDate": "2026-08-04",
-              "dueDate": "2026-08-31",
-              "completedDate": null,
-              "tags": [
-                "feature"
-              ],
-              "completed": false
+              "dueDate": null,
+              "completedDate": "2026-09-04",
+              "tags": [],
+              "completed": true
             },
             {
               "text": "DB 唯一索引登记：T_COMMUNICTY.COMMUNITY_CODE 部分唯一索引（达梦 WHERE STATUS='1'，随数据迁移执行；编码列 2026-08-14 由 COMMUNITY_ID 重命名）",
               "priority": "P2",
               "createdDate": "2026-08-04",
-              "dueDate": "2026-08-31",
+              "dueDate": "2026-09-30",
               "completedDate": null,
               "tags": [
                 "database"
@@ -3048,7 +3057,7 @@
               "text": "T_USER_INFO DELETED 归一化（1033 条有效记录 deleted=null 残留；查询已兼容 null，建议 `UPDATE T_USER_INFO SET DELETED=0 WHERE DELETED IS NULL AND STATUS='1'` 统一）",
               "priority": "P2",
               "createdDate": "2026-08-11",
-              "dueDate": null,
+              "dueDate": "2026-09-30",
               "completedDate": null,
               "tags": [
                 "database"
@@ -3067,10 +3076,10 @@
               "completed": false
             },
             {
-              "text": "恢复 log4j.properties 文件 appender（R/L 的 File 路径被注释，日志只输出控制台不落盘，影响线上排查）    （2026-08-14 决策：随移动端主线空档处理，顺延）",
+              "text": "恢复 log4j.properties 文件 appender（R/L 的 File 路径被注释，日志只输出控制台不落盘，影响线上排查）    （2026-08-14 决策：随移动端主线空档处理）",
               "priority": "P2",
               "createdDate": "2026-08-07",
-              "dueDate": "2026-08-20",
+              "dueDate": "2026-09-30",
               "completedDate": null,
               "tags": [
                 "refactor"
@@ -3078,10 +3087,10 @@
               "completed": false
             },
             {
-              "text": "nginx upstream 加健康检查（`max_fails=3 fail_timeout=30s`，自动摘掉不健康后端，避免再出现实例挂了 14 天无人发现的情况）     （运维侧小活，2026-08-14 决策顺延至 8-20）",
+              "text": "nginx upstream 加健康检查（`max_fails=3 fail_timeout=30s`，自动摘掉不健康后端，避免再出现实例挂了 14 天无人发现的情况）",
               "priority": "P1",
               "createdDate": "2026-08-07",
-              "dueDate": "2026-08-20",
+              "dueDate": "2026-09-30",
               "completedDate": null,
               "tags": [
                 "devops",
@@ -3093,7 +3102,7 @@
               "text": "Exchange.jar 彻底去除 QunzufangGather 空转（反编译修改 jar 去掉 batchupdateQunzufangStatus 调用，或改代码让 updateHouseQunzufangStatus 解析响应并更新 ISQZF）",
               "priority": "P2",
               "createdDate": "2026-08-07",
-              "dueDate": "2026-08-31",
+              "dueDate": "2026-09-30",
               "completedDate": null,
               "tags": [
                 "performance"
@@ -3104,7 +3113,7 @@
               "text": "schedule-server token-clean 适配 Sa-Token Redis key（login:token:* → sa-token 会话 key）",
               "priority": "P2",
               "createdDate": "2026-08-06",
-              "dueDate": "2026-08-20",
+              "dueDate": "2026-09-30",
               "completedDate": null,
               "tags": [
                 "refactor"
@@ -3137,7 +3146,7 @@
               "text": "数据迁移（园区旧库 → 达梦测试库，登录相关7表已就绪，待全量）",
               "priority": "P2",
               "createdDate": "2026-08-03",
-              "dueDate": "2026-08-31",
+              "dueDate": "2026-09-30",
               "completedDate": null,
               "tags": [
                 "devops"
@@ -3148,7 +3157,7 @@
               "text": "手工修复 3 个迁移问题对象（V_DQ_HCTJ 视图 / PROC_AUTO_EXE_C_JOB 存储过程 / 1 个函数）",
               "priority": "P2",
               "createdDate": "2026-08-03",
-              "dueDate": "2026-08-10",
+              "dueDate": "2026-09-15",
               "completedDate": null,
               "tags": [
                 "database",
@@ -3160,7 +3169,7 @@
               "text": "分析 Oracle USERS 表空间的表（决定是否迁移，先查内容）",
               "priority": "P2",
               "createdDate": "2026-08-03",
-              "dueDate": "2026-08-07",
+              "dueDate": "2026-09-15",
               "completedDate": null,
               "tags": [
                 "database"
@@ -3182,7 +3191,7 @@
               "text": "改造 oracle.sql.* 类型（10 个 Java 文件：BLOB/CLOB/DATE 替换为 java.sql 标准类型）",
               "priority": "P1",
               "createdDate": "2026-08-03",
-              "dueDate": "2026-09-01",
+              "dueDate": "2026-09-15",
               "completedDate": null,
               "tags": [
                 "refactor",
@@ -3194,7 +3203,7 @@
               "text": "批量替换 JDBC URL/Driver/Hibernate Dialect（30+ 配置 + 10 pom.xml + OracleLobHandler）",
               "priority": "P1",
               "createdDate": "2026-08-05",
-              "dueDate": "2026-09-01",
+              "dueDate": "2026-09-15",
               "completedDate": null,
               "tags": [
                 "refactor",
@@ -3206,7 +3215,7 @@
               "text": "ROWNUM 分页改造验证（90+ 处，评估批量改 LIMIT/OFFSET）",
               "priority": "P2",
               "createdDate": "2026-08-07",
-              "dueDate": "2026-09-05",
+              "dueDate": "2026-09-30",
               "completedDate": null,
               "tags": [
                 "refactor",
@@ -3218,7 +3227,7 @@
               "text": "DB Link 跨库引用改造（139 处 `@census`/`@CENSUS_BI` 改为 Schema 跨表访问）",
               "priority": "P1",
               "createdDate": "2026-08-07",
-              "dueDate": "2026-09-01",
+              "dueDate": "2026-09-15",
               "completedDate": null,
               "tags": [
                 "refactor",
@@ -9173,7 +9182,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-04T16:00:29.767043"
+  "generated_at": "2026-09-04T17:00:46.720771"
 };
 
         let currentFilter = 'all';
