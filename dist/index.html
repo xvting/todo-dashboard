@@ -1059,26 +1059,22 @@
           "title": "",
           "tasks": [
             {
-              "text": "aistore-asr 每会话泄漏 Jetty JSR-356 WS client 容器 — `AbstractLASRRealtimeProvider.open()` 每次 `new StandardWebSocketClient()`（Spring 每次取新 container → Jetty 新建 heavyweight 容器：≥8 非 daemon 线程 QueuedThreadPool + HttpClient），从不 close；会话随重连/任务数线性增长，数天~数周线程耗尽/OOM。改应用级单例共享 + 随 Spring 生命周期 stop",
-              "priority": "P0",
-              "createdDate": "2026-09-03",
+              "text": "aistore-asr 每会话泄漏 Jetty JSR-356 WS client 容器",
+              "priority": null,
+              "createdDate": null,
               "dueDate": null,
               "completedDate": null,
-              "tags": [
-                "performance"
-              ],
-              "completed": false
+              "tags": [],
+              "completed": true
             },
             {
-              "text": "aistore-task RunningTask 停止泄漏 — ①消费者线程 `while(running||!queue.isEmpty())` 停止时队列残留即永久空转（非 daemon、不 drain、不 interrupt，~19MB PCM 队列对象图无法 GC）②健康检查 `scheduleAtFixedRate` 从不 cancel（任务反复启停累积僵尸任务占满 2 线程 scheduler）③runTask 异常路径未调 runningTask.stop()。补 drain + interrupt + cancel",
-              "priority": "P0",
-              "createdDate": "2026-09-03",
+              "text": "aistore-task RunningTask 停止泄漏",
+              "priority": null,
+              "createdDate": null,
               "dueDate": null,
               "completedDate": null,
-              "tags": [
-                "performance"
-              ],
-              "completed": false
+              "tags": [],
+              "completed": true
             },
             {
               "text": "ES 转写 doc id 4 位序号回绕覆盖 — `ResultPersistService.java:40` `t_{taskCode}_%04d`：单 run >9999 句定稿即覆盖旧文档；任务重启 seq 归零 → 新 run 覆盖旧 run。id 加 taskRunId；顺带处理 ES 写失败仅 log.error 不重试直接丢（同步阻塞消息线程）",
@@ -2676,14 +2672,14 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-09-04（小区采集功能域初步完成——四类人员登记/编辑/确认/注销+出租屋+照片链路 Web 端闭环，批次 1/2 已上线 app 1.4.93~1.4.99 / admin 1.3.75；TODO 核对：过期截止日期统一重排至 9 月、关闭\"前端正式工程 Vue3 项目\"（已被三端 React 统一取代）、新增 BLOB 双写清理小项；详见 会话交接-20260904.md）",
+      "last_update": "2026-09-04（集宿区园区化完成——/page 类型过滤+Web /dormitory 入口+admin 四字段+昆山孤儿代码清理 33 文件+本地端到端实测，两仓 feature/dormitory 已提交待合并发布；新遗留：集宿区 5960 间房屋 ADDRESS_ID 回填；详见 design/19）",
       "sections": [
         {
           "status": "进行中",
           "title": "",
           "tasks": [
             {
-              "text": "**昆山独有业务清理遗留**（照片 MinIO 子项已完成 ✅ 1.4.94/1.4.97：统一桶 yuanqu + chinese/foreigner 分类 + T_FOREIGNER_PIC_URL + 存量迁移；残留：sure/工地 2 处 BLOB 双写清理）：Device/Sq 园区重写（T_REGISTER_INFO/T_ADMIN_AREA）；网格 T_USER_AREA_WG 达梦补表+恢复链路；集宿区园区化验证（COMMUNITY_TYPE='1'）",
+              "text": "集宿区园区化验证（COMMUNITY_TYPE='1'）",
               "priority": "P0",
               "createdDate": "2026-08-14",
               "dueDate": null,
@@ -2692,6 +2688,15 @@
                 "refactor"
               ],
               "completed": false
+            },
+            {
+              "text": "**集宿区园区化**（design/19）：/page 加 communityType 参数（复用数据范围）+ Web /dormitory 独立入口 + 集宿区信息维护字段（admin 四字段）+ 昆山孤儿代码清理（33 文件：20 孤儿类+envir 包+死枚举+死方法）+ 本地端到端实测（125 条集宿区列表/友达宿舍 2436 房屋钻取）",
+              "priority": null,
+              "createdDate": "2026-09-04",
+              "dueDate": null,
+              "completedDate": "2026-09-04",
+              "tags": [],
+              "completed": true
             },
             {
               "text": "**移动端写入链路联调**：Web 端\"添加人员\"实测保存测试人员（addLiving/update/sure/del + 一人一住所 + 广达上报）——2026-08-14 主体链路已实测通过（add/update/del/一人一住所 + 统计闭环，修复 12 处昆山遗留）；2026-08-17 扩展字段落库 null 已修复（字段名错配 czkssj→rentbegindate 等，curl 实测全部正确落库）；**剩余：sure/广达上报留专网**",
@@ -2840,6 +2845,17 @@
               "completedDate": null,
               "tags": [
                 "refactor"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**集宿区房屋 ADDRESS_ID 存量回填**：达梦 5960 间集宿区房屋（T_COMMUNICTY type='1' → T_BUILDING → T_HOUSE_INFO）ADDRESS_ID 全部为 null——导致房屋详情钻取 addressId=null、三级统计表集宿区维度 0 行；随存量地址分批回填（建模地址查询页）覆盖集宿区房屋维度",
+              "priority": "P2",
+              "createdDate": "2026-09-04",
+              "dueDate": "2026-09-30",
+              "completedDate": null,
+              "tags": [
+                "database"
               ],
               "completed": false
             },
@@ -9182,7 +9198,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-04T17:00:46.720771"
+  "generated_at": "2026-09-04T18:00:35.078372"
 };
 
         let currentFilter = 'all';
