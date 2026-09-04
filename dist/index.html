@@ -2833,7 +2833,7 @@
               "completed": false
             },
             {
-              "text": "**身份证照片功能移除代码完成**（园区无此业务，昆山模型多余移植）：字段层 10 DTO/BO/VO + PO + 接口；TBasicInfoServiceImpl 上传块（含传错字节 bug）；TLivingInfoServiceImpl 两链路清理分支；广达推送兜底与照片校验简化；Mapper NULL 别名；前端 PersonFormTab 身份证采集区——mvn compile + 24 单测 + 前端 build 全过；本地起服务接口实测全过（add 带 idCardPic 不落库/不报错、BLOB 不写、换照滚动、pic 读取 200）；2026-09-03 已提交 main（b6f7993）+ 打 tag deploy-main-1.4.93 发布中（测试环境 32090 仍 1.4.92-full，待验证）",
+              "text": "**身份证照片功能移除代码完成**（园区无此业务，昆山模型多余移植）：字段层 10 DTO/BO/VO + PO + 接口；TBasicInfoServiceImpl 上传块（含传错字节 bug）；TLivingInfoServiceImpl 两链路清理分支；广达推送兜底与照片校验简化；Mapper NULL 别名；前端 PersonFormTab 身份证采集区——mvn compile + 24 单测 + 前端 build 全过；本地起服务接口实测全过（add 带 idCardPic 不落库/不报错、BLOB 不写、换照滚动、pic 读取 200）；2026-09-03 已提交 main（b6f7993）+ 打 tag deploy-main-1.4.93（**测试环境 32090 仍 1.4.92-full 待验证**）",
               "priority": "P1",
               "createdDate": "2026-09-03",
               "dueDate": null,
@@ -2844,13 +2844,25 @@
               "completed": true
             },
             {
-              "text": "**身份证照片存量收尾**（代码移除完成后）：MinIO `personbasic` 桶 `idCardPic/` 存量对象检查清理；`T_BASIC_PIC_URL.ID_CARD_PIC` 列 DROP（达梦 DDL 随发布窗口）",
-              "priority": "P2",
-              "createdDate": "2026-09-03",
+              "text": "**照片统一桶改造 + 境外 MinIO 化代码完成**（[17]）：桶常量 personbasic→yuanqu（两仓）；境内 key 加 chinese/ 前缀（PIC_DIR_CHINESE 常量 8 处）；新建 T_FOREIGNER_PIC_URL（DDL 已执行）；境外保存/读取改造（foreigner/ 前缀索引 + 换图删旧 + BLOB 兜底）；ensureBucket 自动建桶；**顺带修复境外链路达梦缺列**（CHINA_PHONE exist=false、SERVICE_PLACE 补列）；测试库存量迁移已执行（personbasic→yuanqu/chinese/ 2 对象 + T_BASIC_PIC_URL 前缀 UPDATE）；两仓编译 + 24 单测 + tsc + 本地实测全过（境外 5 图/换图删旧/详情契约、境内新写入 chinese/ + 存量读取）；2026-09-04 提交 + tag deploy-main-1.4.94（待发布）",
+              "priority": "P1",
+              "createdDate": "2026-09-04",
               "dueDate": null,
               "completedDate": null,
               "tags": [
-                "database"
+                "refactor"
+              ],
+              "completed": true
+            },
+            {
+              "text": "**照片体系生产收尾**（随发布窗口）：①生产 MinIO personbasic→yuanqu/chinese/ 对象迁移脚本执行（先迁移后发版，幂等）②达梦生产 T_FOREIGNER_BASIC_INFO 补 SERVICE_PLACE 列 + 建 T_FOREIGNER_PIC_URL（DDL 见 改造/plan/sql/foreigner_pic_url_ddl.sql）③personbasic 旧桶与 idCardPic/ 残留对象清理 ④T_BASIC_PIC_URL.ID_CARD_PIC 列 DROP ⑤T_FOREIGNER_BASIC_INFO 5 BLOB 列退役评估",
+              "priority": "P1",
+              "createdDate": "2026-09-04",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "database",
+                "devops"
               ],
               "completed": false
             },
@@ -9117,7 +9129,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-04T11:00:31.102112"
+  "generated_at": "2026-09-04T12:01:12.228725"
 };
 
         let currentFilter = 'all';
