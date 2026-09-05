@@ -2672,7 +2672,7 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-09-04（集宿区园区化发布：独立 API 域 /api/dormitory/v1 三控制器 + Web /dormitory 入口 + 昆山孤儿代码清理 33 文件；app tag deploy-main-1.4.100（1.4.100-dormitory）CI 构建中；admin 1.3.76 构建异常后重打 **deploy-main-1.3.77**（1.3.77-dormitory）；新遗留：集宿区 5960 间房屋 ADDRESS_ID 回填；详见 design/19）",
+      "last_update": "2026-09-04（集宿区园区化**发布并线上验证通过**：tag deploy-main-1.4.100（1.4.100-dormitory）/ deploy-main-1.3.77（1.3.77-dormitory，1.3.76 构建异常后重发）已部署测试环境，browser-use UI 回归全过——app 集宿区页/新域 5 类请求/搜索钻取、admin 四字段写回路；**测试环境 32090 AUTH_CODE 同为 UUID（不止线上）**；遗留：集宿区 5960 间房屋 ADDRESS_ID 回填（UI 表现：房屋卡片点击不跳转）；详见 design/19）",
       "sections": [
         {
           "status": "进行中",
@@ -2690,7 +2690,7 @@
               "completed": false
             },
             {
-              "text": "**集宿区园区化**（design/19）：集宿区=COMMUNITY_TYPE='1' 与小区同级（存储同表）→ **独立 API 域 /api/dormitory/v1**（三控制器 32 端点完整镜像小区域，借道防护生效）+ Web /dormitory 入口 + admin 四字段 + 昆山孤儿代码清理 33 文件 + 本地端到端实测（125 条集宿区/友达宿舍 2436 房屋钻取/借道拒绝）",
+              "text": "**集宿区园区化**（design/19）：集宿区=COMMUNITY_TYPE='1' 与小区同级（存储同表）→ **独立 API 域 /api/dormitory/v1**（三控制器 32 端点完整镜像小区域，借道防护生效）+ Web /dormitory 入口 + admin 四字段 + 昆山孤儿代码清理 33 文件",
               "priority": null,
               "createdDate": "2026-09-04",
               "dueDate": null,
@@ -9333,7 +9333,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-05T18:00:29.418963"
+  "generated_at": "2026-09-05T19:02:09.110395"
 };
 
         let currentFilter = 'all';
