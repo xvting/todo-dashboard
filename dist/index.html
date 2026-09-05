@@ -2672,7 +2672,7 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-09-04（集宿区园区化完成——/page 类型过滤+Web /dormitory 入口+admin 四字段+昆山孤儿代码清理 33 文件+本地端到端实测，两仓 feature/dormitory 已提交待合并发布；新遗留：集宿区 5960 间房屋 ADDRESS_ID 回填；详见 design/19）",
+      "last_update": "2026-09-04（集宿区园区化发布：独立 API 域 /api/dormitory/v1 三控制器 + Web /dormitory 入口 + 昆山孤儿代码清理 33 文件；app tag deploy-main-1.4.100（1.4.100-dormitory）CI 构建中；admin 1.3.76 构建异常后重打 **deploy-main-1.3.77**（1.3.77-dormitory）；新遗留：集宿区 5960 间房屋 ADDRESS_ID 回填；详见 design/19）",
       "sections": [
         {
           "status": "进行中",
@@ -2690,7 +2690,7 @@
               "completed": false
             },
             {
-              "text": "**集宿区园区化**（design/19）：/page 加 communityType 参数（复用数据范围）+ Web /dormitory 独立入口 + 集宿区信息维护字段（admin 四字段）+ 昆山孤儿代码清理（33 文件：20 孤儿类+envir 包+死枚举+死方法）+ 本地端到端实测（125 条集宿区列表/友达宿舍 2436 房屋钻取）",
+              "text": "**集宿区园区化**（design/19）：集宿区=COMMUNITY_TYPE='1' 与小区同级（存储同表）→ **独立 API 域 /api/dormitory/v1**（三控制器 32 端点完整镜像小区域，借道防护生效）+ Web /dormitory 入口 + admin 四字段 + 昆山孤儿代码清理 33 文件 + 本地端到端实测（125 条集宿区/友达宿舍 2436 房屋钻取/借道拒绝）",
               "priority": null,
               "createdDate": "2026-09-04",
               "dueDate": null,
@@ -5584,12 +5584,72 @@
     },
     {
       "name": "AgentScope 纪委谈话质检系统",
-      "last_update": "2026-09-03",
+      "last_update": "2026-09-04",
       "sections": [
         {
           "status": "待办",
           "title": "",
           "tasks": [
+            {
+              "text": "**质检失败句静默跳过警示**——压测实证：并发≥4 时 15~18/20 句 90s 超时跳过、0 违规、轮次照常 FINISHED（高负载无声漏检）——轮次收尾统计失败句数，失败率超阈值（如 30%）标 FAILED 或前端显著警示；前端轮次行显示「N 句质检失败」；失败句支持单独重检",
+              "priority": "P1",
+              "createdDate": "2026-09-04",
+              "dueDate": "2026-09-15",
+              "completedDate": null,
+              "tags": [
+                "bug",
+                "backend",
+                "frontend"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**vLLM 高负载无响应防护（运维）**——压测 300s 组并发 4 后 vLLM 进入无响应状态（TCP 可连不回包、无 usage，疑似队列死锁/OOM，重启/等待自愈）——给推理服务加 k8s liveness probe + 自动重启；评估 max concurrent requests / 队列上限保护",
+              "priority": "P1",
+              "createdDate": "2026-09-04",
+              "dueDate": "2026-09-12",
+              "completedDate": null,
+              "tags": [
+                "deployment"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**滚动摘要续检（超长谈话治本）**——逐句质检段内句数≥阈值（qms.qc.segment-sentences 默认 50）或估算 token>窗口 80% 时：拼装「前段质检脉络」（violation_record+person_info 服务端拼串零 LLM）+保留最近 10 句+重建 Agent+发【会话继续】事件继续质检；违规已逐句落库零丢失，跨段关联靠摘要；方案已过评审（0.0.242 讨论）",
+              "priority": "P2",
+              "createdDate": "2026-09-04",
+              "dueDate": "2026-09-30",
+              "completedDate": null,
+              "tags": [
+                "feature",
+                "backend",
+                "agent"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**质检 Agent 提示词压回复长度**——实测回复 ~500t/句是上下文增量主因（普通句 ~600t），压到 1-2 句（~100t）→ 撑满句数 210→660；Agent 构建助手提示词已加指导（0.0.244 前完成），需更新业务质检 Agent 实际提示词",
+              "priority": "P2",
+              "createdDate": "2026-09-04",
+              "dueDate": "2026-09-12",
+              "completedDate": null,
+              "tags": [
+                "refactor",
+                "agent"
+              ],
+              "completed": false
+            },
+            {
+              "text": "Qwen3.8 模型配置 max_context_tokens=132000（实测窗口值，管理页 API 直更即可）+ DeepSeek/Qwen3.7-plus 按官方口径配置",
+              "priority": "P3",
+              "createdDate": "2026-09-04",
+              "dueDate": "2026-09-10",
+              "completedDate": null,
+              "tags": [
+                "config"
+              ],
+              "completed": false
+            },
             {
               "text": "应用广场生成页面支持导出 Word/Excel——App 构建助手生成的 /p/{slug} 页面（或应用中心）提供数据导出能力（前端生成代码支持导出按钮 + 后端导出接口/模板）",
               "priority": "P2",
@@ -5685,16 +5745,16 @@
               "completed": false
             },
             {
-              "text": "逐句重检卡死加固：doChat 内 streamEvents 层硬超时熔断（60s 无输出即失败恢复）+ processNext 全链路 try-catch 防断链（8c31d711 案例：15/50 句后第 16 句挂起 9 分钟，collectList().timeout 对阻塞式 streamEvents 不生效）",
+              "text": "逐句重检卡死加固：doChat 内 streamEvents 层硬超时熔断（60s 无输出即失败恢复）+ processNext 全链路 try-catch 防断链",
               "priority": "P1",
               "createdDate": "2026-08-27",
               "dueDate": null,
-              "completedDate": null,
+              "completedDate": "2026-09-03",
               "tags": [
                 "bug",
                 "backend"
               ],
-              "completed": false
+              "completed": true
             },
             {
               "text": "新数据 -8h 根因已随 aistore-mcp 收回消除",
@@ -5771,6 +5831,81 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "逐句质检上下文膨胀根治",
+              "priority": "P0",
+              "createdDate": "2026-09-03",
+              "dueDate": null,
+              "completedDate": "2026-09-03",
+              "tags": [
+                "bug",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "补录流程 assistant 消息重复落库修复",
+              "priority": "P1",
+              "createdDate": "2026-09-04",
+              "dueDate": null,
+              "completedDate": "2026-09-04",
+              "tags": [
+                "bug",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "模型最大上下文配置",
+              "priority": "P2",
+              "createdDate": "2026-09-04",
+              "dueDate": null,
+              "completedDate": "2026-09-04",
+              "tags": [
+                "feature",
+                "backend",
+                "frontend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "模型管理页优化三件套",
+              "priority": "P2",
+              "createdDate": "2026-09-04",
+              "dueDate": null,
+              "completedDate": "2026-09-04",
+              "tags": [
+                "feature",
+                "frontend",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "三模型质检对比 + Qwen3.8 并发压测",
+              "priority": "P1",
+              "createdDate": "2026-09-04",
+              "dueDate": null,
+              "completedDate": "2026-09-04",
+              "tags": [
+                "research",
+                "test"
+              ],
+              "completed": true
+            },
+            {
+              "text": "请求明细条数切换 + 加载更多 + CSV 导出",
+              "priority": "P2",
+              "createdDate": "2026-09-04",
+              "dueDate": null,
+              "completedDate": "2026-09-04",
+              "tags": [
+                "feature",
+                "frontend",
+                "backend"
+              ],
+              "completed": true
+            },
             {
               "text": "模型管理页统计从纯文字升级为可视化（参考 cc-switch 统计页）：①前端引入 recharts（cc-switch 同款库）：UsageTrendChart 按天 token 消耗趋势面积图（输入蓝/输出绿渐变、暗色主题自适应轴/网格/tooltip 配色）+ UsageShareBar 模型调用占比横向堆叠条（色点+厂商图标+名称+次数+百分比）②统计区块重构：4 张数字卡（总调用/输入/输出/平均耗时）→ 图区 grid（趋势图 2 列 + 占比 1 列），保留全部/近7天/近30天切换 ③后端 LlmUsageLogService.usageDaily(days) 按天序列（汇总表按 usage_date 分组 + 今日明细并入 today，与 usageStats 同款不重叠语义），GET /api/models/usage 响应加 daily 字段 ④0.0.229 请求明细表（cc-switch RequestLogTable 式）：GET /api/models/usage/logs?limit=（明细表倒序最近 N 条，仅保留 ≤2 天），统计区块底部表格（时间/模型/次数/输入/输出/耗时）；134 单测绿（新增 5）+ 本地/生产实测（daily 含 9-1 与今日、logs 返回明细）",
               "priority": "P2",
@@ -9198,7 +9333,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-04T19:00:35.886663"
+  "generated_at": "2026-09-05T18:00:29.418963"
 };
 
         let currentFilter = 'all';
