@@ -2672,7 +2672,7 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-09-07（admin 集宿区拆分两批全落地：①集宿区管理独立页（1.3.78）②建筑物/房屋按所属类型拆分——集宿区建筑物 450 栋/集宿区房屋 5960 间独立菜单页，与达梦对账一致，tag deploy-main-1.3.79（1.3.79-dormitory-bh）CI 构建中；遗留：集宿区 5960 间房屋 ADDRESS_ID 回填 + XQJF 列可空性观察；详见 design/19 §3.4）",
+      "last_update": "2026-09-07（admin 集宿区拆分两批全落地（1.3.78 集宿区管理页 + 1.3.79 建筑物/房屋拆分，与达梦对账一致）；**新完成老园区业务对照**：admin 现状=骨架，差距 6 项挂 TODO\"集宿区业务对齐差距\"分组（P0=CZWBH 出租屋编号体系/专网硬前置，P1=楼栋重排+管理员账号，P2=子类型规则/采集细节），详析 design/19 §5；其他遗留：集宿区 5960 间房屋 ADDRESS_ID 回填 + XQJF 列可空性观察）",
       "sections": [
         {
           "status": "进行中",
@@ -2878,6 +2878,73 @@
               "completedDate": null,
               "tags": [
                 "database"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**【P0】出租屋编号（CZWBH）体系**——专网联调硬前置：①集宿区级编号维护 UI（老=T_DORMITORY_RENT_RELATION 表，Web 端校验占用+保存关系；新系统无此表此 UI）②房屋级 6 位编号 RENT_HOUSE_ID_YUANQU 字段维护 ③子类型规则（教育类 0/1 禁止维护编号）④无 CZWBH 时人员登记拦截提示（老话术\"集宿区尚未维护出租屋编号\"）——不做则集宿区人员采集专网上报跑不通",
+              "priority": "P1",
+              "createdDate": "2026-09-07",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature",
+                "database"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**【P1】楼栋编辑房屋重排**：老园区改层数×户数时按新格位重排（有人住 mark='2' 保留/空房软删/新格位补建）；新系统楼栋编辑不重排，日常运维会踩",
+              "priority": "P1",
+              "createdDate": "2026-09-07",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**【P1】集宿区管理员账号体系**（design/07 已挂\"本期不做\"）：老=PERSON_TYPE=2/ORGANIZATION_TYPE=2 + T_USER_AREA 限单集宿区（单位自助采集，dormitoryArry 数据范围）；新系统仅民警可用——等账号体系评估后做",
+              "priority": "P2",
+              "createdDate": "2026-09-07",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "security"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**【P2】子类型（COMMUNITY_SUBTYPE）业务规则**：字段在但规则没跟——广达报文房屋结构映射（0学生→30/1单位→05/1…）、居住方式默认值（单位→04/01/员工\"4\"）、教育类禁编号；随广达批次一起",
+              "priority": "P2",
+              "createdDate": "2026-09-07",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**【P2】人员采集对齐细节**：①\"已在其他集宿区/工地登记\"提示+确认迁移（先被动注销旧记录再新建）②CSV 批量导入（老 /project/upload.do）③三逃比对标记（ischa 刑满/追逃写入 basic_info）④集宿区编号规则差异（老=社区编号+9001 流水，新=普通流水）",
+              "priority": "P2",
+              "createdDate": "2026-09-07",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature"
+              ],
+              "completed": false
+            },
+            {
+              "text": "广达上报类（整区出租屋推送/人员登记推送/注销推送/备案）——随专网联调批次（已在\"移动端写入链路联调\"覆盖，此处不重复挂）",
+              "priority": "P2",
+              "createdDate": "2026-09-07",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "test"
               ],
               "completed": false
             },
@@ -9367,7 +9434,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-07T17:00:28.539982"
+  "generated_at": "2026-09-07T18:00:36.392395"
 };
 
         let currentFilter = 'all';
