@@ -5673,6 +5673,18 @@
               "completed": false
             },
             {
+              "text": "评估：质检链路改非流式（stream:false）的可行性——现状结论（2026-09-04 分析）：质检后台运行确实不需要中间增量，但**不建议改**——总耗时不变（生成速度由推理决定），且流式的 TCP 持续有数据是 90s 长句不被网关/NAT 空闲超时掐断的保命机制（configmap 注释同款坑：MySQL 远程连接曾因空闲断开挂起）；非流式下长句生成期间连接全静默，中间层 60-120s 空闲超时会掐断。仅当未来发现流式引起其他问题（如 chunk 解析开销）再评估",
+              "priority": "P3",
+              "createdDate": "2026-09-04",
+              "dueDate": "2026-09-30",
+              "completedDate": null,
+              "tags": [
+                "refactor",
+                "backend"
+              ],
+              "completed": false
+            },
+            {
               "text": "应用广场生成页面支持导出 Word/Excel——App 构建助手生成的 /p/{slug} 页面（或应用中心）提供数据导出能力（前端生成代码支持导出按钮 + 后端导出接口/模板）",
               "priority": "P2",
               "createdDate": "2026-09-01",
@@ -9355,7 +9367,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-07T14:00:20.494997"
+  "generated_at": "2026-09-07T15:00:22.761364"
 };
 
         let currentFilter = 'all';
