@@ -5854,6 +5854,54 @@
               "completed": false
             },
             {
+              "text": "**协议内核泛化改名评估（协议 v2）**——4 事件「会话开始/会话句子/会话结束/会话继续」命名带对话味；多场景（卷宗）落地前评估泛化改名（任务开始/事实分片/任务结束/任务继续）+ 同步改业务 Agent 提示词「业务事件处理」章节；原则：内核只加不减、变更带版本号、先在消息层跑实证再升级为事件",
+              "priority": "P3",
+              "createdDate": "2026-09-08",
+              "dueDate": "2026-09-30",
+              "completedDate": null,
+              "tags": [
+                "refactor",
+                "agent"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**卷宗质检对象模型设计**——dossier/volume/material 表结构 + 材料文本化（OCR/解析）+ MinIO 存储（照搬 skill 双轨模式）+ 材料级 ID 校验（转写句 ID 模式推广）+ 三级粒度（材料/跨材料/全卷）投喂策略与上下文治理；与「系统场景定义」联动，场景差异收口适配层、4 事件内核不改",
+              "priority": "P3",
+              "createdDate": "2026-09-08",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature",
+                "research",
+                "backend"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**质检失败事实投影**（静默跳过警示的实现口径）——适配层把超时/失败句投影进协议（【系统】消息「第 N 句质检失败」+ 轮次收尾失败统计），与压测暴露问题 P1 同源，实现时统一考虑",
+              "priority": "P2",
+              "createdDate": "2026-09-08",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "backend",
+                "agent"
+              ],
+              "completed": false
+            },
+            {
+              "text": "产品设计 v0.4 差距更新落档——8-18 差距分析以来 R1~R8 实质进展为零，0.0.244 后重新核对 F001~F013/R1~R8 现状并写更新记录四（只读立场：正文不改，注记/更新记录补充）",
+              "priority": "P3",
+              "createdDate": "2026-09-08",
+              "dueDate": "2026-09-30",
+              "completedDate": null,
+              "tags": [
+                "docs"
+              ],
+              "completed": false
+            },
+            {
               "text": "重新梳理系统 Agent 提示词——0.0.199 内置化基线取生产库现行版，需全面校对 5 个系统 Agent（小助手/Skill 管理员/Skill 编辑器/Agent 构建助手/App 构建助手）提示词与业务 Agent 提示词的一致性、职责边界、冗余/矛盾指令（0.0.191 三 Agent 矛盾修复的同类问题排查）",
               "priority": "P1",
               "createdDate": "2026-09-01",
@@ -6021,6 +6069,18 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "协议适配层架构讨论与梳理",
+              "priority": "P1",
+              "createdDate": "2026-09-07",
+              "dueDate": null,
+              "completedDate": "2026-09-08",
+              "tags": [
+                "docs",
+                "research"
+              ],
+              "completed": true
+            },
             {
               "text": "逐句质检上下文膨胀根治",
               "priority": "P0",
@@ -9523,7 +9583,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-08T14:00:24.467978"
+  "generated_at": "2026-09-08T15:00:25.460773"
 };
 
         let currentFilter = 'all';
