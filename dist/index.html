@@ -2672,7 +2672,7 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-09-09（①T_HOUSE_INFO 补列修复（HOUSE_ID→HOUSE_CODE 改名+补 ADDRESS_ID）线上验证通过 ②集宿区独立域多级搜索完成——昆山契约 VO（dormitories 字段）/DormitoryController 独立端点，tag deploy-main-1.4.101（1.4.101-gsearch）CI 构建中待测试环境验证；1.3.80~1.3.82 三连修均已线上验证；本机 9090 落在 Windows TCP 排除段 9014-9113 无法起服务（已定性））",
+      "last_update": "2026-09-09（**集宿区契约对齐昆山全部完成并线上验证**：1.4.101~105 五批——独立域多级搜索（dormitories）/page（dormitory*）/detail（dormitory*）/buildings（dormitoryId 容器）/楼栋房屋（getDormitoryId 别名），curl 全链路验证通过+域隔离正确；同日修复：T_HOUSE_INFO 补列、建模页下拉/钻取三连修（admin 1.3.80~1.3.82）；遗留：集宿区 5960 间房屋 ADDRESS_ID 回填 + 集宿区业务对齐差距 6 项（P0=CZWBH））",
       "sections": [
         {
           "status": "进行中",
@@ -9717,7 +9717,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-09T17:00:38.464888"
+  "generated_at": "2026-09-09T18:00:50.507143"
 };
 
         let currentFilter = 'all';
