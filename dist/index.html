@@ -2672,7 +2672,7 @@
     },
     {
       "name": "园区人口库",
-      "last_update": "2026-09-09（**T_HOUSE_INFO 补列修复**：8-14 编码列重命名遗漏该表——HOUSE_ID 未改 HOUSE_CODE、地址中心化漏补 ADDRESS_ID，导致建模地址查询房屋层全挂；已改名+补列线上恢复；另 1.3.80~1.3.82 三连修（派出所下拉/建模页下拉/drill 钻取错位）均已线上验证；安漫云苑三级绑定演示完成（小区+15 栋已绑，房屋 254 间待补）；遗留见下）",
+      "last_update": "2026-09-09（①T_HOUSE_INFO 补列修复（HOUSE_ID→HOUSE_CODE 改名+补 ADDRESS_ID）线上验证通过 ②集宿区独立域多级搜索完成——昆山契约 VO（dormitories 字段）/DormitoryController 独立端点，tag deploy-main-1.4.101（1.4.101-gsearch）CI 构建中待测试环境验证；1.3.80~1.3.82 三连修均已线上验证；本机 9090 落在 Windows TCP 排除段 9014-9113 无法起服务（已定性））",
       "sections": [
         {
           "status": "进行中",
@@ -9656,7 +9656,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-09T15:00:34.622758"
+  "generated_at": "2026-09-09T16:01:21.433887"
 };
 
         let currentFilter = 'all';
