@@ -5902,6 +5902,54 @@
               "completed": false
             },
             {
+              "text": "**Agent/Skill 场景可视化编辑（体验缺口登记，用户 2026-09-09 暂缓）**——Skill 详情页编辑 Tab 保存不携带 sceneCode（手改 frontmatter 被剥，只能靠 Skill 编辑器对话或 REST 改场景）；Agent 无表单场景选择器（靠构建助手对话 + 服务端缺省 INTERVIEW）；方案：详情页头部加场景下拉（选项来自 /api/system/qc-scenes，复用现有 update 接口）",
+              "priority": "P3",
+              "createdDate": "2026-09-09",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature",
+                "frontend"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**「场景广场」改名评估**——现有导航「场景广场」实为 Agent 广场，与新增「质检场景」概念同字面易混淆（质检场景实施时明确不顺带改名）；建议改名「Agent 广场」或类似，涉及导航/路由/文档同步",
+              "priority": "P3",
+              "createdDate": "2026-09-09",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor",
+                "frontend"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**qc_round 场景快照列随 qc_task 设计**——scene_code/scene_version/protocol_version 本轮全部推迟（当前恒 INTERVIEW/1.0.0/1 零信息量）；场景版本真演化过或第二场景（卷宗）立项时，随 qc_task 聚合根/多场景模型一并设计",
+              "priority": "P3",
+              "createdDate": "2026-09-09",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**scene_code 多值演进**——agent/skill 现为单列 scene_code（空=通用）；第二场景立项时评估 scene_keys 多值列或关联表，并同步 SceneCompatibilityService 规则",
+              "priority": "P3",
+              "createdDate": "2026-09-09",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "feature",
+                "backend"
+              ],
+              "completed": false
+            },
+            {
               "text": "重新梳理系统 Agent 提示词——0.0.199 内置化基线取生产库现行版，需全面校对 5 个系统 Agent（小助手/Skill 管理员/Skill 编辑器/Agent 构建助手/App 构建助手）提示词与业务 Agent 提示词的一致性、职责边界、冗余/矛盾指令（0.0.191 三 Agent 矛盾修复的同类问题排查）",
               "priority": "P1",
               "createdDate": "2026-09-01",
@@ -6069,6 +6117,19 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "质检场景系统级定义（代码目录 + 适用范围 + 兼容性校验 + 只读页）",
+              "priority": "P1",
+              "createdDate": "2026-09-08",
+              "dueDate": null,
+              "completedDate": "2026-09-09",
+              "tags": [
+                "feature",
+                "backend",
+                "frontend"
+              ],
+              "completed": true
+            },
             {
               "text": "模型管理页两处调整",
               "priority": "P2",
@@ -9656,7 +9717,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-09T16:01:21.433887"
+  "generated_at": "2026-09-09T17:00:38.464888"
 };
 
         let currentFilter = 'all';
