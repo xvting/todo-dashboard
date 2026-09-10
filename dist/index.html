@@ -5760,13 +5760,24 @@
               "completed": false
             },
             {
-              "text": "**2 卡环境并发能力重测**——GPUStack 部署 2026-09-08 晚从单卡扩为 **2 张算力卡**（预热首次请求 0.8s 即热态）——MODEL-COMPARISON §5.5 全部并发结论（实时 3 / 批量 4 / 6 路平台期）基于**单卡环境**，需在 2 卡重测校准：并发 3 与 4 各一组对照单卡基准（6.7min / 8.9min）；若 TP=2 单实例则 prefill 加速、并发上限有望上移；若双副本则总吞吐翻倍但单轮耗时不变",
+              "text": "**2 卡环境并发能力重测**——**进度：并发 1 已完成（2026-09-10，轮次 104）**；待跑并发 4 / 8。**部署形态已实测确认**（MODEL-COMPARISON §5.6）：GPUStack v2.1.2 + vLLM v0.23.0-custom（昇腾），单实例 **TP=2，`gpu_indexes=[0,1]`**，卡为昇腾 910B2（宿主共 8 张，本实例每卡申请 57.6GB）——**单请求即跑两张卡，不存在\"只用一张卡\"**。并发 1 结果：7m11s / 违规 9 / 0 失败句，**回复产出速率 27.36 字符/秒 vs 单卡均值 19.28（1.42×）**——墙钟与单卡持平是因为本轮工作量更大（11,820 字符，超过单卡任何一轮），**对比必须用「回复字符/秒」而非墙钟**（本轮违规/补录量主导耗时，7~33min 波动）。直连基准佐证：batch=1 解码 89.2 tok/s（落在 TP=2 区间，单卡估算上限约 59）；**下一步并行 4/8**（单卡基准 8.9min / 21m58s，按 1.42× 推算 2 卡应落到 ~15min 一线）",
               "priority": "P2",
               "createdDate": "2026-09-08",
               "dueDate": "2026-09-20",
               "completedDate": null,
               "tags": [
                 "test",
+                "deployment"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**宿主 2 号卡异常占用排查（运维）**——2026-09-10 观察：8 张 910B2 中 **2 号卡占用 62GB/90% 但 `allocated=0`**、3 号卡占用 40GB/59% 亦 `allocated=0`，而 GPUStack 仅登记本模型实例（占 0/1 号卡）——疑似**非 GPUStack 管理的进程**（手工启动的 vLLM 或重部署残留）；2 号卡显存画像（62GB）与正经实例几乎一致，若为同模型残留则纯属浪费；用 `GET /v2/gpu-devices` 复查 `allocated` 与 `used` 差异定位",
+              "priority": "P2",
+              "createdDate": "2026-09-10",
+              "dueDate": "2026-09-18",
+              "completedDate": null,
+              "tags": [
                 "deployment"
               ],
               "completed": false
@@ -5780,6 +5791,31 @@
               "tags": [
                 "test",
                 "research"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**质检采样温度调优（判定类任务应降温度）**——2026-09-10 从实例日志发现：服务端 `generation_config.json` **强制覆盖** vLLM 采样默认值为 `temperature 1.0 / top_k 20 / top_p 0.95`（日志原文 `Default vLLM sampling parameters have been overridden by the model's generation_config.json`），而 qms `llm_model` 三个模型的 `temperature`/`top_p`/`max_tokens` **全为 NULL → 不传 → 走服务端默认**，故**所有质检请求都在温度 1.0 下采样**——**疑似是「同批 20 句 + 同 Agent + 同提示词，检出 4~15 条违规」轮间波动的主因**（MODEL-COMPARISON 中\"质检质量与并发无关（全档位 4~15 条/轮）\"的离散度需按采样随机性重新归因，而非轮内负载差异）。判定类任务温度应降至 0.2~0.3 或 0（top_k 建议关闭或调小）；**入口缺失**：0.0.202 设计含该列，0.0.203 表单简化时移除采样参数入口，需先把入口加回模型管理页或直接改库；**改动影响全部业务 Agent 行为，须先做对照验证**（同批句、同 Agent 跑两遍，比对检出一致性与条数稳定性）再上生产",
+              "priority": "P1",
+              "createdDate": "2026-09-10",
+              "dueDate": "2026-09-20",
+              "completedDate": null,
+              "tags": [
+                "config",
+                "agent",
+                "test"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**max_num_batched_tokens 调优（服务端，带风险）**——实例日志启动警告：`max_num_scheduled_tokens is set to 2048 based on the speculative decoding settings. This may lead to suboptimal performance. Consider increasing max_num_batched_tokens`——MTP 投机解码把 prefill 批大小压到 2048，可能限制 prefill 吞吐（实测 234~880 tokens/s，峰值 2426）。可试 4096 / 8192 并量测 prefill 吞吐、TTFT 与单轮耗时变化。⚠️ **风险**：批更大可能拉长单次解码延迟，而实测**单次调用最大延迟 74.7s 已贴近 90s 判定红线**，调大有可能把长尾推过线、触发「失败句静默跳过」（同区 P1 条目）——调整期间必须同步盯 `collectList 90000ms` 失败句数做回归",
+              "priority": "P2",
+              "createdDate": "2026-09-10",
+              "dueDate": "2026-09-25",
+              "completedDate": null,
+              "tags": [
+                "deployment",
+                "test"
               ],
               "completed": false
             },
@@ -5994,13 +6030,38 @@
               "completed": false
             },
             {
-              "text": "**执行迁移脚本 V20260910（0.0.274 发版后）**——`src/main/resources/db/migration/V20260910__migrate_agent_bound_sessions.sql`：把老绑定会话（`edit_target_id` 非空且 `agent_id = edit_target_id` 且 agent_id 非系统 slug）从 `chat_session` 搬到 `system_chat_session`（agent_id 改写为 system-agent-builder），消息同步搬 `system_chat_message`。**生产实测待迁 8 条**（2026-09-10 只读核对）；**执行前先跑脚本头部的 COUNT 再核对一遍**，执行后跑核对节（原表残留应 0、chat_message 零残留）。非幂等，只执行一次",
-              "priority": "P2",
+              "text": "**「重新生成」流程图会递增版本**——0.0.275 给详情页加了「重新生成」按钮，但它走的是 `POST /{id}/mermaid/regenerate` → `AgentConfigService.update` → **版本 patch +1 并留一份备份**；新建表单创建成功后也会自动触发一次（所以新建完版本就已从 v1.0.0 变成 v1.0.1）。连续点击会堆出一串只有 mermaid 差异的版本记录。**处理方向**：加一条「只更新 mermaid、不递增版本」的专用更新路径（`AgentConfigService.updateMermaidOnly`），或把流程图从版本语义里排除",
+              "priority": "P3",
               "createdDate": "2026-09-10",
-              "dueDate": "2026-09-12",
+              "dueDate": null,
               "completedDate": null,
               "tags": [
-                "deployment",
+                "refactor",
+                "backend"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**原文 Tab 保存后不重算流程图**——详情页「原文」Tab 直接用 REST `PUT /api/agents/{id}` 保存提示词，而 REST update **不会生成 mermaid**（只有对话的 `update_agent` 会），因此手改提示词后流程图会停留在旧内容。**处理方向**：保存成功后同样触发一次 `regenerateMermaid`，或把 mermaid 生成下沉到 `AgentConfigService.update`（注意 90s 耗时不能阻塞请求）",
+              "priority": "P3",
+              "createdDate": "2026-09-10",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug",
+                "frontend",
+                "backend"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**生产约 16 条历史全局会话失去入口**——`agentConfigId=system-agent-builder` 且 `editTargetId` 为空（0.0.274 前「对话新建 Agent」的产物）在 0.0.275 后无任何 UI 可达。数据保留在 `system_chat_session` 表内；处理方式与「14 条 skill-admin 会话」同类，评估删除或保留为历史数据",
+              "priority": "P3",
+              "createdDate": "2026-09-10",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "refactor",
                 "backend"
               ],
               "completed": false
@@ -6221,6 +6282,45 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "新建 Agent 提示词可留空：创建后由构建助手起草",
+              "priority": "P2",
+              "createdDate": "2026-09-10",
+              "dueDate": null,
+              "completedDate": "2026-09-10",
+              "tags": [
+                "feature",
+                "frontend",
+                "agent"
+              ],
+              "completed": true
+            },
+            {
+              "text": "执行迁移脚本 V20260910：老绑定会话 chat_session → system_chat_session",
+              "priority": "P2",
+              "createdDate": "2026-09-10",
+              "dueDate": null,
+              "completedDate": "2026-09-10",
+              "tags": [
+                "deployment",
+                "backend"
+              ],
+              "completed": true
+            },
+            {
+              "text": "Agent 构建助手只保留编辑能力（创建/删除交给界面代码）",
+              "priority": "P2",
+              "createdDate": "2026-09-10",
+              "dueDate": null,
+              "completedDate": "2026-09-10",
+              "tags": [
+                "refactor",
+                "agent",
+                "backend",
+                "frontend"
+              ],
+              "completed": true
+            },
             {
               "text": "Agent 构建助手在详情页只改当前这一个 Agent（工具层锁死）",
               "priority": "P1",
@@ -9873,7 +9973,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-10T15:00:30.695651"
+  "generated_at": "2026-09-10T16:00:37.254697"
 };
 
         let currentFilter = 'all';
