@@ -5738,13 +5738,48 @@
               "completed": false
             },
             {
-              "text": "Qwen3.8 模型配置 max_context_tokens=132000（实测窗口值，管理页 API 直更即可）+ DeepSeek/Qwen3.7-plus 按官方口径配置",
+              "text": "Qwen3.8 模型配置 max_context_tokens",
               "priority": "P3",
               "createdDate": "2026-09-04",
-              "dueDate": "2026-09-10",
-              "completedDate": null,
+              "dueDate": null,
+              "completedDate": "2026-09-08",
               "tags": [
                 "config"
+              ],
+              "completed": true
+            },
+            {
+              "text": "**vLLM 每日低峰定时重启（运维，2026-09-08 压测新增）**——压测实证「重启效应」：长运行后性能衰减 14%~33% + `Retries exhausted` 抖动累积，重启清零（重启后 15 轮零失败 vs 重启前 5 句失败；并发 4 从 13.3→8.9min）——建议每日低峰期定时重启推理服务（k8s CronJob 或 GPUStack 侧），与 liveness probe 配合",
+              "priority": "P1",
+              "createdDate": "2026-09-08",
+              "dueDate": "2026-09-20",
+              "completedDate": null,
+              "tags": [
+                "deployment"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**2 卡环境并发能力重测**——GPUStack 部署 2026-09-08 晚从单卡扩为 **2 张算力卡**（预热首次请求 0.8s 即热态）——MODEL-COMPARISON §5.5 全部并发结论（实时 3 / 批量 4 / 6 路平台期）基于**单卡环境**，需在 2 卡重测校准：并发 3 与 4 各一组对照单卡基准（6.7min / 8.9min）；若 TP=2 单实例则 prefill 加速、并发上限有望上移；若双副本则总吞吐翻倍但单轮耗时不变",
+              "priority": "P2",
+              "createdDate": "2026-09-08",
+              "dueDate": "2026-09-20",
+              "completedDate": null,
+              "tags": [
+                "test",
+                "deployment"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**三模型对比 token 口径复核（重跑一轮）**——2026-09-10 复核发现 MODEL-COMPARISON.md §2.1/§2.2 的 token 数值取自 llm_usage_log，而该明细表仅保留 2 天、09-04 的数据已清理，**具体数值与 §2.2 增长曲线无法重算**（模型归属与回复长度已用 chat_message 复核，见该文档 §2.3：Qwen3.7-plus 9,776 > Qwen3.8 8,456 > DeepSeek 2,416 字符）——需同条件（005 / 20 句 / 三模型逐句）重跑一轮，跑完当天即导出 llm_usage_log",
+              "priority": "P3",
+              "createdDate": "2026-09-10",
+              "dueDate": "2026-09-30",
+              "completedDate": null,
+              "tags": [
+                "test",
+                "research"
               ],
               "completed": false
             },
@@ -5761,7 +5796,7 @@
               "completed": false
             },
             {
-              "text": "**模型性能测试**——对已配置的 LLM 模型进行性能基准测试（响应延迟/吞吐量/token 消耗/并发上限），为模型选型和质检并发策略提供数据支撑；可复用 MODEL-COMPARISON.md 的对比方法",
+              "text": "**模型性能测试**",
               "priority": "P1",
               "createdDate": "2026-09-08",
               "dueDate": null,
@@ -5770,7 +5805,7 @@
                 "test",
                 "performance"
               ],
-              "completed": false
+              "completed": true
             },
             {
               "text": "**对话引导功能——约束边界（Skill 广场/Agent 广场/应用广场，0.0.270 改名同步）**——三个广场的对话式创建/编辑增加引导约束：明确能力边界、禁止脑补、需求确认后再执行、防止越界操作（提示词+前端引导文案双管齐下）",
@@ -5954,6 +5989,42 @@
               "completedDate": null,
               "tags": [
                 "feature",
+                "backend"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**执行迁移脚本 V20260910（0.0.274 发版后）**——`src/main/resources/db/migration/V20260910__migrate_agent_bound_sessions.sql`：把老绑定会话（`edit_target_id` 非空且 `agent_id = edit_target_id` 且 agent_id 非系统 slug）从 `chat_session` 搬到 `system_chat_session`（agent_id 改写为 system-agent-builder），消息同步搬 `system_chat_message`。**生产实测待迁 8 条**（2026-09-10 只读核对）；**执行前先跑脚本头部的 COUNT 再核对一遍**，执行后跑核对节（原表残留应 0、chat_message 零残留）。非幂等，只执行一次",
+              "priority": "P2",
+              "createdDate": "2026-09-10",
+              "dueDate": "2026-09-12",
+              "completedDate": null,
+              "tags": [
+                "deployment",
+                "backend"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**业务质检 Agent 挂载了已停用的 qc-strategy（启动告警刷屏）**——实测发现（0.0.274 本地实测，非该版本引入）：实时质检员 / 离线质检员的 `selectedSkills` 都挂着 `qc-strategy`，而该 skill 状态为 DISABLED；本地服务从生产库恢复 220 个会话时逐条重建 Agent，`SkillService` 反复告警「Agent 配置引用的 skill 未发布: qc-strategy (status=DISABLED)」约 1 秒 1 条、共 58 条，拖慢启动（本次启动耗时 130 秒）。**处理方向**：二选一——把 `qc-strategy` 重新发布（若内容仍需要），或从这两个 Agent 的挂载列表里移除；顺带评估该告警是否该降级/去重",
+              "priority": "P2",
+              "createdDate": "2026-09-10",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug",
+                "agent"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**会话列表接口时间戳口径失真**——实测发现（0.0.274 本地实测，非该版本引入）：`ChatSession` 构造时用 `LocalDateTime.now()`，`SystemChatService/ChatService` 从实体加载时**不回填** `createdAt/updatedAt`，导致 `/api/system/sessions` 与 `/api/sessions` 返回的时间戳是「服务进程加载该会话的时刻」而非落库时间（实测同一批 78 条系统会话在生产服务与本地服务上分别整体显示 11:35 与 14:06，会话内容完全相同）。影响：会话列表排序/展示的时间不可信，也可能误导排查。**处理方向**：加载时用 `entity.getCreatedAt()/getUpdatedAt()` 回填 `ChatSession`",
+              "priority": "P3",
+              "createdDate": "2026-09-10",
+              "dueDate": null,
+              "completedDate": null,
+              "tags": [
+                "bug",
                 "backend"
               ],
               "completed": false
@@ -6150,6 +6221,21 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "Agent 构建助手在详情页只改当前这一个 Agent（工具层锁死）",
+              "priority": "P1",
+              "createdDate": "2026-09-10",
+              "dueDate": null,
+              "completedDate": "2026-09-10",
+              "tags": [
+                "bug",
+                "feature",
+                "agent",
+                "backend",
+                "frontend"
+              ],
+              "completed": true
+            },
             {
               "text": "系统 Agent 精简：移除「小助手」「Skill 管理员」两个内置 Agent",
               "priority": "P2",
@@ -9787,7 +9873,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-10T14:00:56.362482"
+  "generated_at": "2026-09-10T15:00:30.695651"
 };
 
         let currentFilter = 'all';
