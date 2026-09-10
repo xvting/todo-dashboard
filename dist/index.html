@@ -6091,7 +6091,7 @@
               "completed": false
             },
             {
-              "text": "**重新梳理系统 Agent 提示词**——0.0.199 内置化基线取生产库现行版，需全面校对系统 Agent 提示词与业务 Agent 提示词的一致性、职责边界、冗余/矛盾指令（0.0.191 三 Agent 矛盾修复的同类问题排查）。**范围收窄（0.0.273）：系统 Agent 已由 5 个精简为 3 个**（小助手/Skill 管理员已移除，其提示词无需再校对）。**2026-09-10 排查发现三处「提示词声明 ≠ 代码注册」的不一致，建议做成对照表逐项核对**：①Skill 编辑器注册 5 个工具（get/update/set_status/list_skill_versions/get_skill_version）但提示词只列 2 个（update/set_status）→ 用户问历史版本时它不知道有工具可用 ②Agent 构建助手注册 6 个工具（含 `regenerate_agent_mermaid`）但提示词只列 5 个，且「## 流程图（Mermaid）」章节明确写「你不需要手动保存流程图……系统已自动保存」，与可用工具自相矛盾 ③业务 Agent 侧：实时质检员/离线质检员/执法记录仪提示词里「## 可用工具」小节**重复出现两次且内容不一致**（前一份含 save_person_info，后一份漏掉）——0.0.183 追加「业务事件处理」章节时新写了一份工具清单未删旧版",
+              "text": "**重新梳理系统 Agent 提示词**——0.0.199 内置化基线取生产库现行版，需全面校对系统 Agent 提示词与业务 Agent 提示词的一致性、职责边界、冗余/矛盾指令（0.0.191 三 Agent 矛盾修复的同类问题排查）。**范围收窄（0.0.273）：系统 Agent 已由 5 个精简为 3 个**（小助手/Skill 管理员已移除，其提示词无需再校对）。**2026-09-10 排查发现三处「提示词声明 ≠ 代码注册」的不一致，建议做成对照表逐项核对**：①Skill 编辑器注册 5 个工具（get/update/set_status/list_skill_versions/get_skill_version）但提示词只列 2 个（update/set_status）→ 用户问历史版本时它不知道有工具可用 ②Agent 构建助手注册 6 个工具（含 `regenerate_agent_mermaid`）但提示词只列 5 个，且「## 流程图（Mermaid）」章节明确写「你不需要手动保存流程图……系统已自动保存」，与可用工具自相矛盾 ③业务 Agent 侧：实时质检员/离线质检员/执法记录仪提示词里「## 可用工具」小节**重复出现两次且内容不一致**（前一份含 save_person_info，后一份漏掉）——0.0.183 追加「业务事件处理」章节时新写了一份工具清单未删旧版（⚠️ **0.0.277 已改这三个提示词的铁律段，但未动该重复小节，清理仍待办**；因提示词已被 `update_agent_prompts_brake.py` 按锚点改过一轮，下次清理务必重新取生产库现行版做锚点）",
               "priority": "P1",
               "createdDate": "2026-09-01",
               "dueDate": "2026-09-15",
@@ -6282,6 +6282,19 @@
           "status": "已完成",
           "title": "",
           "tasks": [
+            {
+              "text": "`record_violation` 反复重调（轮次 106 出现 90 次调用 / 79 次「已存在」）",
+              "priority": "P1",
+              "createdDate": "2026-09-10",
+              "dueDate": null,
+              "completedDate": "2026-09-10",
+              "tags": [
+                "bug",
+                "agent",
+                "backend"
+              ],
+              "completed": true
+            },
             {
               "text": "新建 Agent 提示词可留空：创建后由构建助手起草",
               "priority": "P2",
@@ -9973,7 +9986,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-10T17:00:39.182723"
+  "generated_at": "2026-09-10T18:00:40.855916"
 };
 
         let currentFilter = 'all';
