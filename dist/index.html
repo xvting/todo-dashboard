@@ -5682,7 +5682,7 @@
     },
     {
       "name": "AgentScope 纪委谈话质检系统",
-      "last_update": "2026-09-11（**0.0.286 代码已完成、231 单测全绿、本地端到端全过，tag 待确认**：测试改为「按钮入口 + 推入式测试 + 右侧实时 Tab」——把构建助手当作推入方，看被测 Agent 的实时反馈；0.0.285 的三项交互修复与 0.0.284 的对话内测试均已发布）",
+      "last_update": "2026-09-11（**0.0.289 已发布 deploy-main-0.0.289**：取消回收只作用于「本次新建」的测试会话（修 0.0.288 误删「id 已发给对话」运行的缺陷）；0.0.286~0.0.288 的推入式测试、实时 Tab、图标化入口、id 下发均已发布）",
       "sections": [
         {
           "status": "待办",
@@ -6160,7 +6160,7 @@
               "completed": false
             },
             {
-              "text": "**会话列表接口时间戳口径失真**——实测发现（0.0.274 本地实测，非该版本引入）：`ChatSession` 构造时用 `LocalDateTime.now()`，`SystemChatService/ChatService` 从实体加载时**不回填** `createdAt/updatedAt`，导致 `/api/system/sessions` 与 `/api/sessions` 返回的时间戳是「服务进程加载该会话的时刻」而非落库时间（实测同一批 78 条系统会话在生产服务与本地服务上分别整体显示 11:35 与 14:06，会话内容完全相同）。影响：会话列表排序/展示的时间不可信，也可能误导排查。**处理方向**：加载时用 `entity.getCreatedAt()/getUpdatedAt()` 回填 `ChatSession`",
+              "text": "**会话列表接口时间戳口径失真**",
               "priority": "P3",
               "createdDate": "2026-09-10",
               "dueDate": null,
@@ -6169,7 +6169,7 @@
                 "bug",
                 "backend"
               ],
-              "completed": false
+              "completed": true
             },
             {
               "text": "①Skill 构建助手注册 5 个工具但提示词只列 2 个",
@@ -10129,7 +10129,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-11T18:00:45.714903"
+  "generated_at": "2026-09-11T19:00:54.026818"
 };
 
         let currentFilter = 'all';
