@@ -5769,6 +5769,18 @@
               "completed": false
             },
             {
+              "text": "**生产单句超时配置漂移核对（运维，300s vs 90s）**——2026-09-11 实测发现：生产失败消息原文为 `within 300000ms in 'collectList'`，即**实际单句超时 = 300 秒**；而仓库 `k8s-configmap.yaml:26` 为 `QC_SENTENCE_TIMEOUT_SECONDS: \"90\"`（0.0.243 从 300 回退后的值）、`application.yml:62` 默认亦为 90 —— **集群 configmap 仍是 0.0.242 时期的 300s，那次回退未同步到集群**。影响：90s 与 300s 对\"逐句超时\"的判定完全不同（此前多处以 90s 为判据的分析已修正，并发 11~14 的失败句实为模型层 `Retries exhausted` 而非逐句超时；逐句 300s 超时直到并发 15 才首现）。**动作**：核对集群 configmap 实际值 → 与仓库统一（若确需 90s 则更新集群；若维持 300s 则同步仓库与注释）→ 复测一轮确认生效",
+              "priority": "P1",
+              "createdDate": "2026-09-11",
+              "dueDate": "2026-09-18",
+              "completedDate": null,
+              "tags": [
+                "deployment",
+                "config"
+              ],
+              "completed": false
+            },
+            {
               "text": "**质检补录死循环修复（成本/延迟放大器）**——2026-09-10 发现，MODEL-COMPARISON §5.8 有完整机制分析。现象：轮次 106 单轮 `record_violation` 被调 **90 次、79 次被去重拒**，一轮内 6 个回合打到 `maxIters(15)`（=16 次模型调用），input **4,595,803 tokens**（同档位正常轮 12 倍）、耗时 15m06s——**低频（75 轮命中 2 轮）但命中即重罚，且污染压测数据可比性**。根因：`InterviewService.java:1378` 的虚报判定 `reply.contains(\"编号 #\")` **分不清「本轮声称新记录」与「交叉引用历史编号」**→ 误判虚报 → 强制补录 → 而该句违规早已落库、被 `QcBusinessTools.java:126`「同会话同原话」去重拒绝 → 模型换措辞重试至上限。建议修法：①收窄虚报判据（完成态表述 / 按本轮新增转写句 ID）②**补录前先查重，已存在则跳过补录**③同原话补录只允许一次 ④返回话术改「已存在（编号 #x），补录完成」避免误读为失败。连带：`save_person_info` 缺 `name` 时返回原始 Hibernate 异常，应挡在参数校验层。",
               "priority": null,
               "createdDate": null,
@@ -10129,7 +10141,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-11T23:02:14.854763"
+  "generated_at": "2026-09-12T00:00:24.071234"
 };
 
         let currentFilter = 'all';
