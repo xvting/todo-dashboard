@@ -5682,7 +5682,7 @@
     },
     {
       "name": "AgentScope 纪委谈话质检系统",
-      "last_update": "2026-09-11（0.0.282 已发布 deploy-main-0.0.282）",
+      "last_update": "2026-09-11（0.0.283 已发布 deploy-main-0.0.283）",
       "sections": [
         {
           "status": "待办",
@@ -5877,17 +5877,17 @@
               "completed": true
             },
             {
-              "text": "**对话引导功能——约束边界（Skill 广场/Agent 广场/应用广场，0.0.270 改名同步）**——三个广场的对话式创建/编辑增加引导约束：明确能力边界、禁止脑补、需求确认后再执行、防止越界操作（提示词+前端引导文案双管齐下）",
+              "text": "**对话引导功能——约束边界（Skill 广场/Agent 广场/应用广场，0.0.270 改名同步）**",
               "priority": "P1",
               "createdDate": "2026-09-08",
               "dueDate": null,
-              "completedDate": null,
+              "completedDate": "2026-09-11",
               "tags": [
                 "feature",
                 "agent",
                 "frontend"
               ],
-              "completed": false
+              "completed": true
             },
             {
               "text": "**右侧功能区增加测试 Tab**——Agent/Skill 详情页右侧功能区新增「测试」Tab：选择样本集 → 自动运行测试 → 结果在测试 Tab 展示（与正常对话混淆隔离）；测试后修正指令仍在对话框中完成（测试 Tab 只展示结果，不替代对话）",
@@ -6059,6 +6059,32 @@
               "tags": [
                 "feature",
                 "backend"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**App 构建助手读不到完整页面代码（`get_app_page` 截断 800 字符）**——`AppBuilderTools.formatPageDetail` 用 `truncate(html, 800)` 生成 \"contentHtml 预览\"，只给模型前 800 字符；已发布页面动辄 1 万~4 万字符（`违规情况分析` 10856、`对话内容查看` 42458），**助手看不到完整代码就无法做\"改接口/修兜底/纠正字段\"这类改动，只能盲改**。**来源：另一方 2026-09-11 在生产会话里被助手自己报告出来**（会话 `f768bece` 绑定 `/apps/a026f967`：用户要求\"检查完整代码里的数据接口路径和兜底逻辑，把不对齐的地方修掉\"，助手回复\"`get_app_page` 只返回了截断预览（前 ~1000 字符），完整 10856 字符拿不到，所以我无法…\"）。**处理方向**：绑定模式直接返回完整 contentHtml（受模型上下文限制时改为分段读取，如加 `offset/limit` 参数），或对大页面提示\"请让用户手动在原文 Tab 核对\"；注意与「模型最大上下文」联动评估",
+              "priority": "P2",
+              "createdDate": "2026-09-11",
+              "dueDate": "2026-09-24",
+              "completedDate": null,
+              "tags": [
+                "bug",
+                "backend",
+                "agent"
+              ],
+              "completed": false
+            },
+            {
+              "text": "**会议《对话引导功能》的前端那一半未做（0.0.283 只做了提示词侧）**——会议原话要求\"提示词+**前端引导文案**双管齐下\"，目前提示词侧四项已齐（0.0.281/0.283），前端**零命中**（grep `能力边界/禁止脑补/需求确认/能做什么/越界` 全无）。三处可补：①**三个新建弹窗**的能力/边界说明（现有文案只有\"建完去哪完善/提示词可留空/适用范围\"；`NewAppDialog` 连 DialogDescription 都没有）②**三个详情页**的常驻约束提示条（`components/ui` 无 Alert/Callout，需新建或复用 Badge）③**Skill 构建助手缺 `<system-info>` 运行时注入**（Agent/App 都有，Skill 靠开场自己调 `get_skill`，连\"当前技能是谁\"都要先读）",
+              "priority": "P2",
+              "createdDate": "2026-09-11",
+              "dueDate": "2026-10-10",
+              "completedDate": null,
+              "tags": [
+                "feature",
+                "frontend",
+                "agent"
               ],
               "completed": false
             },
@@ -10106,7 +10132,7 @@
       ]
     }
   ],
-  "generated_at": "2026-09-11T11:00:26.115163"
+  "generated_at": "2026-09-11T12:00:26.657269"
 };
 
         let currentFilter = 'all';
